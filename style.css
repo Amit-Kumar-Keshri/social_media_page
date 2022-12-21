@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+body{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+}
+.gradient{
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    
+}
+.form-body{
+    color: white;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.form-page{
+    margin:auto;
+    text-align: left;
+    padding: 48px;
+    border-radius: 10px;
+    background-color: #343a40;
+}
