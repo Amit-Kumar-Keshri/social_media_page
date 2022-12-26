@@ -1,11 +1,15 @@
 <?php
+if (isset($_COOKIE['login_auth'])) {
+  header("Location: myAccount.php");
+} 
+
 include('db.php');
 
 $VALID_EMAIL_PATTERN = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
 $VALID_PHONE_PATTERN = "/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/";
 $VALID_NAME_PATTERN = "/^([a-zA-Z' ]+)$/";
-$name_error = $email_error = $phone_error = $username_error = $password_error = $address_error = $gender_error = '';
-$name = $email = $phone = $username = $password = $address = $gender = '';
+$name_error = $email_error = $phone_error = $username_error = $password_error = $address_error = $gender_error = $image_error = '';
+$name = $email = $phone = $username = $password = $address = $gender = $image = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -61,14 +65,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gender_error = "";
     $gender = $_POST['gender'];
   }
+  if (isset($_FILES["file"])) {
+    $target_dir = "uploads/";
+    $target_file = $target_dir . basename($_FILES["file"]["name"]);
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    // Check if image file is a actual image or fake image
+    $check = getimagesize($_FILES["file"]["tmp_name"]);
+    echo "working";
 
-  if ($name_error == "" && $email_error == "" && $username_error == "" && $password_error == "" && $phone_error == "" && $address_error == "" && $gender_error == "") {
+    if ($check !== false) {
+      if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
+        echo "The file " . htmlspecialchars(basename($_FILES["file"]["name"])) . " has been uploaded.";
+        $profile_image = htmlspecialchars(basename($_FILES["file"]["name"]));
+      } else {
+        echo "Sorry, there was an error uploading your file.";
+      }
+
+      $uploadOk = 1;
+    } else {
+      echo "File is not an image.";
+      $uploadOk = 0;
+    }
+  } else {
+    $image_error = "required";
+  }
+
+  if ($name_error == "" && $email_error == "" && $username_error == "" && $password_error == "" && $phone_error == "" && $address_error == "" && $gender_error == "" && $image_error == "") {
     $sql = "SELECT * FROM tb_registration WHERE email='$email'";
     $result = connect_database()->query($sql);
     if ($result->num_rows > 0) {
       $email_error = "Email Already Registered";
     } else {
-      $insert_query = "INSERT INTO tb_registration (name, email, password, phone, address, gender) VALUES ('$name', '$email', '$password', '$phone', '$address', '$gender')";
+      $insert_query = "INSERT INTO tb_registration (name, email, password, phone, address, gender, profile_image) VALUES ('$name', '$email', '$password', '$phone', '$address', '$gender','$profile_image')";
       if ($result = connect_database()->query($insert_query)) {
         $message = 'Data Inserted';
       } else {
@@ -94,13 +122,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Registration-Form</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
   <section class="min-vh-100 gradient">
     <div class="d-flex justify-content-center align-items-center gx-5 form-body h-100">
-      <form class="form-page" action="" method="POST">
+      <form class="form-page" action="registration.php" method="POST" enctype="multipart/form-data">
         <!-- title -->
         <div class="row">
           <div class="col-lg-12">
@@ -141,46 +169,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <?php echo $phone_error ?>
             </small>
           </div>
-          <!-- <div class="col-lg-6 my-2">
-                    <label for="validationCustom01">Re-type Phone-number:</label>
-                   <input type="tel" class="form-control" id="validationCustom01" name="re-phone" placeholder="Re-type phone-number" >
-                  
-                </div> -->
-        </div>
-        <div class="row">
-          <div class="col-lg-12 my-2">
-            <label for="address">Address</label>
-            <textarea class="form-control" name="address" rows="3"></textarea>
-            <small class="form-text text-danger">
-              <?php echo $address_error ?>
-            </small>
+          
+           
           </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12 my-2">
-            <div>
-              Choose your Gender:
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" id="male" value="Male"/>
-                <label class="form-check-label" for="male"> Male </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" id="female" value="Female" />
-                <label class="form-check-label" for="female"> Female </label>
-              </div>
+          <div class="row">
+            <div class="col-lg-12 my-2">
+              <label for="address">Address</label>
+              <textarea class="form-control" name="address" rows="3"></textarea>
+              <small class="form-text text-danger">
+                <?php echo $address_error ?>
+              </small>
             </div>
-            <small class="form-text text-danger">
-              <?php echo $gender_error ?>
-            </small>
           </div>
-        </div>
-        <div class="text-center col-lg-12">
-          <button class="btn btn-outline-light btn-lg px-4" type="submit">Sign Up</button>
-        </div>
-        <div class="text-center mt-2">
-          <p class="mb-0 text-white">Don't have an account? <a href="login.php" class="text-white-50 fw-bold">Login</a>
-          </p>
-        </div>
+          <div class="row">
+            <div class="col-lg-12 my-2">
+              <div>
+                Choose your Gender:
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gender" id="male" value="Male" />
+                  <label class="form-check-label" for="male"> Male </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gender" id="female" value="Female" />
+                  <label class="form-check-label" for="female"> Female </label>
+                </div>
+              </div>
+              <small class="form-text text-danger">
+                <?php echo $gender_error ?>
+              </small>
+            </div>
+          </div>
+          <div class="text-center col-lg-12">
+            <button class="btn btn-outline-light btn-lg px-4" type="submit">Sign Up</button>
+          </div>
+          <div class="text-center mt-2">
+            <p class="mb-0 text-white">Don't have an account? <a href="login.php" class="text-white-50 fw-bold">Login</a>
+            </p>
+          </div>
       </form>
     </div>
   </section>

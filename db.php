@@ -1,7 +1,6 @@
 <?php
-function connect_database() {
-
-
+function connect_database()
+{
   $servername = "localhost";
   $username = "root";
   $password = "";
@@ -15,4 +14,3 @@ function connect_database() {
     return $conn;
   }
 }
-?>
