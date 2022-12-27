@@ -10,6 +10,9 @@ include('db.php');
 
 
 <?php
+
+
+
 $VALID_EMAIL_PATTERN = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
 $VALID_PHONE_PATTERN = "/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/";
 $VALID_NAME_PATTERN = "/^([a-zA-Z' ]+)$/";
@@ -72,6 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gender_error = "";
     $gender = $_POST['gender'];
   }
+
 
 
   if ($name_error == "" && $email_error == "" && $username_error == "" && $password_error == "" && $phone_error == "" && $address_error == "" && $gender_error == "") {
