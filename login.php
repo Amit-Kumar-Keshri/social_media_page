@@ -1,7 +1,7 @@
 <?php
 include('db.php');
 if (isset($_COOKIE['login_auth'])) {
-    header("Location: myAccount.php");
+    header("Location: my-account.php");
 } 
 
 else if (isset($_POST['login'])) {
@@ -17,7 +17,7 @@ else if (isset($_POST['login'])) {
             $name = $row['name'];
             $id = $row['id'];
             setcookie('login_auth', $id, time() + (86400 * 30), "/");
-            header("Location: myAccount.php");
+            header("Location: my-account.php");
         } else {
             echo 'Invalid Credintials';
         }

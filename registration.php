@@ -1,6 +1,6 @@
 <?php
 if (isset($_COOKIE['login_auth'])) {
-  header("Location: myAccount.php");
+  header("Location: my-account.php");
 }
 ?>
 
