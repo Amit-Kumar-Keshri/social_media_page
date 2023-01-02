@@ -177,10 +177,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <form class="mt-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
           <div class="row my-3">
-            <div class="col-3">
+            <div class="col-lg-3">
               <label for="name">Name</label>
             </div>
-            <div class="col-9">
+            <div class="col-lg-9">
               <input type="text" class="form-control disabled-box" id="name" name="name" placeholder="Name" value="<?= $name ?>" disabled />
               <small class="form-text text-danger">
                 <?php echo $name_error ?>
@@ -189,10 +189,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
 
           <div class="row my-3">
-            <div class="col-3">
+            <div class="col-lg-3">
               <label for="email">E-mail</label>
             </div>
-            <div class="col-9">
+            <div class="col-lg-9">
               <input type="email" class="form-control disabled-box" id="email" name="email" placeholder="Email" value="<?= $email ?>" disabled />
               <small class="form-text text-danger">
                 <?php echo $email_error ?>
@@ -200,10 +200,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
           </div>
           <div class="row my-3">
-            <div class="col-3">
+            <div class="col-lg-3">
               <label for="phone">Phone Number</label>
             </div>
-            <div class="col-9">
+            <div class="col-lg-9">
               <input type="tel" class="form-control disabled-box" id="phone" name="phone" value="<?= $phone ?>" placeholder="Phone Number" disabled />
               <small class="form-text text-danger">
                 <?php echo $phone_error ?>
@@ -211,10 +211,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
           </div>
           <div class="row my-3">
-            <div class="col-3">
+            <div class="col-lg-3">
               <label for="address">Address</label>
             </div>
-            <div class="col-9">
+            <div class="col-lg-9">
               <input type="address" class="form-control disabled-box" id="address" name="address" placeholder="Address" value="<?= $address ?>" disabled />
               <small class="form-text text-danger">
                 <?php echo $address_error ?>
@@ -222,10 +222,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
           </div>
           <div class="row my-3">
-            <div class="col-3">
+            <div class="col-lg-3">
               <label for="gender">Gender</label>
             </div>
-            <div class="col-9">
+            <div class="col-lg-9">
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="gender" id="male" value="Male" <?php if(strtolower($gender) == "male"){ echo "checked";} ?>/>
                 <label class="form-check-label" for="male"> Male </label>
@@ -245,7 +245,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
 
           <div class="row my-3">
-            <div class="col-6">
+            <div class="col-lg-6">
               <a class=" btn btn-primary edit-button gy-3">Edit</a>
               <button class="btn btn-primary" type="submit" name="update" disabled>Update</button>
             </div>
