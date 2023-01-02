@@ -1,5 +1,6 @@
 <?php
-include('db.php');
+
+include('includes/header.php');
 include('functions.php');
 
 if (isset($_COOKIE['login_auth'])) {
@@ -16,7 +17,7 @@ if (isset($_POST['login'])) {
     } 
 }
 ?>
-<?php include('includes/header.php'); ?>
+<?php  ?>
 <section class="min-vh-100 gradient">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">

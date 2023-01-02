@@ -1,5 +1,5 @@
 <?php
-include('db.php');
+include('includes/header.php');
 include('functions.php');
 if (isset($_COOKIE['login_auth'])) {
   header("Location: my-account.php");
@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $reg_validation = reg_validation_check($_POST['name'],$_POST['email'],$_POST['password'],$_POST['phone'],$_POST['address'],$_POST['gender']);
   if($reg_validation['status']){
 
-    $reg_res_query = insert_registration_data($_POST['name'],$_POST['email'],$_POST['password'],$_POST['phone'],$_POST['address'],$_POST['gender']);
+    $reg_res_query = insert_registration_data($_POST['name'],$_POST['email'],md5($_POST['password']),$_POST['phone'],$_POST['address'],$_POST['gender']);
       if($reg_res_query['status']){
         $success_message = $reg_res_query['message'];
       } else {
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $error_message = $reg_validation['message'];
   }
 }
-include('includes/header.php');
+
 ?>
 
   <section class="min-vh-100 gradient">

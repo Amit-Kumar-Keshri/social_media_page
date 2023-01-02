@@ -1,3 +1,15 @@
+<?php
+include('db.php') ;
+if (isset($_COOKIE['login_auth'])) {
+$id = $_COOKIE["login_auth"];
+$query = "Select * from tb_registration where id='$id'";
+$result = connect_database()->query($query);
+$row = $result->fetch_assoc();
+$profile_image = $row['profile_image'];
+}
+?>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,6 +25,9 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
   <!-- MDB -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css" rel="stylesheet"/>
+  <!-- CUSTOM -->
+  <link rel="stylesheet" href="assets/css/style.css"/>
+
 
 </head>
 <body>
@@ -89,7 +104,7 @@
           aria-expanded="false"
         >
           <img
-            src=""
+            src="uploads/<?=$profile_image?>"
             class="rounded-circle"
             height="25"
             alt="Black and White Portrait of a Man"
@@ -107,7 +122,7 @@
             <a class="dropdown-item" href="#">Settings</a>
           </li>
           <li>
-            <a class="dropdown-item" href="#">Logout</a>
+            <a class="dropdown-item" href = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>?logout=true">Logout</a>
           </li>
         </ul>
       </div>

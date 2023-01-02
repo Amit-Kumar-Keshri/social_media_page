@@ -9,7 +9,7 @@ if (!isset($_COOKIE['login_auth'])) {
   header("Location:login.php");
 }
 include('includes/header.php');
-include('db.php');
+
 
 $VALID_EMAIL_PATTERN = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
 $VALID_PHONE_PATTERN = "/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/";
@@ -223,7 +223,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <label for="gender">Gender</label>
             </div>
             <div class="col-9">
-              <input type="gender" class="form-control disabled-box" id="gender" name="gender" placeholder="Gender" value="<?= $gender ?>" disabled />
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="male" value="Male" <?php if(strtolower($gender) == "male"){ echo "checked";} ?>/>
+                <label class="form-check-label" for="male"> Male </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="female" value="Female" <?php if(strtolower($gender) == "female"){ echo "checked";} ?> />
+                <label class="form-check-label" for="female"> Female </label>
+              </div>
+              <!-- <input type="radio" class="form-control disabled-box" id="gender" name="gender" placeholder="Gender" value="male"  />
+              <label class="form-check-label" for="male"> Male </label>
+              <input type="radio" class="form-control disabled-box" id="gender" name="gender" placeholder="Gender" value="female"  />
+              <label class="form-check-label" for="female"> Female </label> -->
               <small class="form-text text-danger">
                 <?php echo $gender_error ?>
               </small>
@@ -233,7 +244,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div class="row my-3">
             <div class="col-6">
               <a class=" btn btn-primary edit-button gy-3">Edit</a>
-              <a class=" btn btn-primary gy-3" href="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>?logout=true">Logout</a>
               <button class="btn btn-primary" type="submit" name="update" disabled>Update</button>
             </div>
           </div>
