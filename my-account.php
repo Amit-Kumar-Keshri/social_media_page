@@ -9,7 +9,6 @@ if (!isset($_COOKIE['login_auth'])) {
   header("Location:login.php");
 }
 include('includes/header.php');
-
 include('db.php');
 
 $VALID_EMAIL_PATTERN = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
@@ -234,7 +233,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div class="row my-3">
             <div class="col-6">
               <a class=" btn btn-primary edit-button gy-3">Edit</a>
-              <!-- <a class=" btn btn-primary gy-3" href="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>?logout=true">Logout</a> -->
+              <a class=" btn btn-primary gy-3" href="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>?logout=true">Logout</a>
               <button class="btn btn-primary" type="submit" name="update" disabled>Update</button>
             </div>
           </div>
@@ -242,9 +241,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
     </div>
   </div>
-</body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script src="assets/js/script.js"></script>
 
-</html>
+<?php include('includes/footer.php'); ?>

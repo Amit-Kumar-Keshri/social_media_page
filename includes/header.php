@@ -1,53 +1,24 @@
-<?php
-
-
-// include('db.php');
-
-
-// $id = $_COOKIE["login_auth"];
-// $query = "Select * from tb_registration where id='$id'";
-// $result = connect_database()->query($query);
-// $row = $result->fetch_assoc();
-// $profile_image = $row['profile_image'];
-
-
-?>
-
-
-
-
 <!doctype html>
 <html lang="en">
-
 <head>
-  <title>Title</title>
+  <title>Social Media Project</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS v5.2.1 -->
-  
-    <!-- Font Awesome -->
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-  rel="stylesheet"
-/>
-<!-- Google Fonts -->
-<link
-  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-  rel="stylesheet"
-/>
-<!-- MDB -->
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css"
-  rel="stylesheet"
-/>
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css" rel="stylesheet"/>
 
 </head>
-
 <body>
-  <header>
-    <!-- Navbar -->
+
+<header>
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <!-- Container wrapper -->
   <div class="container-fluid">
@@ -70,22 +41,10 @@
       <a class="navbar-brand mt-2 mt-lg-0" href="#">
         Social Media
       </a>
-      <!-- Left links -->
-      <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Team</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Projects</a>
-        </li>
-      </ul> -->
-      <!-- Left links -->
     </div>
     <!-- Collapsible wrapper -->
 
+<?php if (isset($_COOKIE['login_auth'])) { ?>
     <!-- Right elements -->
     <div class="d-flex align-items-center">
       <!-- Icon -->
@@ -154,24 +113,20 @@
       </div>
     </div>
     <!-- Right elements -->
+<?php } ?>
+
   </div>
   <!-- Container wrapper -->
 </nav>
 <!-- Navbar -->
-  </header>
-  <main>
+</header>
 
-  </main>
-  <footer>
-    <!-- place footer here -->
-  </footer>
-  <!-- Bootstrap JavaScript Libraries -->
- 
-  <!-- MDB -->
-<script
-  type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"
-></script>
-</body>
+<?php 
+if(isset($error_message)) {
+    echo '<p class="notification_sec error_msg">'.$error_message.'</p>';
+}
 
-</html>
+if(isset($success_message)) {
+    echo '<p class="notification_sec success_msg">'.$success_message.'</p>';
+}
+?>
