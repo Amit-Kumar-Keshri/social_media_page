@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
-*{
-  --bs-gutter-x: 0 rem;
+.row{
+  --mdb-gutter-x: 0 rem;
 }
 body {
   font-family: "Poppins", sans-serif;
