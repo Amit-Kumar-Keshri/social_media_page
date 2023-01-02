@@ -151,18 +151,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
     </div>
   </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-4 my-3 highlight">
+  <div class="gradient">
+  <div class="container ">
+    <div class="row justify-content-lg-between">
+      <div class="col-lg-5 my-3 highlight">
         <div class="image-container ">
           <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
-            <img class="img-fluid" src="uploads/<?= $profile_image ?>" />
-            <div class="row my-3">
-              <div class="col">
+          <div class="image-container"> 
+          <img class="profile-image"  src="uploads/<?= $profile_image ?>" />
+</div>
+            <div class="row my-3 justify-content-center align-items-center">
+              
                 <input type="file" class="form-control" id="file" name="file" placeholder="Upload Your Photo" value="<?= $name ?>" />
-              </div>
+              
             </div>
-            <div class="text-center upload-button">
+            <div class="text-center upload-button">-
               <button class="my-3 btn btn-primary" name="upload" type="submit">
                 Upload photo
               </button>
@@ -170,7 +173,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </form>
         </div>
       </div>
-      <div class="col-lg-8">
+      <div class="col-lg-7">
 
         <form class="mt-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
           <div class="row my-3">
@@ -251,5 +254,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
     </div>
   </div>
-
+</div>
 <?php include('includes/footer.php'); ?>
