@@ -1,4 +1,5 @@
 <?php
+include('includes/header.php');
 if (isset($_GET['logout']) && isset($_COOKIE["login_auth"])) {
   header("Location:login.php");
   unset($_COOKIE['login_auth']);
@@ -8,7 +9,7 @@ if (isset($_GET['logout']) && isset($_COOKIE["login_auth"])) {
 if (!isset($_COOKIE['login_auth'])) {
   header("Location:login.php");
 }
-include('includes/header.php');
+include("functions.php");
 
 
 $VALID_EMAIL_PATTERN = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
@@ -20,10 +21,8 @@ $name_error = $email_error = $phone_error = $address_error = $gender_error = '';
 $update_name = $update_email = $update_phone = $update_address = $update_gender = '';
 
 
-$id = $_COOKIE["login_auth"];
-$query = "Select * from tb_registration where id='$id'";
-$result = connect_database()->query($query);
-$row = $result->fetch_assoc();
+
+$row = retrive_data($_COOKIE["login_auth"]);
 $name = $row['name'];
 $email = $row['email'];
 $phone = $row['phone'];
@@ -31,34 +30,17 @@ $address = $row['address'];
 $gender = $row['gender'];
 $profile_image = $row['profile_image'];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (isset($_FILES["file"])) {
-    $target_dir = "uploads/";
-    $target_file = $target_dir . basename($_FILES["file"]["name"]);
-    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-    $check = getimagesize($_FILES["file"]["tmp_name"]);
-    if ($check !== false) {
-      if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
-
-        $profile_image = htmlspecialchars(basename($_FILES["file"]["name"]));
-        $image_upload_query = "update tb_registration set profile_image='$profile_image' where id='$id' ";
-        connect_database()->query($image_upload_query);
-      } else {
-        echo "Sorry, there was an error uploading your file.";
-      }
-
-      $uploadOk = 1;
-    } else {
-      echo "File is not an image.";
-      $uploadOk = 0;
-    }
-  } else {
-    $image_error = "required";
+  if (fileupload($_FILES['file'])){
+      $image_error = "File not Uploaded";
+  }
+  else{
+    $image_error = "File Upload";
   }
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (isset($_POST['name'])) {
-    if (strcmp($name, $_POST['name']) != 0 && preg_match($VALID_NAME_PATTERN, $_POST['name'])) {
+    if (strcmp($name, $_POST['name']) != 0) {
       $name_error = "";
       $update_name = $_POST['name'];
       $update_query = "UPDATE tb_registration SET name='$update_name' where id = '$id'";
@@ -71,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   if (isset($_POST['email'])) {
-    if (strcmp($email, $_POST['email']) != 0 && preg_match($VALID_EMAIL_PATTERN, $_POST['email'])) {
+    if (strcmp($email, $_POST['email']) != 0) {
       $email_error = "";
       $update_email = $_POST['email'];
       $check_query = "Select * from tb_registration where email='$update_email'";
@@ -90,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   if (isset($_POST['phone'])) {
-    if (strcmp($phone, $_POST['phone']) != 0 && preg_match($VALID_PHONE_PATTERN, $_POST['phone'])) {
+    if (strcmp($phone, $_POST['phone']) != 0) {
       $phone_error = "";
       $update_phone = $_POST['phone'];
       $update_query = "UPDATE tb_registration SET phone='$update_phone' where id = '$id'";
@@ -150,10 +132,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
             <div class="row my-3 justify-content-center align-items-center">
               
-                <input type="file" class="form-control" id="file" name="file" placeholder="Upload Your Photo" value="<?= $name ?>" />
+                <input type="file" class="form-control" id="file" name="file" placeholder="Upload Your Photo" />
+                <small class="form-text text-danger ">
+                <?php echo $image_error ?>
+              </small>
               
             </div>
-            <div class="text-center upload-button">-
+            <div class="text-center upload-button">
               <button class="my-3 btn btn-primary" name="upload" type="submit">
                 Upload photo
               </button>

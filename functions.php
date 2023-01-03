@@ -73,7 +73,42 @@ function insert_registration_data($fullname,$email_address,$password,$phone_numb
 }
 
 
-function validation(){
+function retrive_data($id){
+    $query = "Select * from tb_registration where id='$id'";
+    $result = connect_database()->query($query);
+    $row = $result->fetch_assoc();
+    return $row;
+}
 
+
+
+
+function fileupload($file){
+    if (isset($file)) {
+        $target_dir = "uploads/";
+        $target_file = $target_dir . basename($file["file"]["name"]);
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        $check = getimagesize($file["file"]["tmp_name"]);
+        if ($check !== false) {
+          if (move_uploaded_file($file["file"]["tmp_name"], $target_file)) {
+    
+            $profile_image = htmlspecialchars(basename($file["file"]["name"]));
+            $image_upload_query = "update tb_registration set profile_image='$profile_image' where id='$id' ";
+            connect_database()->query($image_upload_query);
+          } else {
+            $file_error = true;
+            return $file_error;
+          }
+    
+          $uploadOk = 1;
+        } else {
+            $file_error = "File is not an image.";
+            return $file_error;
+            $uploadOk = 0;
+        }
+      } else {
+        $file_error = "required";
+        return $file_error;
+      }
 }
 ?>
