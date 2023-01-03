@@ -52,3 +52,12 @@ input#file{
   margin: 0 !important;
   padding: 10px;
 }
+
+.user_item {
+    position: relative;
+}
+
+.user_item img {
+    width: 100%;
+    height: auto;
+}

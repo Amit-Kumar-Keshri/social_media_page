@@ -62,6 +62,12 @@ $profile_image = $row['profile_image'];
 <?php if (isset($_COOKIE['login_auth'])) { ?>
     <!-- Right elements -->
     <div class="d-flex align-items-center">
+      <div class="dropdown">
+        <a href="index.php"><i class="fas fa-home"></i></a>
+      </div>
+      <div class="dropdown">
+        <a href="people.php"><i class="fas fa-user"></i></a>
+      </div>
       <!-- Icon -->
       
 
@@ -126,6 +132,7 @@ $profile_image = $row['profile_image'];
           </li>
         </ul>
       </div>
+
     </div>
     <!-- Right elements -->
 <?php } ?>

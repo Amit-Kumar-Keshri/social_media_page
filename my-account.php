@@ -31,7 +31,7 @@ $phone = $row['phone'];
 $address = $row['address'];
 $gender = $row['gender'];
 $profile_image = $row['profile_image'];
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (isset($_POST['upload'])) {
   $upload_profile_check = mya_fileupload($_FILES['file'],$id);
   if ($upload_profile_check['status']){
      $profile_image = $upload_profile_check['image'];
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (isset($_POST['update'])) {
   if (isset($_POST['name'])) {
     if (strcmp($name, $_POST['name']) != 0) {
       $name_error = "";
@@ -116,8 +116,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 include('includes/header.php');
 ?>
-
-<body>
   <div class="row">
     <div class="col-lg-12  ">
       <div class="blue-header d-flex flex-column justify-content-center">
