@@ -1,5 +1,5 @@
 <?php
-include('db.php') ;
+
 if (isset($_COOKIE['login_auth'])) {
 $id = $_COOKIE["login_auth"];
 $query = "Select * from tb_registration where id='$id'";
@@ -138,10 +138,10 @@ $profile_image = $row['profile_image'];
 
 <?php 
 if(isset($error_message)) {
-    echo '<p class="notification_sec error_msg">'.$error_message.'</p>';
+    echo '<p class="notification_sec error_msg bg-danger text-center w-100 text-white">'.$error_message.'</p>';
 }
 
 if(isset($success_message)) {
-    echo '<p class="notification_sec success_msg">'.$success_message.'</p>';
+    echo '<p class="notification_sec success_msg bg-success text-center w-100 text-white">'.$success_message.'</p>';
 }
 ?>

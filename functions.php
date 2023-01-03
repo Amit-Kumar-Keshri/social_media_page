@@ -83,32 +83,32 @@ function retrive_data($id){
 
 
 
-function fileupload($file){
+function mya_fileupload($file,$id){
     if (isset($file)) {
         $target_dir = "uploads/";
-        $target_file = $target_dir . basename($file["file"]["name"]);
+        $target_file = $target_dir . basename($_FILES["file"]["name"]);
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-        $check = getimagesize($file["file"]["tmp_name"]);
+        $check = getimagesize($_FILES["file"]["tmp_name"]);
         if ($check !== false) {
-          if (move_uploaded_file($file["file"]["tmp_name"], $target_file)) {
+          if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
     
-            $profile_image = htmlspecialchars(basename($file["file"]["name"]));
+            $profile_image = htmlspecialchars(basename($_FILES["file"]["name"]));
             $image_upload_query = "update tb_registration set profile_image='$profile_image' where id='$id' ";
             connect_database()->query($image_upload_query);
+            $file_error = false;
           } else {
             $file_error = true;
-            return $file_error;
           }
     
           $uploadOk = 1;
+          $file_error = true;
         } else {
-            $file_error = "File is not an image.";
-            return $file_error;
-            $uploadOk = 0;
+          $file_error = false;
         }
       } else {
-        $file_error = "required";
-        return $file_error;
+        $file_error = true;
       }
+      $response = array('status'=>$file_error, 'image'=>$profile_image);
+      return $response;
 }
 ?>

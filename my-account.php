@@ -1,5 +1,5 @@
 <?php
-include('includes/header.php');
+include("db.php");
 if (isset($_GET['logout']) && isset($_COOKIE["login_auth"])) {
   header("Location:login.php");
   unset($_COOKIE['login_auth']);
@@ -17,12 +17,14 @@ $VALID_PHONE_PATTERN = "/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/";
 $VALID_NAME_PATTERN = "/^([a-zA-Z' ]+)$/";
 
 
-$name_error = $email_error = $phone_error = $address_error = $gender_error = '';
+$name_error = $email_error = $phone_error = $address_error = $gender_error = $image_error ='';
 $update_name = $update_email = $update_phone = $update_address = $update_gender = '';
 
 
 
 $row = retrive_data($_COOKIE["login_auth"]);
+//var_dump($row);
+$id = $row['id'];
 $name = $row['name'];
 $email = $row['email'];
 $phone = $row['phone'];
@@ -30,11 +32,13 @@ $address = $row['address'];
 $gender = $row['gender'];
 $profile_image = $row['profile_image'];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (fileupload($_FILES['file'])){
-      $image_error = "File not Uploaded";
+  $upload_profile_check = mya_fileupload($_FILES['file'],$id);
+  if ($upload_profile_check['status']){
+     $profile_image = $upload_profile_check['image'];
+     $image_error = '';
   }
   else{
-    $image_error = "File Upload";
+    $image_error = "File not Upload";
   }
 }
 
@@ -110,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gender_error = "Required";
   }
 }
-
+include('includes/header.php');
 ?>
 
 <body>

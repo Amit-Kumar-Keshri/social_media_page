@@ -48,3 +48,7 @@ body {
 input#file{
  width:90%;
 }
+.notification_sec{
+  margin: 0 !important;
+  padding: 10px;
+}
