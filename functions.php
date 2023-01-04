@@ -141,7 +141,7 @@ function add_as_friend_func($people_id) {
 	
 	$current_user_id = $_COOKIE['login_auth'];
 	$date_added = date("l jS \of F Y h:i:s A");
-
+    echo $current_user_id;
     $insert_query = "INSERT INTO tb_request (added_by, requested_to, date_of_added) VALUES ('$current_user_id', '$people_id', '$date_added')";
     if ($result = connect_database()->query($insert_query)) {
         $status = true;
