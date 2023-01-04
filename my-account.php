@@ -17,7 +17,7 @@ $VALID_PHONE_PATTERN = "/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/";
 $VALID_NAME_PATTERN = "/^([a-zA-Z' ]+)$/";
 
 
-$name_error = $email_error = $phone_error = $address_error = $gender_error = $image_error ='';
+$name_error = $email_error = $phone_error = $address_error = $gender_error = $image_error = '';
 $update_name = $update_email = $update_phone = $update_address = $update_gender = '';
 
 
@@ -32,12 +32,11 @@ $address = $row['address'];
 $gender = $row['gender'];
 $profile_image = $row['profile_image'];
 if (isset($_POST['upload'])) {
-  $upload_profile_check = mya_fileupload($_FILES['file'],$id);
-  if ($upload_profile_check['status']){
-     $profile_image = $upload_profile_check['image'];
-     $image_error = '';
-  }
-  else{
+  $upload_profile_check = mya_fileupload($_FILES['file'], $id);
+  if ($upload_profile_check['status']) {
+    $profile_image = $upload_profile_check['image'];
+    $image_error = '';
+  } else {
     $image_error = "File not Upload";
   }
 }
@@ -116,29 +115,30 @@ if (isset($_POST['update'])) {
 }
 include('includes/header.php');
 ?>
-  <div class="row">
-    <div class="col-lg-12  ">
-      <div class="blue-header d-flex flex-column justify-content-center">
-        <h1 class="text-center">Welcome <?= $name ?></h1>
-      </div>
+<div class="row">
+  <div class="col-lg-12  ">
+    <div class="blue-header d-flex flex-column justify-content-center">
+      <h1 class="text-center">Welcome <?= $name ?></h1>
     </div>
   </div>
-  <div class="gradient">
+</div>
+<div class="gradient">
   <div class="container ">
     <div class="row justify-content-lg-between">
       <div class="col-lg-5 my-3 highlight">
         <div class="image-container ">
-          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
-          <div class="image-container"> 
-          <img class="profile-image"  src="uploads/<?= $profile_image ?>" />
-</div>
+          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST"
+            enctype="multipart/form-data">
+            <div class="image-container">
+              <img class="profile-image" src="uploads/<?= $profile_image ?>" />
+            </div>
             <div class="row my-3 justify-content-center align-items-center">
-              
-                <input type="file" class="form-control" id="file" name="file" placeholder="Upload Your Photo" />
-                <small class="form-text text-danger ">
+
+              <input type="file" class="form-control imgUploadBtn" data-id="<?=$id;?>" id="file" name="file" placeholder="Upload Your Photo" />
+              <small class="form-text text-danger ">
                 <?php echo $image_error ?>
               </small>
-              
+
             </div>
             <div class="text-center upload-button">
               <button class="my-3 btn btn-primary" name="upload" type="submit">
@@ -156,7 +156,8 @@ include('includes/header.php');
               <label for="name">Name</label>
             </div>
             <div class="col-lg-9">
-              <input type="text" class="form-control disabled-box" id="name" name="name" placeholder="Name" value="<?= $name ?>" disabled />
+              <input type="text" class="form-control disabled-box" id="name" name="name" placeholder="Name"
+                value="<?= $name ?>" disabled />
               <small class="form-text text-danger">
                 <?php echo $name_error ?>
               </small>
@@ -168,7 +169,8 @@ include('includes/header.php');
               <label for="email">E-mail</label>
             </div>
             <div class="col-lg-9">
-              <input type="email" class="form-control disabled-box" id="email" name="email" placeholder="Email" value="<?= $email ?>" disabled />
+              <input type="email" class="form-control disabled-box" id="email" name="email" placeholder="Email"
+                value="<?= $email ?>" disabled />
               <small class="form-text text-danger">
                 <?php echo $email_error ?>
               </small>
@@ -179,7 +181,8 @@ include('includes/header.php');
               <label for="phone">Phone Number</label>
             </div>
             <div class="col-lg-9">
-              <input type="tel" class="form-control disabled-box" id="phone" name="phone" value="<?= $phone ?>" placeholder="Phone Number" disabled />
+              <input type="tel" class="form-control disabled-box" id="phone" name="phone" value="<?= $phone ?>"
+                placeholder="Phone Number" disabled />
               <small class="form-text text-danger">
                 <?php echo $phone_error ?>
               </small>
@@ -190,7 +193,8 @@ include('includes/header.php');
               <label for="address">Address</label>
             </div>
             <div class="col-lg-9">
-              <input type="address" class="form-control disabled-box" id="address" name="address" placeholder="Address" value="<?= $address ?>" disabled />
+              <input type="address" class="form-control disabled-box" id="address" name="address" placeholder="Address"
+                value="<?= $address ?>" disabled />
               <small class="form-text text-danger">
                 <?php echo $address_error ?>
               </small>
@@ -201,12 +205,16 @@ include('includes/header.php');
               <label for="gender">Gender</label>
             </div>
             <div class="col-lg-9">
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" id="male" value="Male" <?php if(strtolower($gender) == "male"){ echo "checked";} ?>/>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="male" value="Male" <?php if (strtolower($gender) == "male") {
+                  echo "checked";
+                } ?> />
                 <label class="form-check-label" for="male"> Male </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" id="female" value="Female" <?php if(strtolower($gender) == "female"){ echo "checked";} ?> />
+                <input class="form-check-input" type="radio" name="gender" id="female" value="Female" <?php if (strtolower($gender) == "female") {
+                  echo "checked";
+                } ?> />
                 <label class="form-check-label" for="female"> Female </label>
               </div>
               <!-- <input type="radio" class="form-control disabled-box" id="gender" name="gender" placeholder="Gender" value="male"  />

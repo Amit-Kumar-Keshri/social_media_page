@@ -29,4 +29,26 @@ jQuery(document).ready(function () {
       },
     });
   });
+  
+  jQuery(document).on("click", ".imgUploadBtn", function () {
+    var user_id = jQuery(this).attr("data-id");
+    console.log(user_id);
+    jQuery.ajax({
+      url: "http://127.0.0.1/social_media_page/response-data.php",
+      type: "POST",
+      cache: false,
+      dataType: "JSON",
+      data: {
+        action: "upload_image_action",
+        user_id: user_id,
+      },
+      success: function (response) {
+        console.log(response);
+      },
+      error: function (xhr, status, error) {
+        //var err = eval("(" + xhr.responseText + ")");
+        console.log(error);
+      },
+    });
+  });
 });
