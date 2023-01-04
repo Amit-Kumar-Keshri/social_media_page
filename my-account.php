@@ -31,15 +31,7 @@ $phone = $row['phone'];
 $address = $row['address'];
 $gender = $row['gender'];
 $profile_image = $row['profile_image'];
-if (isset($_POST['upload'])) {
-  $upload_profile_check = mya_fileupload($_FILES['file'], $id);
-  if ($upload_profile_check['status']) {
-    $profile_image = $upload_profile_check['image'];
-    $image_error = '';
-  } else {
-    $image_error = "File not Upload";
-  }
-}
+
 
 if (isset($_POST['update'])) {
   if (isset($_POST['name'])) {

@@ -92,7 +92,7 @@ function retrive_all_data(){
 
 
 function mya_fileupload($file,$id){
-    if (isset($file)) {
+   
         $target_dir = "uploads/";
         $target_file = $target_dir . basename($_FILES["file"]["name"]);
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -112,10 +112,7 @@ function mya_fileupload($file,$id){
           $file_error = true;
         } else {
           $file_error = false;
-        }
-      } else {
-        $file_error = true;
-      }
+        } 
       $response = array('status'=>$file_error, 'image'=>$profile_image);
       return $response;
 }
