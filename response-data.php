@@ -9,7 +9,7 @@ if(isset($_POST['action']) && $_POST['action']=='add_friend_action'){
 
 
 function add_as_friend_func($people_id) {
-	$people_id = $people_id;
+	
 	$current_user_id = $_COOKIE['login_auth'];
 	$date_added = date("l jS \of F Y h:i:s A");
 

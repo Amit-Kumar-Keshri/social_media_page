@@ -53,11 +53,18 @@ input#file{
   padding: 10px;
 }
 
-.user_item {
-    position: relative;
+.people-nearby .nearby-user{
+  padding: 20px 0;
+  border-top: 1px solid #f1f2f2;
+  border-bottom: 1px solid #f1f2f2;
+  margin-bottom: 20px;
 }
-
-.user_item img {
-    width: 100%;
-    height: auto;
+.people-nearby .nearby-user h5{
+  text-transform: capitalize;
+}
+img.profile-photo-lg{
+  height: 80px;
+  width: 80px;
+  border-radius: 100%;
+  
 }
