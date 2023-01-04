@@ -32,6 +32,8 @@ jQuery(document).ready(function () {
   
   jQuery(document).on("click", ".imgUploadBtn", function () {
     var user_id = jQuery(this).attr("data-id");
+    var name = jQuery(this).attr("name");
+
     console.log(user_id);
     jQuery.ajax({
       url: "http://127.0.0.1/social_media_page/response-data.php",
@@ -41,6 +43,7 @@ jQuery(document).ready(function () {
       data: {
         action: "upload_image_action",
         user_id: user_id,
+        name: name
       },
       success: function (response) {
         console.log(response);

@@ -136,3 +136,22 @@ function check_if_already_added($people_id) {
     }
     mysqli_close(connect_database());
 }
+
+function add_as_friend_func($people_id) {
+	
+	$current_user_id = $_COOKIE['login_auth'];
+	$date_added = date("l jS \of F Y h:i:s A");
+
+    $insert_query = "INSERT INTO tb_request (added_by, requested_to, date_of_added) VALUES ('$current_user_id', '$people_id', '$date_added')";
+    if ($result = connect_database()->query($insert_query)) {
+        $status = true;
+        $message = 'User Successfully Registered';
+    } else {
+        $status = false;
+        $message = 'Failed' . connect_database()->error;
+    }
+    mysqli_close(connect_database());
+
+	echo json_encode(array('status'=> $status,));
+	exit();
+}
