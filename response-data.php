@@ -19,6 +19,7 @@ function mya_fileupload($file, $id)
 		
 		$image_upload_query = "update tb_registration set profile_image='$file' where id='$id' ";
 		connect_database()->query($image_upload_query);
+		mysqli_close(connect_database());
 		$file_error = false;
 	} else {
 		$file_error = true;
@@ -42,6 +43,6 @@ function add_as_friend_func($people_id)
 		$message = 'Failed' . connect_database()->error;
 	}
 	mysqli_close(connect_database());
-	echo json_encode(array('status' => $status, ));
+	echo json_encode(array('status' => $status));
 	exit();
 }

@@ -51,9 +51,7 @@ jQuery(document).ready(function () {
       processData: false,
       success: function (response) {
         console.log(response);
-        
         jQuery(".profile-image, .header-profile-image").attr("src", response.image);
-        
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");
