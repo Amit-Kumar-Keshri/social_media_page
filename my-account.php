@@ -142,7 +142,7 @@ include('includes/header.php');
               <label for="name">Name</label>
             </div>
             <div class="col-lg-9">
-              <input type="text" class="form-control disabled-box" id="name" name="name" placeholder="Name"
+              <input type="text" class="form-control disabled-box bg-transparent" id="name" name="name" placeholder="Name"
                 value="<?= $name ?>" disabled />
               <small class="form-text text-danger">
                 <?php echo $name_error ?>
@@ -155,7 +155,7 @@ include('includes/header.php');
               <label for="email">E-mail</label>
             </div>
             <div class="col-lg-9">
-              <input type="email" class="form-control disabled-box" id="email" name="email" placeholder="Email"
+              <input type="email" class="form-control disabled-box bg-transparent" id="email" name="email" placeholder="Email"
                 value="<?= $email ?>" disabled />
               <small class="form-text text-danger">
                 <?php echo $email_error ?>
@@ -167,7 +167,7 @@ include('includes/header.php');
               <label for="phone">Phone Number</label>
             </div>
             <div class="col-lg-9">
-              <input type="tel" class="form-control disabled-box" id="phone" name="phone" value="<?= $phone ?>"
+              <input type="tel" class="form-control disabled-box bg-transparent" id="phone" name="phone" value="<?= $phone ?>"
                 placeholder="Phone Number" disabled />
               <small class="form-text text-danger">
                 <?php echo $phone_error ?>
@@ -179,7 +179,7 @@ include('includes/header.php');
               <label for="address">Address</label>
             </div>
             <div class="col-lg-9">
-              <input type="address" class="form-control disabled-box" id="address" name="address" placeholder="Address"
+              <input type="address" class="form-control disabled-box bg-transparent" id="address" name="address" placeholder="Address"
                 value="<?= $address ?>" disabled />
               <small class="form-text text-danger">
                 <?php echo $address_error ?>
