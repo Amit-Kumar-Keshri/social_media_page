@@ -162,7 +162,7 @@ $profile_image = $row['profile_image'];
         >
           <img
             src="uploads/<?=$profile_image?>"
-            class="rounded-circle"
+            class="rounded-circle header-profile-image"
             height="25"
             alt="Black and White Portrait of a Man"
             loading="lazy"

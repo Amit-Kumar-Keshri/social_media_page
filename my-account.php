@@ -127,16 +127,10 @@ include('includes/header.php');
             <div class="row my-3 justify-content-center align-items-center">
 
               <input type="file" class="form-control imgUploadBtn" data-id="<?=$id;?>" id="file" name="file" placeholder="Upload Your Photo" />
-              <small class="form-text text-danger ">
-                <?php echo $image_error ?>
-              </small>
+              
 
             </div>
-            <div class="text-center upload-button">
-              <button class="my-3 btn btn-primary" name="upload" type="submit">
-                Upload photo
-              </button>
-            </div>
+            
           </form>
         </div>
       </div>

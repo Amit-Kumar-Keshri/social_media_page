@@ -30,23 +30,30 @@ jQuery(document).ready(function () {
     });
   });
   
-  jQuery(document).on("click", ".imgUploadBtn", function () {
+  jQuery(document).on("change", ".imgUploadBtn", function () {
     var user_id = jQuery(this).attr("data-id");
-    var name = jQuery(this).attr("name");
+    var image_file = jQuery(".imgUploadBtn")[0].files;
+    console.log(image_file);
+   var formdata =  new FormData();
+    formdata.append('action', 'upload_image_action');
+    formdata.append('user_id', user_id);
+    formdata.append('image_file', image_file[0]);
 
-    console.log(user_id);
+    console.log(formdata);
+    console.log(image_file[0]);
     jQuery.ajax({
       url: "http://localhost/social_media_page/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
-      data: {
-        action: "upload_image_action",
-        user_id: user_id,
-        name: name
-      },
+      data: formdata,
+      contentType: false,    
+      processData: false,
       success: function (response) {
         console.log(response);
+        
+        jQuery(".profile-image, .header-profile-image").attr("src", response.image);
+        
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");
