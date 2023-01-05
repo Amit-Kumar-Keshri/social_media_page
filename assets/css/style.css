@@ -53,22 +53,6 @@ input#file{
   padding: 10px;
 }
 
-/* .people-nearby .nearby-user{
-  padding: 20px 0;
-  border-top: 1px solid #f1f2f2;
-  border-bottom: 1px solid #f1f2f2;
-  margin-bottom: 20px;
-}
-.people-nearby .nearby-user h5{
-  text-transform: capitalize;
-}
-img.profile-photo-lg{
-  height: 80px;
-  width: 80px;
-  border-radius: 100%;
-  
-} */
-
 /********* Friends  Page *********/
 
 body {
@@ -93,7 +77,7 @@ body {
     list-style-type: none;
     color: #fff;
     display: inline-block;
-    /* float: left; */
+    
     margin-right: 20px;
 }
 

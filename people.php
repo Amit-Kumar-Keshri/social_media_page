@@ -19,7 +19,7 @@ if (!isset($_COOKIE['login_auth'])) {
     </div>
   </div>
 </div>
-<div class="container ">
+<div class="container">
   <div class="row">
     <div class="col-lg-12">
       <div class="d-flex flex-wrap">
