@@ -5,7 +5,7 @@ $id = $_COOKIE["login_auth"];
 $query = "Select * from tb_registration where id='$id'";
 $result = connect_database()->query($query);
 $row = $result->fetch_assoc();
-$id = $row['id'];
+
 $profile_image = $row['profile_image'];
 }
 ?>
@@ -93,24 +93,32 @@ $profile_image = $row['profile_image'];
         <?php
         $all_data = retrive_all_request($id);
         foreach ($all_data as $key => $value) {
-          $user_id = $value[0];
-          if ($user_id != $_COOKIE['login_auth']) {
+          $sender_id = $value[1];
+          $row = retrive_data($sender_id);
+          $sender_profile_image = $row['profile_image'];
+          $sender_name = $row['name'];
+          
             ?>
           <li>
            <div class="row">
             <div class="col-2">
-                <img src="" class="img-fluid rounded-top" alt="">
-
+                <img src="uploads/<?=$sender_profile_image?>" class="img-fluid " alt="">
             </div>
             <div class="col-10">
-
+                <div class="row">
+                  <div class="col-12">
+                    <h3><?=$sender_name?></h3>
+                  </div>
+                  <div class="col-12">
+                     
+                  </div>
+                  
+                </div>
             </div>
            </div>
           </li>
-
           <?php
           }
-        }
         ?>
          
         </ul>
