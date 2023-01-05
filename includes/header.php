@@ -5,6 +5,7 @@ $id = $_COOKIE["login_auth"];
 $query = "Select * from tb_registration where id='$id'";
 $result = connect_database()->query($query);
 $row = $result->fetch_assoc();
+$id = $row['id'];
 $profile_image = $row['profile_image'];
 }
 ?>
@@ -67,11 +68,53 @@ $profile_image = $row['profile_image'];
       
       
         <a class="link-secondary me-3" href="people.php"><i class="fas fa-user"></i></a>
+        <a class="link-secondary me-3" href=""></a>
       
       <!-- Icon -->
       
 
       <!-- Notifications -->
+      <div class="dropdown">
+        <a
+          class="text-reset me-3 dropdown-toggle hidden-arrow"
+          href="#"
+          id="navbarDropdownMenuLink"
+          role="button"
+          data-mdb-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <i class="fa-solid fa-plus"></i>
+          <span class="badge rounded-pill badge-notification bg-danger">1</span>
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="navbarDropdownMenuLink"
+        >
+        <?php
+        $all_data = retrive_all_request($id);
+        foreach ($all_data as $key => $value) {
+          $user_id = $value[0];
+          if ($user_id != $_COOKIE['login_auth']) {
+            ?>
+          <li>
+           <div class="row">
+            <div class="col-2">
+                <img src="" class="img-fluid rounded-top" alt="">
+
+            </div>
+            <div class="col-10">
+
+            </div>
+           </div>
+          </li>
+
+          <?php
+          }
+        }
+        ?>
+         
+        </ul>
+      </div>
       <div class="dropdown">
         <a
           class="text-reset me-3 dropdown-toggle hidden-arrow"
@@ -122,7 +165,7 @@ $profile_image = $row['profile_image'];
           aria-labelledby="navbarDropdownMenuAvatar"
         >
           <li>
-            <a class="dropdown-item" href="#">My profile</a>
+            <a class="dropdown-item" href="my-account.php">My profile</a>
           </li>
           <li>
             <a class="dropdown-item" href="#">Settings</a>

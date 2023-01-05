@@ -12,7 +12,7 @@ jQuery(document).ready(function () {
     var people_id = jQuery(this).attr("data-id");
     console.log(people_id);
     jQuery.ajax({
-      url: "http://127.0.0.1/social_media_page/response-data.php",
+      url: "http://localhost/social_media_page/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -36,7 +36,7 @@ jQuery(document).ready(function () {
 
     console.log(user_id);
     jQuery.ajax({
-      url: "http://127.0.0.1/social_media_page/response-data.php",
+      url: "http://localhost/social_media_page/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
