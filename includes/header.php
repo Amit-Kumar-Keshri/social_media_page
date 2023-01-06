@@ -76,13 +76,17 @@ if (isset($_COOKIE['login_auth'])) {
               <ul class="dropdown-menu dropdown-menu-end friend-request-list" aria-labelledby="navbarDropdownMenuLink">
                 <?php
                 $all_data = retrive_all_request($id);
+                
                 foreach ($all_data as $key => $value) {
+
                   $sender_id = $value[1];
                   $row = retrive_data($sender_id);
                   $sender_profile_image = $row['profile_image'];
                   $sender_name = $row['name'];
+                  $sender_status = $value[3];
                   ?>
-                  <li class="m-3">
+                  <?php if($sender_status == "requested") {?>
+                  <li class="m-3 user_item">
                     <div class="row align-items-center">
                       <div class="col-4">
                         <img src="uploads/<?= $sender_profile_image ?>" class="img-fluid round-edges" alt="">
@@ -95,16 +99,17 @@ if (isset($_COOKIE['login_auth'])) {
                       <div class="col-4">
                         <div class="row">
                           <div class="col-12 gy-2">
-                            <button class="btn btn-success">Accept</button>
+                            <button class="btn btn-success btn-accept" data-rqst-sender-id="<?=$sender_id?>">Accept</button>
                           </div>
                           <div class="col-12 gy-2">
-                            <button class="btn btn-danger">Reject</button>
+                            <button class="btn btn-danger btn-reject" data-rqst-sender-id="<?=$sender_id?>">Reject</button>
                           </div>
                         </div>
                       </div>
                     </div>
                   </li>
                   <?php
+                }
                 }
                 ?>
 

@@ -69,6 +69,57 @@ jQuery(document).ready(function () {
       },
     });
   });
+
+
+  jQuery(document).on("click", ".btn-accept", function () {
+    var sender_id = jQuery(this).attr("data-rqst-sender-id");
+    console.log(sender_id);
+    jQuery.ajax({
+      url: "http://localhost/social_media_page/response-data.php",
+      type: "POST",
+      cache: false,
+      dataType: "JSON",
+      data: {
+        action: "accept_action",
+        sender_id: sender_id,
+      },
+      success: function (response) {
+        console.log(response);
+        if(response.status){
+            
+            console.log('working');
+        }
+      },
+      error: function (xhr, status, error) {
+        //var err = eval("(" + xhr.responseText + ")");
+        console.log(error);
+      },
+
+    });
+    jQuery(this).parents('li.user_item').hide();
+  });
+
+  jQuery(document).on("click", ".btn-reject", function () {
+    var sender_id = jQuery(this).attr("data-rqst-sender-id");
+    console.log(sender_id);
+    jQuery.ajax({
+      url: "http://localhost/social_media_page/response-data.php",
+      type: "POST",
+      cache: false,
+      dataType: "JSON",
+      data: {
+        action: "reject_action",
+        sender_id: sender_id,
+      },
+      success: function (response) {
+        console.log(response);
+      },
+      error: function (xhr, status, error) {
+        //var err = eval("(" + xhr.responseText + ")");
+        console.log(error);
+      },
+    });
+  });
   
   jQuery(document).on("change", ".imgUploadBtn", function () {
     var user_id = jQuery(this).attr("data-id");

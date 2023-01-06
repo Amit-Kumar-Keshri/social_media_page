@@ -45,9 +45,8 @@ if (!isset($_COOKIE['login_auth'])) {
                   <?php if (!check_if_already_added($value[0])) { ?>
                     <button class="btn btn-primary pull-right add_friend_btn" data-id="<?= $value[0]; ?>">Add Friend</button>
                   <?php } else { ?>
-                    <button class="btn btn-primary pull-right add_friend_btn" style="visibility: hidden;"
-                      data-id="<?= $value[0]; ?>">Add Friend</button>
-
+                    <button class="btn btn-success pull-right add_friend_btn"
+                      data-id="<?= $value[0]; ?>">Pending Request</button>
                   <?php } ?>
                 </div>
                 <div class="contacts">
