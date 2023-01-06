@@ -14,17 +14,18 @@ if (isset($_POST['action']) && $_POST['action'] == 'upload_post_action') {
 	post_upload_function($_FILES['post_file'], $_COOKIE['login_auth']);
 }
 
-function post_upload_function($post_file, $user_id){
+function post_upload_function($post_file, $user_id)
+{
 	$target_dir = "uploads/posts/";
 	$filename = $post_file["name"];
-	$target_file = $target_dir.$filename;
+	$target_file = $target_dir . $filename;
 	$date_added = date("l jS \of F Y h:i:s A");
 
-	$FileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+	$FileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-	if($FileType=='jpg' || $FileType=='jpeg' || $FileType=='png' || $FileType=='gif') {
+	if ($FileType == 'jpg' || $FileType == 'jpeg' || $FileType == 'png' || $FileType == 'gif') {
 		$file_type = 'image';
-	} else if($FileType=='mp4' || $FileType=='avi' || $FileType=='webm' || $FileType=='flv') {
+	} else if ($FileType == 'mp4' || $FileType == 'avi' || $FileType == 'webm' || $FileType == 'flv') {
 		$file_type = 'video';
 	} else {
 		$file_type = 'UNKNOWN';
@@ -32,7 +33,7 @@ function post_upload_function($post_file, $user_id){
 
 	if (move_uploaded_file($post_file["tmp_name"], $target_file)) {
 		$post_insert_query = "INSERT INTO tb_post (user_id, media_path, date_added, file_type) VALUES ('$user_id', '$filename', '$date_added', '$file_type')";
-		if($result=connect_database()->query($post_insert_query)){
+		if ($result = connect_database()->query($post_insert_query)) {
 			$status = true;
 			mysqli_close(connect_database());
 		} else {
@@ -41,15 +42,16 @@ function post_upload_function($post_file, $user_id){
 	} else {
 		$status = false;
 	}
-	echo json_encode(array('status' => $status,'image' =>$target_file, 'file_type'=>$FileType));
+	echo json_encode(array('status' => $status, 'image' => $target_file, 'file_type' => $FileType));
 	exit();
 }
 
 
-function mya_fileupload($image_file, $user_id) {
+function mya_fileupload($image_file, $user_id)
+{
 	$target_dir = "uploads/";
 	$filename = $image_file["name"];
-	$target_file = $target_dir.$filename;
+	$target_file = $target_dir . $filename;
 
 
 	if (move_uploaded_file($image_file["tmp_name"], $target_file)) {
@@ -60,7 +62,7 @@ function mya_fileupload($image_file, $user_id) {
 	} else {
 		$status = false;
 	}
-	echo json_encode(array('status' => $status,'image' =>$target_file));
+	echo json_encode(array('status' => $status, 'image' => $target_file));
 	exit();
 
 }

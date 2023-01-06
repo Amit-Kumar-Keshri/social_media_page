@@ -305,16 +305,7 @@ ul.friend-list .right p {
     text-align: center;
 }
 
-.card-one h3::after {
-    content: '';
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    margin-left: -15px;
-    width: 30px;
-    height: 1px;
-    background: #000;
-}
+
 
 .card-one .desc {
     padding: 0 1rem 2rem;
@@ -339,6 +330,16 @@ ul.friend-list .right p {
     margin-left: -15px;
     border: 15px solid transparent;
     border-bottom-color: #3afe;
+}
+.friend-request-list{
+    width: 300px !important;
+}
+
+.round-edges{
+    border-radius: 100%;
+}
+.profile-link{
+    text-transform: capitalize;
 }
 
 

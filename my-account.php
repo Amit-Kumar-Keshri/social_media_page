@@ -106,7 +106,7 @@ if (isset($_POST['update'])) {
   }
 }
 ?>
-<?php include('includes/header.php');?>
+<?php include('includes/header.php'); ?>
 <div class="row">
   <div class="col-lg-12  ">
     <div class="blue-header d-flex flex-column justify-content-center">
@@ -125,7 +125,8 @@ if (isset($_POST['update'])) {
               <img class="profile-image" src="uploads/<?= $profile_image ?>" />
             </div>
             <div class="row my-3 justify-content-center align-items-center">
-              <input type="file" class="form-control imgUploadBtn" data-id="<?=$id;?>" id="file" name="file" placeholder="Upload Your Photo" />
+              <input type="file" class="form-control imgUploadBtn" data-id="<?= $id; ?>" id="file" name="file"
+                placeholder="Upload Your Photo" />
             </div>
           </form>
         </div>
@@ -137,8 +138,8 @@ if (isset($_POST['update'])) {
               <label for="name">Name</label>
             </div>
             <div class="col-lg-9">
-              <input type="text" class="form-control disabled-box bg-transparent" id="name" name="name" placeholder="Name"
-                value="<?= $name ?>" disabled />
+              <input type="text" class="form-control disabled-box bg-transparent" id="name" name="name"
+                placeholder="Name" value="<?= $name ?>" disabled />
               <small class="form-text text-danger">
                 <?php echo $name_error ?>
               </small>
@@ -149,8 +150,8 @@ if (isset($_POST['update'])) {
               <label for="email">E-mail</label>
             </div>
             <div class="col-lg-9">
-              <input type="email" class="form-control disabled-box bg-transparent" id="email" name="email" placeholder="Email"
-                value="<?= $email ?>" disabled />
+              <input type="email" class="form-control disabled-box bg-transparent" id="email" name="email"
+                placeholder="Email" value="<?= $email ?>" disabled />
               <small class="form-text text-danger">
                 <?php echo $email_error ?>
               </small>
@@ -161,8 +162,8 @@ if (isset($_POST['update'])) {
               <label for="phone">Phone Number</label>
             </div>
             <div class="col-lg-9">
-              <input type="tel" class="form-control disabled-box bg-transparent" id="phone" name="phone" value="<?= $phone ?>"
-                placeholder="Phone Number" disabled />
+              <input type="tel" class="form-control disabled-box bg-transparent" id="phone" name="phone"
+                value="<?= $phone ?>" placeholder="Phone Number" disabled />
               <small class="form-text text-danger">
                 <?php echo $phone_error ?>
               </small>
@@ -173,8 +174,8 @@ if (isset($_POST['update'])) {
               <label for="address">Address</label>
             </div>
             <div class="col-lg-9">
-              <input type="address" class="form-control disabled-box bg-transparent" id="address" name="address" placeholder="Address"
-                value="<?= $address ?>" disabled />
+              <input type="address" class="form-control disabled-box bg-transparent" id="address" name="address"
+                placeholder="Address" value="<?= $address ?>" disabled />
               <small class="form-text text-danger">
                 <?php echo $address_error ?>
               </small>
@@ -227,12 +228,12 @@ if (isset($_POST['update'])) {
           <li><button>FriendList</button></li>
         </ul>
       </div>
-      <div class="custom_tab_content" >
+      <div class="custom_tab_content">
         <div class="col-md-12 add_media_sec" style="display:block;">
-          <?php include("dashboard-media.php");?>
+          <?php include("dashboard-media.php"); ?>
         </div>
         <div class="col-md-12 friendlist_sec" style="display:none;">
-          <?php include("dashboard-friends .php");?>
+          <?php include("dashboard-friends .php"); ?>
         </div>
       </div>
     </div>
