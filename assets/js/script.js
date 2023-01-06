@@ -1,4 +1,44 @@
 jQuery(document).ready(function () {
+
+  jQuery(document).on("change", ".postUploadBtn", function () {
+    var post_file = jQuery(".postUploadBtn")[0].files;
+    var formdata =  new FormData();
+    formdata.append('action', 'upload_post_action');
+    formdata.append('post_file', post_file[0]);
+
+    console.log(post_file[0]);
+    jQuery.ajax({
+      url: "http://localhost/social_media_page/response-data.php",
+      type: "POST",
+      cache: false,
+      dataType: "JSON",
+      data: formdata,
+      contentType: false,    
+      processData: false,
+      success: function (response) {
+        console.log(response);
+        jQuery(".profile-image, .header-profile-image").attr("src", response.image);
+      },
+      error: function (xhr, status, error) {
+        //var err = eval("(" + xhr.responseText + ")");
+        console.log(error);
+      },
+    });
+  });
+
+  jQuery(document).on("click", ".custom_tab_list > li", function () {
+    if(!jQuery(this).find('button').hasClass('active')){
+      jQuery('.custom_tab_list > li').find('button').removeClass('active');
+      jQuery(this).find('button').addClass('active');
+
+      var tab_data_index = jQuery(this).index();
+
+      jQuery('.custom_tab_content > div').hide();
+      jQuery('.custom_tab_content > div').eq(tab_data_index).slideDown();
+    }
+    
+
+  });
   jQuery(document).on("click", ".edit-button", function () {
     jQuery(".disabled-box").prop("disabled", false);
     jQuery(".edit-button").hide();

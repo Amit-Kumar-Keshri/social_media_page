@@ -19,9 +19,6 @@ function sm_login_user($email_address,$password){
 
     return $message;
 }
-
-
-
 function reg_validation_check($fullname,$email_address,$password,$phone_number,$address,$gender) {
     $VALID_EMAIL_PATTERN = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
     $VALID_PHONE_PATTERN = "/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/";
@@ -49,7 +46,6 @@ function reg_validation_check($fullname,$email_address,$password,$phone_number,$
     $response = array('status'=>$status, 'message'=> $message);
     return $response;
 }
-
 function insert_registration_data($fullname,$email_address,$password,$phone_number,$address,$gender){
     $profile_image = 'demo.png';
     $sql = "SELECT * FROM tb_registration WHERE email='$email_address'";
@@ -71,16 +67,12 @@ function insert_registration_data($fullname,$email_address,$password,$phone_numb
     $response = array('status'=>$status, 'message'=> $message);
     return $response;
 }
-
-
 function retrive_data($id){
     $query = "Select * from tb_registration where id='$id'";
     $result = connect_database()->query($query);
     $row = $result->fetch_assoc();
     return $row;
 }
-
-
 function retrive_all_data(){
     $query = "Select * from tb_registration";
     $result = connect_database()->query($query);
@@ -93,13 +85,6 @@ function retrive_all_request($recieverid){
     $row = $result->fetch_all();
     return $row;
 }
-
-
-
-
-
-
-
 function check_if_already_added($people_id) {
     
     $current_user_id = $_COOKIE['login_auth'];
@@ -114,6 +99,14 @@ function check_if_already_added($people_id) {
     } else {
         return false;
     } 
+}
+
+
+function show_post_by_current_user($user_id){
+    $query = "Select * from tb_post where user_id='$user_id' ORDER BY id DESC";
+    $result = connect_database()->query($query);
+    $row = $result->fetch_all();
+    return $row;  
 }
 
 

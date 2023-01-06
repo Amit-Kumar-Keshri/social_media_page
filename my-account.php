@@ -105,8 +105,8 @@ if (isset($_POST['update'])) {
     $gender_error = "Required";
   }
 }
-include('includes/header.php');
 ?>
+<?php include('includes/header.php');?>
 <div class="row">
   <div class="col-lg-12  ">
     <div class="blue-header d-flex flex-column justify-content-center">
@@ -125,37 +125,31 @@ include('includes/header.php');
               <img class="profile-image" src="uploads/<?= $profile_image ?>" />
             </div>
             <div class="row my-3 justify-content-center align-items-center">
-
               <input type="file" class="form-control imgUploadBtn" data-id="<?=$id;?>" id="file" name="file" placeholder="Upload Your Photo" />
-              
-
             </div>
-            
           </form>
         </div>
       </div>
       <div class="col-lg-7">
-
         <form class="mt-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
           <div class="row my-3">
             <div class="col-lg-3">
               <label for="name">Name</label>
             </div>
             <div class="col-lg-9">
-              <input type="text" class="form-control disabled-box" id="name" name="name" placeholder="Name"
+              <input type="text" class="form-control disabled-box bg-transparent" id="name" name="name" placeholder="Name"
                 value="<?= $name ?>" disabled />
               <small class="form-text text-danger">
                 <?php echo $name_error ?>
               </small>
             </div>
           </div>
-
           <div class="row my-3">
             <div class="col-lg-3">
               <label for="email">E-mail</label>
             </div>
             <div class="col-lg-9">
-              <input type="email" class="form-control disabled-box" id="email" name="email" placeholder="Email"
+              <input type="email" class="form-control disabled-box bg-transparent" id="email" name="email" placeholder="Email"
                 value="<?= $email ?>" disabled />
               <small class="form-text text-danger">
                 <?php echo $email_error ?>
@@ -167,7 +161,7 @@ include('includes/header.php');
               <label for="phone">Phone Number</label>
             </div>
             <div class="col-lg-9">
-              <input type="tel" class="form-control disabled-box" id="phone" name="phone" value="<?= $phone ?>"
+              <input type="tel" class="form-control disabled-box bg-transparent" id="phone" name="phone" value="<?= $phone ?>"
                 placeholder="Phone Number" disabled />
               <small class="form-text text-danger">
                 <?php echo $phone_error ?>
@@ -179,7 +173,7 @@ include('includes/header.php');
               <label for="address">Address</label>
             </div>
             <div class="col-lg-9">
-              <input type="address" class="form-control disabled-box" id="address" name="address" placeholder="Address"
+              <input type="address" class="form-control disabled-box bg-transparent" id="address" name="address" placeholder="Address"
                 value="<?= $address ?>" disabled />
               <small class="form-text text-danger">
                 <?php echo $address_error ?>
@@ -212,7 +206,6 @@ include('includes/header.php');
               </small>
             </div>
           </div>
-
           <div class="row my-3">
             <div class="col-lg-6">
               <a class=" btn btn-primary edit-button gy-3">Edit</a>
@@ -220,6 +213,27 @@ include('includes/header.php');
             </div>
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="gradient">
+  <div class="container ">
+    <div class="row justify-content-lg-between">
+      <div class="col-md-12">
+        <ul class="nav custom_tab_list">
+          <li><button class="active">Add Media</button></li>
+          <li><button>FriendList</button></li>
+        </ul>
+      </div>
+      <div class="custom_tab_content" >
+        <div class="col-md-12 add_media_sec" style="display:block;">
+          <?php include("dashboard-media.php");?>
+        </div>
+        <div class="col-md-12 friendlist_sec" style="display:none;">
+          <?php include("dashboard-friends .php");?>
+        </div>
       </div>
     </div>
   </div>
