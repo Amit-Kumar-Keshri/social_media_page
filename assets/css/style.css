@@ -506,6 +506,13 @@ body .fc-widget-header a {
 .profile-container {
     padding: 1.5625rem;
 }
+.status-image{
+height:50px;
+width:50px;
+}
+.modal-status{
+    top: 290px;
+}
 @media (max-width: 967px) {
     .profile-header-img {
         width: 5.625rem;

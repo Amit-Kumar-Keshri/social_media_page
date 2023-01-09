@@ -1,18 +1,18 @@
 <?php include('db.php');
-include("functions.php");
+
 if (isset($_GET['logout']) && isset($_COOKIE["login_auth"])) {
     header("Location:login.php");
     unset($_COOKIE['login_auth']);
     setcookie('login_auth', null, -1, '/');
     return true;
 }
-
 if (!isset($_COOKIE['login_auth'])) {
     header("Location:login.php");
 }
-
+include("functions.php");
 
 $row = retrive_data($_COOKIE["login_auth"]);
+//var_dump($row);
 $id = $row['id'];
 $name = $row['name'];
 $email = $row['email'];
@@ -20,6 +20,7 @@ $phone = $row['phone'];
 $address = $row['address'];
 $gender = $row['gender'];
 $profile_image = $row['profile_image'];
+
 ?>
 
 
@@ -65,7 +66,7 @@ $profile_image = $row['profile_image'];
         <div class="profile-container">
             <div class="row row-space-20">
                 <div class="col-md-8">
-                    <div class="tab-content p-0">
+                    <div class="tab-content p-0 m-3">
 
                         <div class="tab-pane fade active show" id="profile-friends">
                             <div class="m-b-10"><b>Friend List (9)</b></div>
@@ -98,16 +99,50 @@ $profile_image = $row['profile_image'];
                         </div>
 
                         <!-- Videos -->
-
+                         
                         <div class="tab-pane fade" id="profile-posts">
-                            <div class="create-post">
-                                <div class="form-group align-items-center justify-content-evenly">
-                                    <img src="uploads/<?= $profile_image ?>" alt="" class="img-thumbnail profile-photo-md" />
-                                    <textarea name="caption" id="exampleTextarea" cols="10" rows="1" class="form-control post_caption" placeholder="Write what you wish"></textarea>
-                                    <input type="file" class="form-control postUploadBtn" id="post_file" name="post_file" placeholder="Upload Your Media" />
-                                    <button class="btn btn-primary pull-right">Publish</button>
-                                </div>
+                        <div class="card card-body">
+                            <div class="d-flex flex-colomn">
+                                <div class="card-image">
+                                
+                                <img class="mt-3 rounded-circle status-image"  src="https://social.webestica.com/assets/images/avatar/03.jpg" alt="image">
+                                    </div>
+                                    <div class="status-update m-3">
+                                     <form class="w-100">
+                                     <textarea class="form-control pe-4 border-0"  name="" id=""  rows="2" data-autoresize placeholder="share your thought..." data-mdb-toggle="modal" data-mdb-target="#exampleModal"></textarea>
+                                     </form>
+                                     <!-- Button trigger modal -->
+                                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-status">
+    <div class="modal-content ">
+      <div class="modal-header">
+        <!-- <h5 class="modal-title " id="exampleModalLabel">Share your thoughts...</h5> -->
+        <!-- <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body">
+      <form class="w-100">
+      <textarea class="form-control" placeholder="enter your thoughts here..."></textarea>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+                                     <ul class="nav nav-pills nav-stack">
+                                        <li class="nav-items"><a href="#">Photo</a></li>
+                                        <li class="nav-items"><a href="#">Video</a></li>
+                                        <li class="nav-items"><a href="#">Event</a></li>
+                                        <li class="nav-items"><a href="#">Feeling/Activity</a></li>
+                                    </div>
                             </div>
+                         </div>  
+                            
                         </div>
                         <div class="tab-pane fade" id="profile-videos">
                             <div class="post_area">
