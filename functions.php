@@ -91,6 +91,13 @@ function retrive_all_request($recieverid)
     $row = $result->fetch_all();
     return $row;
 }
+function retrive_all_friends($user_id)
+{
+    $query = "Select * from tb_request where added_by = '$user_id'";
+    $result = connect_database()->query($query);
+    $row = $result->fetch_all();
+    return $row;
+}
 function check_if_already_added($people_id)
 {
 
