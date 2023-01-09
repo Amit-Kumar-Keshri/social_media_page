@@ -2,9 +2,12 @@ jQuery(document).ready(function () {
 
   jQuery(document).on("change", ".postUploadBtn", function () {
     var post_file = jQuery(".postUploadBtn")[0].files;
+    var post_caption = jQuery('.post_caption').val();
     var formdata =  new FormData();
+    
     formdata.append('action', 'upload_post_action');
     formdata.append('post_file', post_file[0]);
+    formdata.append('post_caption', post_caption)
 
     console.log(post_file[0]);
     jQuery.ajax({
@@ -26,19 +29,19 @@ jQuery(document).ready(function () {
     });
   });
 
-  jQuery(document).on("click", ".custom_tab_list > li", function () {
-    if(!jQuery(this).find('button').hasClass('active')){
-      jQuery('.custom_tab_list > li').find('button').removeClass('active');
-      jQuery(this).find('button').addClass('active');
+  // jQuery(document).on("click", ".custom_tab_list > li", function () {
+  //   if(!jQuery(this).find('button').hasClass('active')){
+  //     jQuery('.custom_tab_list > li').find('button').removeClass('active');
+  //     jQuery(this).find('button').addClass('active');
 
-      var tab_data_index = jQuery(this).index();
+  //     var tab_data_index = jQuery(this).index();
 
-      jQuery('.custom_tab_content > div').hide();
-      jQuery('.custom_tab_content > div').eq(tab_data_index).slideDown();
-    }
+  //     jQuery('.custom_tab_content > div').hide();
+  //     jQuery('.custom_tab_content > div').eq(tab_data_index).slideDown();
+  //   }
     
 
-  });
+  // });
   jQuery(document).on("click", ".edit-button", function () {
     jQuery(".disabled-box").prop("disabled", false);
     jQuery(".edit-button").hide();

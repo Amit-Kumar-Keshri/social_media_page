@@ -1,18 +1,18 @@
 <?php include('db.php');
-
+include("functions.php");
 if (isset($_GET['logout']) && isset($_COOKIE["login_auth"])) {
     header("Location:login.php");
     unset($_COOKIE['login_auth']);
     setcookie('login_auth', null, -1, '/');
     return true;
 }
+
 if (!isset($_COOKIE['login_auth'])) {
     header("Location:login.php");
 }
-include("functions.php");
+
 
 $row = retrive_data($_COOKIE["login_auth"]);
-//var_dump($row);
 $id = $row['id'];
 $name = $row['name'];
 $email = $row['email'];
@@ -20,7 +20,6 @@ $phone = $row['phone'];
 $address = $row['address'];
 $gender = $row['gender'];
 $profile_image = $row['profile_image'];
-
 ?>
 
 
@@ -104,7 +103,7 @@ $profile_image = $row['profile_image'];
                             <div class="create-post">
                                 <div class="form-group align-items-center justify-content-evenly">
                                     <img src="uploads/<?= $profile_image ?>" alt="" class="img-thumbnail profile-photo-md" />
-                                    <textarea name="texts" id="exampleTextarea" cols="10" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
+                                    <textarea name="caption" id="exampleTextarea" cols="10" rows="1" class="form-control post_caption" placeholder="Write what you wish"></textarea>
                                     <input type="file" class="form-control postUploadBtn" id="post_file" name="post_file" placeholder="Upload Your Media" />
                                     <button class="btn btn-primary pull-right">Publish</button>
                                 </div>

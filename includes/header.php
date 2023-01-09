@@ -5,7 +5,6 @@ if (isset($_COOKIE['login_auth'])) {
   $query = "Select * from tb_registration where id='$id'";
   $result = connect_database()->query($query);
   $row = $result->fetch_assoc();
-
   $profile_image = $row['profile_image'];
 }
 ?>
