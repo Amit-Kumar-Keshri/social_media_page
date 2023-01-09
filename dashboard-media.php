@@ -18,9 +18,5 @@
 				</iframe>
 			</div>
 		<?php } ?>
-
-
-		<?php
-	}
-	?>
+	<?php } ?>
 </div>

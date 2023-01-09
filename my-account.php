@@ -1,15 +1,15 @@
 <?php
-include("db.php");
-if (isset($_GET['logout']) && isset($_COOKIE["login_auth"])) {
-  header("Location:login.php");
-  unset($_COOKIE['login_auth']);
-  setcookie('login_auth', null, -1, '/');
-  return true;
-}
-if (!isset($_COOKIE['login_auth'])) {
-  header("Location:login.php");
-}
-include("functions.php");
+// include("db.php");
+// if (isset($_GET['logout']) && isset($_COOKIE["login_auth"])) {
+//   header("Location:login.php");
+//   unset($_COOKIE['login_auth']);
+//   setcookie('login_auth', null, -1, '/');
+//   return true;
+// }
+// if (!isset($_COOKIE['login_auth'])) {
+//   header("Location:login.php");
+// }
+// include("functions.php");
 
 
 $VALID_EMAIL_PATTERN = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";

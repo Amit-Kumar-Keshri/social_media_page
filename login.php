@@ -2,7 +2,7 @@
 include("db.php");
 include('functions.php');
 if (isset($_COOKIE['login_auth'])) {
-    header("Location: my-account.php");
+    header("Location: my-account-new.php");
 }
 
 if (isset($_POST['login'])) {
