@@ -76,9 +76,7 @@ if (isset($_COOKIE['login_auth'])) {
               <ul class="dropdown-menu dropdown-menu-end friend-request-list" aria-labelledby="navbarDropdownMenuLink">
                 <?php
                 $all_data = retrive_all_request($id);
-                
                 foreach ($all_data as $key => $value) {
-
                   $sender_id = $value[1];
                   $row = retrive_data($sender_id);
                   $sender_profile_image = $row['profile_image'];
@@ -112,7 +110,7 @@ if (isset($_COOKIE['login_auth'])) {
                     </li>
                     <?php
                   }
-                }
+                } 
                 ?>
 
               </ul>
