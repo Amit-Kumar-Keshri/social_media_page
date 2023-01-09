@@ -100,6 +100,16 @@ $profile_image = $row['profile_image'];
 
                         <!-- Videos -->
 
+                        <div class="tab-pane fade" id="profile-posts">
+                            <div class="create-post">
+                                <div class="form-group align-items-center justify-content-evenly">
+                                    <img src="uploads/<?= $profile_image ?>" alt="" class="img-thumbnail profile-photo-md" />
+                                    <textarea name="texts" id="exampleTextarea" cols="10" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
+                                    <input type="file" class="form-control postUploadBtn" id="post_file" name="post_file" placeholder="Upload Your Media" />
+                                    <button class="btn btn-primary pull-right">Publish</button>
+                                </div>
+                            </div>
+                        </div>
                         <div class="tab-pane fade" id="profile-videos">
                             <div class="post_area">
                                 <?php
@@ -123,7 +133,7 @@ $profile_image = $row['profile_image'];
                                 foreach ($all_user_post as $key => $value) {
                                 ?>
                                     <?php if ($value[4] == 'image') { ?>
-                                        <div class="">
+                                        <div class="d-inline-block">
                                             <img width="320" height="240" src="uploads/posts/<?= $value[2]; ?>" alt="">
                                         </div>
                                     <?php } ?>
