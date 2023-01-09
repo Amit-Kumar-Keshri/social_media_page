@@ -39,31 +39,26 @@ $profile_image = $row['profile_image'];
                     <h4 class="m-t-sm">
                         <?= $name ?>
                     </h4>
-                    <a href="#" class="btn btn-xs btn-primary mb-2">Edit Profile</a>
+                    <a href="my-account.php" class="btn btn-xs btn-primary mb-2">Edit Profile</a>
                 </div>
             </div>
 
             <!-- Tabs navs -->
             <ul class="nav nav-tabs profile-header bg-light" id="ex1" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="ex1-tab-1" data-mdb-toggle="tab" href="#profile-friends" role="tab"
-                        aria-controls="ex1-tabs-1" aria-selected="true">FRIENDS</a>
+                    <a class="nav-link active" id="ex1-tab-1" data-mdb-toggle="tab" href="#profile-friends" role="tab" aria-controls="ex1-tabs-1" aria-selected="true">FRIENDS</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="ex1-tab-2" data-mdb-toggle="tab" href="#profile-posts" role="tab"
-                        aria-controls="ex1-tabs-2" aria-selected="false">POSTS</a>
+                    <a class="nav-link" id="ex1-tab-2" data-mdb-toggle="tab" href="#profile-posts" role="tab" aria-controls="ex1-tabs-2" aria-selected="false">POSTS</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#profile-photos" role="tab"
-                        aria-controls="ex1-tabs-3" aria-selected="false">PHOTOS</a>
+                    <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#profile-photos" role="tab" aria-controls="ex1-tabs-3" aria-selected="false">PHOTOS</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#profile-videos" role="tab"
-                        aria-controls="ex1-tabs-3" aria-selected="false">VIDEOS</a>
+                    <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#profile-videos" role="tab" aria-controls="ex1-tabs-3" aria-selected="false">VIDEOS</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#profile-about" role="tab"
-                        aria-controls="ex1-tabs-3" aria-selected="false">ABOUT</a>
+                    <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#profile-about" role="tab" aria-controls="ex1-tabs-3" aria-selected="false">ABOUT</a>
                 </li>
             </ul>
         </div>
@@ -77,25 +72,30 @@ $profile_image = $row['profile_image'];
                             <div class="m-b-10"><b>Friend List (9)</b></div>
 
                             <ul class="friend-list clearfix">
-                                <li>
-                                    <!-- /* curently this showing user profile but it needs to shown friend list here */ -->
-                                    <a href="#">
-                                        <div class="friend-img"><img src="uploads/<?= $profile_image ?>" alt="" /></div>
-                                        <div class="friend-info">
-                                            <?php
-                                            $all_friends = retrive_all_friends($_COOKIE['login_auth']);
-                                            foreach ($all_friends as $key => $value) {
-                                                if ($value[3] == 'accepted') {
-                                                    $row = retrive_data($value[2]);
-                                                    
-                                                    ?>
+
+                                <!-- /* curently this showing user profile but it needs to shown friend list here */ -->
+                                <?php
+                                $all_friends = retrive_all_friends($_COOKIE['login_auth']);
+                                foreach ($all_friends as $key => $value) {
+                                    if ($value[3] == 'accepted') {
+                                        $row = retrive_data($value[2]);
+
+                                ?>
+                                        <li>
+                                            <a href="#" class="">
+                                                <div class="friend-img"><img src="uploads/<?= $row['profile_image'] ?>" alt="" /></div>
+                                                <div class="friend-info">
                                                     <h4><?= $row['name']; ?></h4>
                                                     <p>392 friends</p>
-                                                <?php } ?>
-                                            <?php } ?>
-                                        </div>
-                                    </a>
-                                </li>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    <?php } ?>
+                                <?php } ?>
+
+
+
+
                             </ul>
                         </div>
 
@@ -106,7 +106,7 @@ $profile_image = $row['profile_image'];
                                 <?php
                                 $all_user_post = show_post_by_current_user($_COOKIE['login_auth']);
                                 foreach ($all_user_post as $key => $value) {
-                                    ?>
+                                ?>
                                     <?php if ($value[4] == 'video') { ?>
                                         <iframe width="320" height="240" src="uploads/posts/<?= $value[2]; ?>">
                                         </iframe>
@@ -122,7 +122,7 @@ $profile_image = $row['profile_image'];
                                 <?php
                                 $all_user_post = show_post_by_current_user($_COOKIE['login_auth']);
                                 foreach ($all_user_post as $key => $value) {
-                                    ?>
+                                ?>
                                     <?php if ($value[4] == 'image') { ?>
                                         <div class="">
                                             <img width="320" height="240" src="uploads/posts/<?= $value[2]; ?>" alt="">

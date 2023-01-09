@@ -1,15 +1,15 @@
 <?php
-// include("db.php");
-// if (isset($_GET['logout']) && isset($_COOKIE["login_auth"])) {
-//   header("Location:login.php");
-//   unset($_COOKIE['login_auth']);
-//   setcookie('login_auth', null, -1, '/');
-//   return true;
-// }
-// if (!isset($_COOKIE['login_auth'])) {
-//   header("Location:login.php");
-// }
-// include("functions.php");
+include("db.php");
+if (isset($_GET['logout']) && isset($_COOKIE["login_auth"])) {
+  header("Location:login.php");
+  unset($_COOKIE['login_auth']);
+  setcookie('login_auth', null, -1, '/');
+  return true;
+}
+if (!isset($_COOKIE['login_auth'])) {
+  header("Location:login.php");
+}
+include("functions.php");
 
 
 $VALID_EMAIL_PATTERN = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
@@ -219,24 +219,4 @@ if (isset($_POST['update'])) {
   </div>
 </div>
 
-<div class="gradient">
-  <div class="container ">
-    <div class="row justify-content-lg-between">
-      <div class="col-md-12">
-        <ul class="nav custom_tab_list">
-          <li><button class="active">Add Media</button></li>
-          <li><button>FriendList</button></li>
-        </ul>
-      </div>
-      <div class="custom_tab_content">
-        <div class="col-md-12 add_media_sec" style="display:block;">
-          <?php include("dashboard-media.php"); ?>
-        </div>
-        <div class="col-md-12 friendlist_sec" style="display:none;">
-          <?php include("dashboard-friends .php"); ?>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 <?php include('includes/footer.php'); ?>
