@@ -9,7 +9,7 @@ if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $pass = md5($_POST['password']);
     if (sm_login_user($email, $pass) == 'success') {
-        header("Location: my-account.php");
+        header("Location: my-account-new.php");
     } else {
         $error_message = 'Invalid Credentials';
     }

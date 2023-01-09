@@ -75,8 +75,17 @@ $profile_image = $row['profile_image'];
                                     <a href="#">
                                         <div class="friend-img"><img src="uploads/<?= $profile_image ?>" alt="" /></div>
                                         <div class="friend-info">
-                                            <h4><?= $name ?></h4>
-                                            <p>392 friends</p>
+                                            <?php $row = retrive_all_request($_COOKIE['login_auth']) ?>
+                                            <?php foreach ($row as $key => $value) {
+                                            ?>
+                                                <?php if ($value[3] == 'accepted') { ?>
+                                                   <?php $name = retrive_data($value[2]); 
+                                                   echo var_dump($name);
+                                                   ?>
+                                                    <h4><?php $name['name'] ?></h4>
+                                                    <p>392 friends</p>
+                                                <?php } ?>
+                                            <?php } ?>
                                         </div>
                                     </a>
                                 </li>
