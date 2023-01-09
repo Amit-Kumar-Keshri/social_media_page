@@ -104,6 +104,8 @@ function check_if_already_added($people_id)
     $current_user_id = $_COOKIE['login_auth'];
     $check_query = "SELECT * FROM tb_request WHERE requested_to='$people_id' AND added_by='$current_user_id'";
     if ($result = connect_database()->query($check_query)) {
+       // $row = $result->fetch_assoc();
+       // $status = $row[''];
         mysqli_close(connect_database());
         if ($result->num_rows > 0) {
             return true;

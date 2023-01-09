@@ -26,7 +26,7 @@ if (!isset($_COOKIE['login_auth'])) {
         <div class="d-flex flex-wrap">
           <?php
           $all_data = retrive_all_data();
-
+        
           foreach ($all_data as $key => $value) {
             $user_id = $value[0];
 
