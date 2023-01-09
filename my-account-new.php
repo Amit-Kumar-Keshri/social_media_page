@@ -79,7 +79,6 @@ $profile_image = $row['profile_image'];
                                 foreach ($all_friends as $key => $value) {
                                     if ($value[3] == 'accepted') {
                                         $row = retrive_data($value[2]);
-
                                 ?>
                                         <li>
                                             <a href="#" class="">
@@ -132,6 +131,25 @@ $profile_image = $row['profile_image'];
                             </div>
                         </div>
                     </div>
+                </div>
+                <div id="profile-about">
+                    <ul class="profile-info-list">
+                        <li class="title">PERSONAL INFORMATION</li>
+                        <li>
+                            <div class="field">Address:</div>
+                            <div class="value">
+                                <address class="m-b-0">
+                                    <?= $address ?>
+                                </address>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="field">Phone No.:</div>
+                            <div class="value">
+                                <?= $phone ?>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
 
                 <div class=" col-md-4 hidden-xs hidden-sm">
