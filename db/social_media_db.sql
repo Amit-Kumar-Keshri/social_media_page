@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2023 at 07:22 AM
+-- Generation Time: Jan 09, 2023 at 07:30 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -95,7 +95,17 @@ CREATE TABLE `tb_request` (
 INSERT INTO `tb_request` (`id`, `added_by`, `requested_to`, `status`, `date_of_added`) VALUES
 (1, 1, 2, 'accepted', 'Friday 6th of January 2023 10:56:45 AM'),
 (2, 1, 3, 'requested', 'Friday 6th of January 2023 10:56:47 AM'),
-(3, 1, 4, 'requested', 'Friday 6th of January 2023 10:56:48 AM');
+(3, 1, 4, 'requested', 'Friday 6th of January 2023 10:56:48 AM'),
+(4, 2, 1, 'requested', 'Friday 6th of January 2023 02:05:34 PM'),
+(5, 2, 3, 'requested', 'Friday 6th of January 2023 02:05:36 PM'),
+(6, 2, 4, 'requested', 'Friday 6th of January 2023 02:05:37 PM'),
+(7, 2, 5, 'requested', 'Friday 6th of January 2023 02:05:41 PM'),
+(8, 2, 6, 'requested', 'Friday 6th of January 2023 02:05:42 PM'),
+(9, 3, 1, 'requested', 'Friday 6th of January 2023 02:06:46 PM'),
+(10, 3, 6, 'requested', 'Friday 6th of January 2023 02:06:48 PM'),
+(11, 3, 5, 'requested', 'Friday 6th of January 2023 02:06:49 PM'),
+(12, 3, 2, 'requested', 'Friday 6th of January 2023 02:06:50 PM'),
+(13, 3, 4, 'requested', 'Friday 6th of January 2023 02:06:51 PM');
 
 --
 -- Indexes for dumped tables
@@ -140,7 +150,7 @@ ALTER TABLE `tb_registration`
 -- AUTO_INCREMENT for table `tb_request`
 --
 ALTER TABLE `tb_request`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
