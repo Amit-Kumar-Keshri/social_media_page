@@ -84,9 +84,9 @@ function retrive_all_data()
     $row = $result->fetch_all();
     return $row;
 }
-function retrive_all_request($recieverid)
+function retrive_all_request($reciever_id)
 {
-    $query = "Select * from tb_request where requested_to = '$recieverid'";
+    $query = "Select * from tb_request where requested_to = '$reciever_id'";
     $result = connect_database()->query($query);
     $row = $result->fetch_all();
     return $row;

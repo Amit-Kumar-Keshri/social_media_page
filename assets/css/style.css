@@ -332,7 +332,9 @@ ul.friend-list .right p {
     border-bottom-color: #3afe;
 }
 .friend-request-list{
-    width: 300px !important;
+    width: 400px !important;
+    height: 290px;
+    overflow: scroll;
 }
 
 .round-edges{

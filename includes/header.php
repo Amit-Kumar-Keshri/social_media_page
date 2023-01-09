@@ -83,33 +83,35 @@ if (isset($_COOKIE['login_auth'])) {
                   $row = retrive_data($sender_id);
                   $sender_profile_image = $row['profile_image'];
                   $sender_name = $row['name'];
-                  $sender_status = $value[3];
+                  $status = $value[3];
                   ?>
-                  <?php if($sender_status == "requested") {?>
-                  <li class="m-3 user_item">
-                    <div class="row align-items-center">
-                      <div class="col-4">
-                        <img src="uploads/<?= $sender_profile_image ?>" class="img-fluid round-edges" alt="">
-                      </div>
-                      <div class="col-4">
-                        <h3 class="text-center">
-                          <?= $sender_name ?>
-                        </h3>
-                      </div>
-                      <div class="col-4">
-                        <div class="row">
-                          <div class="col-12 gy-2">
-                            <button class="btn btn-success btn-accept" data-rqst-sender-id="<?=$sender_id?>">Accept</button>
-                          </div>
-                          <div class="col-12 gy-2">
-                            <button class="btn btn-danger btn-reject" data-rqst-sender-id="<?=$sender_id?>">Reject</button>
+                  <?php if ($status == "requested") { ?>
+                    <li class="m-3 user_item">
+                      <div class="row align-items-center">
+                        <div class="col-4">
+                          <img src="uploads/<?= $sender_profile_image ?>" class="img-fluid round-edges" alt="">
+                        </div>
+                        <div class="col-4">
+                          <h3 class="text-center">
+                            <?= $sender_name ?>
+                          </h3>
+                        </div>
+                        <div class="col-4">
+                          <div class="row">
+                            <div class="col-12 gy-2">
+                              <button class="btn btn-success btn-accept"
+                                data-rqst-sender-id="<?= $sender_id ?>">Accept</button>
+                            </div>
+                            <div class="col-12 gy-2">
+                              <button class="btn btn-danger btn-reject"
+                                data-rqst-sender-id="<?= $sender_id ?>">Reject</button>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </li>
-                  <?php
-                }
+                    </li>
+                    <?php
+                  }
                 }
                 ?>
 
