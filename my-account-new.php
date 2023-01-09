@@ -115,7 +115,7 @@ $profile_image = $row['profile_image'];
                         </div>
 
 
-
+                        <!-- Photos -->
                         <div class="tab-pane fade" id="profile-photos">
                             <div class="post_area">
                                 <?php
@@ -130,27 +130,29 @@ $profile_image = $row['profile_image'];
                                 <?php } ?>
                             </div>
                         </div>
+
+                        <div class="tab-pane fade" id="profile-about">
+                            <ul class="profile-info-list">
+                                <li class="title">PERSONAL INFORMATION</li>
+                                <li>
+                                    <div class="field">Address:</div>
+                                    <div class="value">
+                                        <address class="m-b-0">
+                                            <?= $address ?>
+                                        </address>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="field">Phone No.:</div>
+                                    <div class="value">
+                                        <?= $phone ?>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div id="profile-about">
-                    <ul class="profile-info-list">
-                        <li class="title">PERSONAL INFORMATION</li>
-                        <li>
-                            <div class="field">Address:</div>
-                            <div class="value">
-                                <address class="m-b-0">
-                                    <?= $address ?>
-                                </address>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="field">Phone No.:</div>
-                            <div class="value">
-                                <?= $phone ?>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+
 
                 <div class=" col-md-4 hidden-xs hidden-sm">
                     <ul class="profile-info-list">
@@ -177,7 +179,7 @@ $profile_image = $row['profile_image'];
 
 
 
-        <!-- Photos -->
+
 
         <!-- About -->
 
