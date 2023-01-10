@@ -125,3 +125,10 @@ function show_post_by_current_user($user_id)
     $row = $result->fetch_all();
     return $row;
 }
+function retrive_all_post()
+{
+    $query = "Select * from tb_post";
+    $result = connect_database()->query($query);
+    $row = $result->fetch_all();
+    return $row;
+}

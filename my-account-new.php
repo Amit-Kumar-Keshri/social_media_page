@@ -62,15 +62,12 @@ $profile_image = $row['profile_image'];
                 </li>
             </ul>
         </div>
-
         <div class="profile-container">
             <div class="row row-space-20">
                 <div class="col-md-8">
                     <div class="tab-content p-0 m-3">
-
                         <div class="tab-pane fade active show" id="profile-friends">
                             <div class="m-b-10"><b>Friend List (9)</b></div>
-
                             <ul class="friend-list clearfix">
 
                                 <!-- /* curently this showing user profile but it needs to shown friend list here */ -->
@@ -91,58 +88,53 @@ $profile_image = $row['profile_image'];
                                         </li>
                                     <?php } ?>
                                 <?php } ?>
-
-
-
-
                             </ul>
                         </div>
 
                         <!-- Videos -->
-                         
+
                         <div class="tab-pane fade" id="profile-posts">
-                        <div class="card card-body">
-                            <div class="d-flex flex-colomn">
-                                <div class="card-image">
-                                
-                                <img class="mt-3 rounded-circle status-image"  src="https://social.webestica.com/assets/images/avatar/03.jpg" alt="image">
+                            <div class="card card-body">
+                                <div class="d-flex flex-colomn">
+                                    <div class="card-image">
+
+                                        <img class="mt-3 rounded-circle status-image" src="https://social.webestica.com/assets/images/avatar/03.jpg" alt="image">
                                     </div>
                                     <div class="status-update m-3">
-                                     <form class="w-100">
-                                     <textarea class="form-control pe-4 border-0"  name="" id=""  rows="2" data-autoresize placeholder="share your thought..." data-mdb-toggle="modal" data-mdb-target="#exampleModal"></textarea>
-                                     </form>
-                                     <!-- Button trigger modal -->
-                                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-status">
-    <div class="modal-content ">
-      <div class="modal-header">
-        <!-- <h5 class="modal-title " id="exampleModalLabel">Share your thoughts...</h5> -->
-        <!-- <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button> -->
-      </div>
-      <div class="modal-body">
-      <form class="w-100">
-      <textarea class="form-control" placeholder="enter your thoughts here..."></textarea>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-                                     <ul class="nav nav-pills nav-stack">
-                                        <li class="nav-items"><a href="#">Photo</a></li>
-                                        <li class="nav-items"><a href="#">Video</a></li>
-                                        <li class="nav-items"><a href="#">Event</a></li>
-                                        <li class="nav-items"><a href="#">Feeling/Activity</a></li>
+                                        <form class="w-100">
+                                            <textarea class="form-control pe-4 border-0" name="" id="" rows="2" data-autoresize placeholder="share your thought..." data-mdb-toggle="modal" data-mdb-target="#exampleModal"></textarea>
+                                        </form>
+                                        <!-- Button trigger modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-status">
+                                                <div class="modal-content ">
+                                                    <div class="modal-header">
+                                                        <!-- <h5 class="modal-title " id="exampleModalLabel">Share your thoughts...</h5> -->
+                                                        <!-- <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button> -->
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form class="w-100">
+                                                            <textarea class="form-control post_caption" placeholder="enter your thoughts here..."></textarea>
+                                                            <input type="file" class="form-control post_media" id="post_file" name="post_file" placeholder="Upload Your Media" />
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-primary postUploadBtn">Save changes</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="nav nav-pills nav-stack">
+                                            <li class="nav-items"><a href="#">Photo</a></li>
+                                            <li class="nav-items"><a href="#">Video</a></li>
+                                            <li class="nav-items"><a href="#">Event</a></li>
+                                            <li class="nav-items"><a href="#">Feeling/Activity</a></li>
+                                        </ul>
                                     </div>
+                                </div>
                             </div>
-                         </div>  
-                            
+
                         </div>
                         <div class="tab-pane fade" id="profile-videos">
                             <div class="post_area">
@@ -150,8 +142,8 @@ $profile_image = $row['profile_image'];
                                 $all_user_post = show_post_by_current_user($_COOKIE['login_auth']);
                                 foreach ($all_user_post as $key => $value) {
                                 ?>
-                                    <?php if ($value[4] == 'video') { ?>
-                                        <iframe width="320" height="240" src="uploads/posts/<?= $value[2]; ?>">
+                                    <?php if ($value[5] == 'video') { ?>
+                                        <iframe width="320" height="240" src="uploads/posts/<?= $value[3]; ?>">
                                         </iframe>
                                     <?php } ?>
                                 <?php } ?>
@@ -166,9 +158,9 @@ $profile_image = $row['profile_image'];
                                 $all_user_post = show_post_by_current_user($_COOKIE['login_auth']);
                                 foreach ($all_user_post as $key => $value) {
                                 ?>
-                                    <?php if ($value[4] == 'image') { ?>
+                                    <?php if ($value[5] == 'image') { ?>
                                         <div class="d-inline-block">
-                                            <img width="320" height="240" src="uploads/posts/<?= $value[2]; ?>" alt="">
+                                            <img width="320" height="240" src="uploads/posts/<?= $value[3]; ?>" alt="">
                                         </div>
                                     <?php } ?>
                                 <?php } ?>

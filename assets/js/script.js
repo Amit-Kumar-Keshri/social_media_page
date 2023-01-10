@@ -1,13 +1,13 @@
 jQuery(document).ready(function () {
 
-  jQuery(document).on("change", ".postUploadBtn", function () {
-    var post_file = jQuery(".postUploadBtn")[0].files;
+  jQuery(document).on("click", ".postUploadBtn", function () {
+    var post_file = jQuery(".post_media")[0].files;
     var post_caption = jQuery('.post_caption').val();
     var formdata =  new FormData();
     
     formdata.append('action', 'upload_post_action');
     formdata.append('post_file', post_file[0]);
-    formdata.append('post_caption', post_caption)
+    formdata.append('post_caption', post_caption);
 
     console.log(post_file[0]);
     jQuery.ajax({
