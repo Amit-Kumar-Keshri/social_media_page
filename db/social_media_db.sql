@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2023 at 07:30 AM
+-- Generation Time: Jan 10, 2023 at 08:45 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `tb_post` (
   `id` int(10) NOT NULL,
   `user_id` varchar(255) NOT NULL,
+  `post_text` text NOT NULL,
   `media_path` varchar(255) NOT NULL,
   `date_added` varchar(255) NOT NULL,
   `file_type` varchar(255) NOT NULL
@@ -39,10 +40,14 @@ CREATE TABLE `tb_post` (
 -- Dumping data for table `tb_post`
 --
 
-INSERT INTO `tb_post` (`id`, `user_id`, `media_path`, `date_added`, `file_type`) VALUES
-(1, '1', 'MV5BZDk1ZmU0NGYtMzQ2Yi00N2NjLTkyNWEtZWE2NTU4NTJiZGUzXkEyXkFqcGdeQXVyMTExNDQ2MTI@._V1_.jpg', 'Thursday 5th of January 2023 12:28:32 PM', 'image'),
-(2, '1', 'SampleVideo_640x360_1mb.mp4', 'Thursday 5th of January 2023 12:28:44 PM', 'video'),
-(3, '1', 'video.mp4', 'Thursday 5th of January 2023 12:39:57 PM', 'video');
+INSERT INTO `tb_post` (`id`, `user_id`, `post_text`, `media_path`, `date_added`, `file_type`) VALUES
+(1, '1', '', 'MV5BZDk1ZmU0NGYtMzQ2Yi00N2NjLTkyNWEtZWE2NTU4NTJiZGUzXkEyXkFqcGdeQXVyMTExNDQ2MTI@._V1_.jpg', 'Thursday 5th of January 2023 12:28:32 PM', 'image'),
+(2, '1', '', 'SampleVideo_640x360_1mb.mp4', 'Thursday 5th of January 2023 12:28:44 PM', 'video'),
+(3, '1', '', 'video.mp4', 'Thursday 5th of January 2023 12:39:57 PM', 'video'),
+(4, '1', '', 'avatar2.png', 'Monday 9th of January 2023 12:05:29 PM', 'image'),
+(5, '3', '', 'avatar2.png', 'Tuesday 10th of January 2023 06:47:55 AM', 'image'),
+(6, '3', '', 'avatar6.png', 'Tuesday 10th of January 2023 06:48:56 AM', 'image'),
+(7, '3', '', 'avatar7.png', 'Tuesday 10th of January 2023 06:50:10 AM', 'image');
 
 -- --------------------------------------------------------
 
@@ -94,17 +99,17 @@ CREATE TABLE `tb_request` (
 
 INSERT INTO `tb_request` (`id`, `added_by`, `requested_to`, `status`, `date_of_added`) VALUES
 (1, 1, 2, 'accepted', 'Friday 6th of January 2023 10:56:45 AM'),
-(2, 1, 3, 'requested', 'Friday 6th of January 2023 10:56:47 AM'),
-(3, 1, 4, 'requested', 'Friday 6th of January 2023 10:56:48 AM'),
-(4, 2, 1, 'requested', 'Friday 6th of January 2023 02:05:34 PM'),
+(2, 1, 3, 'accepted', 'Friday 6th of January 2023 10:56:47 AM'),
+(3, 1, 4, 'accepted', 'Friday 6th of January 2023 10:56:48 AM'),
+(4, 2, 1, 'accepted', 'Friday 6th of January 2023 02:05:34 PM'),
 (5, 2, 3, 'requested', 'Friday 6th of January 2023 02:05:36 PM'),
 (6, 2, 4, 'requested', 'Friday 6th of January 2023 02:05:37 PM'),
 (7, 2, 5, 'requested', 'Friday 6th of January 2023 02:05:41 PM'),
 (8, 2, 6, 'requested', 'Friday 6th of January 2023 02:05:42 PM'),
-(9, 3, 1, 'requested', 'Friday 6th of January 2023 02:06:46 PM'),
+(9, 3, 1, 'accepted', 'Friday 6th of January 2023 02:06:46 PM'),
 (10, 3, 6, 'requested', 'Friday 6th of January 2023 02:06:48 PM'),
 (11, 3, 5, 'requested', 'Friday 6th of January 2023 02:06:49 PM'),
-(12, 3, 2, 'requested', 'Friday 6th of January 2023 02:06:50 PM'),
+(12, 3, 2, 'accepted', 'Friday 6th of January 2023 02:06:50 PM'),
 (13, 3, 4, 'requested', 'Friday 6th of January 2023 02:06:51 PM');
 
 --
@@ -138,7 +143,7 @@ ALTER TABLE `tb_request`
 -- AUTO_INCREMENT for table `tb_post`
 --
 ALTER TABLE `tb_post`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tb_registration`

@@ -27,7 +27,7 @@ include('includes/header.php');
                     <div class="panel-body">
                         <?php if (!empty($value[2])) { ?>
                             <blockquote>
-                                <?= $value[2] ?>
+                            <?= $value[2] ?>
                             </blockquote>
                         <?php } elseif ($value[5] == "image") { ?>
                             <img src="uploads/posts/<?= $value[3] ?>" class="img-responsive image-">
