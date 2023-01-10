@@ -2,9 +2,10 @@
 include("functions.php");
 include('includes/header.php');
 ?>
-<div class="container d-flex justify-content-center">
+<div class="gradient">
+<div class="container d-flex justify-content-center py-3">
     <div class="row activity ">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <?php
             $all_posts = retrive_all_post();
             foreach ($all_posts as $key => $value) {
@@ -14,7 +15,7 @@ include('includes/header.php');
                 $profile_image = $row['profile_image'];
                 $address = $row['address'];
                 ?>
-                <div class="panel panel-default">
+                <div class="panel panel-default card px-3">
                     <div class="panel-heading">
                         <img src="uploads/<?= $profile_image ?>" class="rounded-circle">
                         <div><strong>
@@ -24,18 +25,32 @@ include('includes/header.php');
                             <?= $address ?>
                         </div>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body d-flex justify-content-center">
                         <?php if (!empty($value[2])) { ?>
                             <blockquote>
                             <?= $value[2] ?>
                             </blockquote>
                         <?php } elseif ($value[5] == "image") { ?>
-                            <img src="uploads/posts/<?= $value[3] ?>" class="img-responsive image-">
+                            <img src="uploads/posts/<?= $value[3] ?>" class="img-responsive img-fluid">
                         <?php } elseif ($value[5] == "video") { ?>
-                            <iframe src="uploads/posts/<?= $value[3] ?>" width="500" height="281" frameborder="0"></iframe>
+                          <iframe src="uploads/posts/<?= $value[3] ?>" height="320" width="500" class="post-video"  frameborder="0"></iframe>
                         <?php } ?>
                     </div>
-                    <div class="panel-footer">
+                    <div class="panel-footer my-3">
+                        <div class="row ">
+                            
+                            <div class="col text-center ">
+                            
+                            <button type="button" class="btn btn-secondary"><i class="fa-solid fa-thumbs-up"></i>Like</button>
+                            </div>
+                            <div class="col text-center">
+                            <button type="button" class="btn btn-secondary"><i class="fa-solid fa-comment"></i>Comment</button>
+                            </div>
+                            <div class="col text-center">
+                            <button type="button" class="btn btn-secondary"><i class="fa-solid fa-share"></i>Share</button>
+                           </div>
+                            
+                        </div>
                     </div>
                 </div>
                 <?php
@@ -102,4 +117,5 @@ include('includes/header.php');
         </div> -->
     </div>
 </div>
+        </div>
 <?php include('includes/footer.php'); ?>
