@@ -59,12 +59,14 @@ include('includes/header.php');
                                     <button type="button" class="btn btn-secondary liked-btn" post-id="<?= $value[0]; ?>"><i class="fa-solid fa-thumbs-up"></i>Like</button>
                                 </div>
                                 <div class="col text-center">
-                                    <button type="button" class="btn btn-secondary"><i class="fa-solid fa-comment"></i>Comment</button>
+                                    <button type="button" class="btn btn-secondary comment-btn"><i class="fa-solid fa-comment"></i>Comment</button>
                                 </div>
                                 <div class="col text-center">
                                     <button type="button" class="btn btn-secondary"><i class="fa-solid fa-share"></i>Share</button>
                                 </div>
-
+                                <div class="col-12 mt-3">
+                                    <input type="text" class="form-control post-comment" id="comment" name="comment" placeholder="Write a Comment"/>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -72,21 +74,7 @@ include('includes/header.php');
                 }
                 ?>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-rounded">
-                    <div><strong>John Doe</strong></div>
-                    <div class="small"><i class="fa fa-map-marker"></i> Medellin, Colombia</div>
-                </div>
-                <div class="panel-body">
-                    <div class="video-container">
-                        <iframe src="//player.vimeo.com/video/87526548" width="500" height="281" frameborder="0"></iframe>
-                    </div>
-                </div>
-                <div class="panel-footer">
-                </div>
-            </div>
-        </div> -->
+        </div>
     </div>
 </div>
 </div>

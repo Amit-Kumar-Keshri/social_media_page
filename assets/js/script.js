@@ -112,6 +112,13 @@ jQuery(document).ready(function () {
     jQuery(this).parents('li.user_item').hide();
   });
 
+  jQuery(document).on("click", ".comment-btn", function (){
+    jQuery(".post-comment").slideToggle();
+  });
+
+
+
+
   jQuery(document).on("click", ".btn-reject", function () {
     var sender_id = jQuery(this).attr("data-rqst-sender-id");
     console.log(sender_id);

@@ -788,6 +788,7 @@ img.profile-photo-md {
 .post_media {
   height: 400px;
   width: 400px;
+  margin: auto;
 }
 
 .friend-info h4 {

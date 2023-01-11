@@ -79,7 +79,7 @@ $profile_image = $row['profile_image'];
                                 ?>
                                         <li>
                                             <a href="#" class="">
-                                                <div class="friend-img"><img src="uploads/<?= $row['profile_image'] ?>" alt="" /></div>
+                                                <div class="friend-img"><img src="uploads/<?= $row['profile_image'] ?>" alt="user profile photo" /></div>
                                                 <div class="friend-info">
                                                     <h4><?= $row['name']; ?></h4>
                                                     <p>392 friends</p>
