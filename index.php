@@ -64,8 +64,10 @@ include('includes/header.php');
                                 <div class="col text-center">
                                     <button type="button" class="btn btn-secondary"><i class="fa-solid fa-share"></i>Share</button>
                                 </div>
-                                <div class="col-12 mt-3">
-                                    <input type="text" class="form-control post-comment" id="comment" name="comment" placeholder="Write a Comment"/>
+                                <div class="col-12 mt-3 post-comment-sec">
+                                    <input type="text" class="form-control post-comment " id="comment" name="comment" placeholder="Write a Comment" />
+                                    <a href="#"><img src="assets/images/send.png" alt=""></a>
+                                    
                                 </div>
                             </div>
                         </div>

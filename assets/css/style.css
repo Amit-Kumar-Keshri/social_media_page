@@ -794,3 +794,22 @@ img.profile-photo-md {
 .friend-info h4 {
   text-transform: capitalize;
 }
+
+
+input.post-comment{
+  border-radius: 20px;
+}
+
+.post-comment-sec{
+  position: relative;
+  
+}
+.post-comment-sec img{
+  width: 24px;
+  position: absolute;
+  right: 3%;
+  top: 16%;
+}
+.form-control{
+  padding: 4.5px 20px 3.68px;
+}
