@@ -77,6 +77,13 @@ function retrive_data($id)
     $row = $result->fetch_assoc();
     return $row;
 }
+function retrive_data_request($id)
+{
+    $query = "Select * from tb_request where added_by = '$id'";
+    $result = connect_database()->query($query);
+    $row = $result->fetch_assoc();
+    return $row;
+}
 function retrive_all_data()
 {
     $query = "Select * from tb_registration";
@@ -112,6 +119,18 @@ function check_if_already_added($people_id)
         } else {
             return false;
         }
+    } else {
+        return false;
+    }
+}
+
+function all_added_users($user_id){
+
+    $check_query = "SELECT requested_to FROM tb_request WHERE added_by='$user_id' AND status='accepted'";
+    if ($result = connect_database()->query($check_query)) {
+        $row = $result->fetch_all();
+        mysqli_close(connect_database());
+        return $row;
     } else {
         return false;
     }

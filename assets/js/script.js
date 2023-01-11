@@ -1,5 +1,27 @@
 jQuery(document).ready(function () {
 
+  jQuery(document).on("click", ".liked-btn", function () {
+    var post_id = jQuery(this).attr("post-id");
+    jQuery.ajax({
+      url: "http://localhost/social_media_page/response-data.php",
+      type: "POST",
+      cache: false,
+      dataType: "JSON",
+      data:  {
+        action: "add_like_react",
+        post_id: post_id,
+      },
+      success: function (response) {
+        console.log(response);
+
+      },
+      error: function (xhr, status, error) {
+        //var err = eval("(" + xhr.responseText + ")");
+        console.log(error);
+      },
+    });
+  });
+
   jQuery(document).on("click", ".postUploadBtn", function () {
     var post_file = jQuery(".post_media")[0].files;
     var post_caption = jQuery('.post_caption').val();
@@ -29,19 +51,7 @@ jQuery(document).ready(function () {
     });
   });
 
-  // jQuery(document).on("click", ".custom_tab_list > li", function () {
-  //   if(!jQuery(this).find('button').hasClass('active')){
-  //     jQuery('.custom_tab_list > li').find('button').removeClass('active');
-  //     jQuery(this).find('button').addClass('active');
 
-  //     var tab_data_index = jQuery(this).index();
-
-  //     jQuery('.custom_tab_content > div').hide();
-  //     jQuery('.custom_tab_content > div').eq(tab_data_index).slideDown();
-  //   }
-    
-
-  // });
   jQuery(document).on("click", ".edit-button", function () {
     jQuery(".disabled-box").prop("disabled", false);
     jQuery(".edit-button").hide();

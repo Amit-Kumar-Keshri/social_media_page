@@ -115,7 +115,7 @@ $profile_image = $row['profile_image'];
                                                     <div class="modal-body">
                                                         <form class="w-100">
                                                             <textarea class="form-control post_caption" placeholder="enter your thoughts here..."></textarea>
-                                                            <input type="file" class="form-control post_media" id="post_file" name="post_file" placeholder="Upload Your Media" />
+                                                            <input type="file" class="form-control mt-3" id="post_file" name="post_file" placeholder="Upload Your Media" />
                                                         </form>
                                                     </div>
                                                     <div class="modal-footer">
@@ -143,7 +143,7 @@ $profile_image = $row['profile_image'];
                                 foreach ($all_user_post as $key => $value) {
                                 ?>
                                     <?php if ($value[5] == 'video') { ?>
-                                        <iframe width="320" height="240" src="uploads/posts/<?= $value[3]; ?>">
+                                        <iframe width="320" height="240" src="uploads/posts/<?= $value[3]; ?>" autoplay="false">
                                         </iframe>
                                     <?php } ?>
                                 <?php } ?>

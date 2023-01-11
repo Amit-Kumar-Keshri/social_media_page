@@ -2,14 +2,14 @@
 include("db.php");
 include('functions.php');
 if (isset($_COOKIE['login_auth'])) {
-    header("Location: my-account-new.php");
+    header("Location: index.php");
 }
 
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $pass = md5($_POST['password']);
     if (sm_login_user($email, $pass) == 'success') {
-        header("Location: my-account-new.php");
+        header("Location: index.php");
     } else {
         $error_message = 'Invalid Credentials';
     }

@@ -17,10 +17,28 @@ if (isset($_POST['action']) && $_POST['action'] == 'upload_image_action') {
 }
 
 if (isset($_POST['action']) && $_POST['action'] == 'upload_post_action') {
-	post_upload_function($_POST['post_caption'],$_FILES['post_file'], $_COOKIE['login_auth']);
+	post_upload_function($_POST['post_caption'], $_FILES['post_file'], $_COOKIE['login_auth']);
 }
 
-function post_upload_function($post_caption,$post_file, $user_id)
+if (isset($_POST['action']) && $_POST['action'] == 'add_like_react') {
+	add_like_react_func($_POST['post_id'], $_COOKIE['login_auth']);
+}
+
+function add_like_react_func($post_id, $current_user_id)
+{
+	$date_added = date("l jS \of F Y h:i:s A");
+	$post_insert_query = "INSERT INTO tb_reactions (added_by, post_id, added_comment, liked, date_added) VALUES ('$current_user_id','$post_id','','1','$date_added')";
+	if ($result = connect_database()->query($post_insert_query)) {
+		$status = true;
+		mysqli_close(connect_database());
+	} else {
+		$status = false;
+	}
+	echo json_encode(array('status' => 200));
+	exit();
+}
+
+function post_upload_function($post_caption, $post_file, $user_id)
 {
 	$target_dir = "uploads/posts/";
 	$filename = $post_file["name"];
@@ -29,7 +47,7 @@ function post_upload_function($post_caption,$post_file, $user_id)
 
 	$FileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-	if ($FileType == 'jpg' || $FileType == 'jpeg' || $FileType == 'png' || $FileType == 'gif') {
+	if ($FileType == 'jpg' || $FileType == 'jpeg' || $FileType == 'png' || $FileType == 'gif' || $FileType == 'gif' || $FileType == 'webp') {
 		$file_type = 'image';
 	} else if ($FileType == 'mp4' || $FileType == 'avi' || $FileType == 'webm' || $FileType == 'flv') {
 		$file_type = 'video';
@@ -70,7 +88,6 @@ function mya_fileupload($image_file, $user_id)
 	}
 	echo json_encode(array('status' => $status, 'image' => $target_file));
 	exit();
-
 }
 
 
@@ -91,22 +108,24 @@ function add_as_friend_func($people_id)
 }
 
 function friend_request_accept_helper($sender_id)
-{	$accept_status = "accepted";
+{
+	$accept_status = "accepted";
 	$current_user_id = $_COOKIE['login_auth'];
-	$update_query ="UPDATE tb_request SET status ='$accept_status' where added_by = '$sender_id' AND requested_to = '$current_user_id'";
+	$update_query = "UPDATE tb_request SET status ='$accept_status' where added_by = '$sender_id' AND requested_to = '$current_user_id'";
 	if ($result = connect_database()->query($update_query)) {
 		$status = true;
 	} else {
 		$status = false;
 	}
 	mysqli_close(connect_database());
-	echo json_encode(array('status' => $status,'request_status' => $accept_status));
+	echo json_encode(array('status' => $status, 'request_status' => $accept_status));
 	exit();
 }
 function friend_request_reject_helper($sender_id)
-{	$reject_status = "rejected";
+{
+	$reject_status = "rejected";
 	$current_user_id = $_COOKIE['login_auth'];
-	$update_query ="UPDATE tb_request SET status ='$reject_status' where added_by = '$sender_id' AND requested_to = '$current_user_id'";
+	$update_query = "UPDATE tb_request SET status ='$reject_status' where added_by = '$sender_id' AND requested_to = '$current_user_id'";
 	if ($result = connect_database()->query($update_query)) {
 		$status = true;
 	} else {

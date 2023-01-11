@@ -7,6 +7,7 @@ if (isset($_COOKIE['login_auth'])) {
   $row = $result->fetch_assoc();
   $profile_image = $row['profile_image'];
 }
+$request_counter = 0;
 ?>
 
 
@@ -70,23 +71,25 @@ if (isset($_COOKIE['login_auth'])) {
               <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button"
                 data-mdb-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-plus"></i>
-                <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                <span class="badge rounded-pill badge-notification bg-danger"><?=$request_counter?></span>
               </a>
               <ul class="dropdown-menu dropdown-menu-end friend-request-list" aria-labelledby="navbarDropdownMenuLink">
                 <?php
                 $all_data = retrive_all_request($id);
+                
                 foreach ($all_data as $key => $value) {
                   $sender_id = $value[1];
                   $row = retrive_data($sender_id);
                   $sender_profile_image = $row['profile_image'];
                   $sender_name = $row['name'];
                   $status = $value[3];
+                  $request_counter = $request_counter + 1;
                   ?>
                   <?php if ($status == "requested") { ?>
                     <li class="m-3 user_item">
                       <div class="row align-items-center">
                         <div class="col-4">
-                          <img src="uploads/<?= $sender_profile_image ?>" class="img-fluid round-edges" alt="">
+                          <img src="uploads/<?= $sender_profile_image ?>" class="img-fluid rounded-circle" alt="">
                         </div>
                         <div class="col-4">
                           <h3 class="text-center">
@@ -114,7 +117,7 @@ if (isset($_COOKIE['login_auth'])) {
 
               </ul>
             </div>
-            <div class="dropdown">
+            <!-- <div class="dropdown">
               <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button"
                 data-mdb-toggle="dropdown" aria-expanded="false">
                 <i class="fas fa-bell"></i>
@@ -131,7 +134,7 @@ if (isset($_COOKIE['login_auth'])) {
                   <a class="dropdown-item" href="#">Something else here</a>
                 </li>
               </ul>
-            </div>
+            </div> -->
             <!-- Avatar -->
             <div class="dropdown">
               <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"

@@ -793,3 +793,12 @@ margin:0 !important;
         margin-top: 10px;
         font-size: 12px
     }
+
+    .post_media{
+        height: 400px;
+        width: 400px;
+    }
+    
+    .friend-info h4{
+        text-transform: capitalize;
+    }
