@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2023 at 08:45 AM
+-- Generation Time: Jan 11, 2023 at 11:18 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -47,7 +47,32 @@ INSERT INTO `tb_post` (`id`, `user_id`, `post_text`, `media_path`, `date_added`,
 (4, '1', '', 'avatar2.png', 'Monday 9th of January 2023 12:05:29 PM', 'image'),
 (5, '3', '', 'avatar2.png', 'Tuesday 10th of January 2023 06:47:55 AM', 'image'),
 (6, '3', '', 'avatar6.png', 'Tuesday 10th of January 2023 06:48:56 AM', 'image'),
-(7, '3', '', 'avatar7.png', 'Tuesday 10th of January 2023 06:50:10 AM', 'image');
+(7, '3', '', 'avatar7.png', 'Tuesday 10th of January 2023 06:50:10 AM', 'image'),
+(8, '1', 'Hello How are you', '2133155.webp', 'Tuesday 10th of January 2023 11:04:05 AM', 'image'),
+(9, '1', 'Hello How are you', 'whatsapp dp image6-601.jpg', 'Tuesday 10th of January 2023 11:04:36 AM', 'image'),
+(10, '2', 'Hi how are you', 'Smiley-816x1024.jpg', 'Tuesday 10th of January 2023 11:15:15 AM', 'image');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_reactions`
+--
+
+CREATE TABLE `tb_reactions` (
+  `id` int(10) NOT NULL,
+  `added_by` int(10) NOT NULL,
+  `post_id` int(10) NOT NULL,
+  `added_comment` varchar(255) NOT NULL,
+  `liked` int(10) NOT NULL,
+  `date_added` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tb_reactions`
+--
+
+INSERT INTO `tb_reactions` (`id`, `added_by`, `post_id`, `added_comment`, `liked`, `date_added`) VALUES
+(1, 1, 1, '', 1, 'Tuesday 10th of January 2023 02:46:01 PM');
 
 -- --------------------------------------------------------
 
@@ -123,6 +148,12 @@ ALTER TABLE `tb_post`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tb_reactions`
+--
+ALTER TABLE `tb_reactions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tb_registration`
 --
 ALTER TABLE `tb_registration`
@@ -143,7 +174,13 @@ ALTER TABLE `tb_request`
 -- AUTO_INCREMENT for table `tb_post`
 --
 ALTER TABLE `tb_post`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `tb_reactions`
+--
+ALTER TABLE `tb_reactions`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tb_registration`

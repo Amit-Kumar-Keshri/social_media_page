@@ -113,8 +113,11 @@ jQuery(document).ready(function () {
   });
 
   jQuery(document).on("click", ".comment-btn", function (){
-    jQuery(".post-comment").slideToggle();
+    var index = jQuery(".comment-btn").index(this);
+    jQuery(".post-comment").eq(index).slideToggle();
   });
+
+  
 
 
 
