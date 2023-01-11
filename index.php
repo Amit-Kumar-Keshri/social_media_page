@@ -65,10 +65,30 @@ include('includes/header.php');
                                 <div class="col text-center">
                                     <button type="button" class="btn btn-secondary"><i class="fa-solid fa-share"></i>Share</button>
                                 </div>
-                                <div class="col-12 mt-3 post-comment-sec">
-                                    <input type="text" class="form-control post-comment " id="comment" name="comment" placeholder="Write a Comment" />
-                                    <a href="#" class="comment-send" post-id="<?= $value[0]; ?>" ><img src="assets/images/send.png" alt=""></a>
-                                    
+                                <div class="col-12 mt-3 ">
+                                    <div class="post-comment">
+                                        <div class="post-comment-sec">
+                                            <input type="text" class="form-control post-comment1" id="comment" name="comment" placeholder="Write a Comment" />
+                                            <a href="#" class="comment-send" post-id="<?= $value[0]; ?>"><img class="send-btn-icon" src="assets/images/send.png" alt=""></a>
+                                        </div>
+                                        <div class="mt-3 ms-3">
+                                            <?php
+                                            $all_friends = retrive_all_comments($_COOKIE['login_auth']);
+                                            foreach ($all_friends as $key => $value) {
+                                                if ($value[3] == 'accepted') {
+                                                    $row = retrive_data($value[2]);
+                                            ?>
+                                                    <a href="" class="friend-list comments clearfix">
+                                                        <div class="friend-img rounded-circle d-inline"><img src="uploads/<?= $row['profile_image'] ?>" alt="user profile photo" /></div>
+                                                        <div class="friend-info comments-ctn d-inline-block">
+                                                            <h4><?= $row['name']; ?></h4>
+                                                            <p>392 friends</p>
+                                                        </div>
+                                                    </a>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

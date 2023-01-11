@@ -796,7 +796,7 @@ img.profile-photo-md {
 }
 
 
-input.post-comment{
+input.post-comment1{
   border-radius: 20px;
 }
 
@@ -804,7 +804,7 @@ input.post-comment{
   position: relative;
   
 }
-.post-comment-sec img{
+.post-comment-sec img.send-btn-icon{
   width: 24px;
   position: absolute;
   right: 3%;
@@ -812,4 +812,10 @@ input.post-comment{
 }
 .form-control{
   padding: 4.5px 20px 3.68px;
+}
+
+
+.comments .comments-ctn {
+    margin-left: 1.625rem;
+    margin-bottom: 1.5rem;
 }
