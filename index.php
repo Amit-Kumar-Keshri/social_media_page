@@ -56,8 +56,11 @@ include('includes/header.php');
                             <div class="row ">
 
                                 <div class="col text-center ">
+                                    <?php if(!check_if_already_liked($value[0])){?>
                                     <button type="button" class="btn btn-secondary liked-btn" value="LIKE" post-id="<?= $value[0]; ?>"><i class="fa-solid fa-thumbs-up"></i>Like</button>
-                                    <span class="badge rounded-pill badge-notification-button bg-danger"></span>
+                                    <?php } else { ?>
+                                    <span class="badge rounded-pill badge-notification-button bg-danger"> <?php echo $count=like_count($value[0]) ?> </span>
+                                    <?php } ?>
                                 </div>
                                 <div class="col text-center">
                                     <button type="button" class="btn btn-secondary comment-btn"><i class="fa-solid fa-comment"></i>Comment</button>
@@ -69,23 +72,23 @@ include('includes/header.php');
                                     <div class="post-comment">
                                         <div class="post-comment-sec">
                                             <input type="text" class="form-control post-comment1" id="comment" name="comment" placeholder="Write a Comment" />
-                                            <a href="#" class="comment-send" post-id="<?= $value[0]; ?>"><img class="send-btn-icon" src="assets/images/send.png" alt=""></a>
+                                            <a class="comment-send" post-id="<?= $value[0]; ?>"><img class="send-btn-icon" src="assets/images/send.png" alt=""></a>
                                         </div>
                                         <div class="mt-3 ms-3">
                                             <?php
-                                            $all_friends = retrive_all_comments($_COOKIE['login_auth']);
-                                            foreach ($all_friends as $key => $value) {
-                                                if ($value[3] == 'accepted') {
-                                                    $row = retrive_data($value[2]);
+                                            $all_comments = retrive_all_comments($value[0]);
+                                            foreach ($all_comments as $key => $comments) {
+                                                if(!empty($comments[3])){
+                                                $commenter_data = retrive_data($comments[1]);
                                             ?>
-                                                    <a href="" class="friend-list comments clearfix">
-                                                        <div class="friend-img rounded-circle d-inline"><img src="uploads/<?= $row['profile_image'] ?>" alt="user profile photo" /></div>
-                                                        <div class="friend-info comments-ctn d-inline-block">
-                                                            <h4><?= $row['name']; ?></h4>
-                                                            <p>392 friends</p>
-                                                        </div>
-                                                    </a>
-                                                <?php } ?>
+                                                <a class="friend-list comments clearfix">
+                                                    <div class="friend-img rounded-circle d-inline"><img src="uploads/<?= $commenter_data['profile_image'] ?>" alt="user profile photo" /></div>
+                                                    <div class="friend-info comments-ctn d-inline-block">
+                                                        <h4><?= $commenter_data['name']; ?></h4>
+                                                        <p><?= $comments[3] ?></p>
+                                                    </div>
+                                                </a>
+                                            <?php } ?>
                                             <?php } ?>
                                         </div>
                                     </div>

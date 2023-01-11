@@ -1,5 +1,5 @@
 jQuery(document).ready(function () {
-  jQuery(".badge-notification-button").hide();
+  
   jQuery(document).on("click", ".liked-btn", function () {
     var post_id = jQuery(this).attr("post-id");
     var button_index = jQuery(".liked-btn").index();
@@ -23,14 +23,14 @@ jQuery(document).ready(function () {
         console.log(error);
       },
     });
-    // jQuery(this).eq(button_index).val(like)
   });
 });
 
 jQuery(document).ready(function () {
   jQuery(document).on("click", ".comment-send", function () {
     var post_id = jQuery(this).attr("post-id");
-    var comment_data =  jQuery(".post-comment").val();
+    var comment_data =  jQuery(this).parents(".panel-default").find(".post-comment1").val();
+    console.log(comment_data);
     jQuery.ajax({
       url: "http://localhost/social_media_page/response-data.php",
       type: "POST",

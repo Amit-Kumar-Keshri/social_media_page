@@ -111,8 +111,8 @@ function check_if_already_added($people_id)
     $current_user_id = $_COOKIE['login_auth'];
     $check_query = "SELECT * FROM tb_request WHERE requested_to='$people_id' AND added_by='$current_user_id'";
     if ($result = connect_database()->query($check_query)) {
-       // $row = $result->fetch_assoc();
-       // $status = $row[''];
+        // $row = $result->fetch_assoc();
+        // $status = $row[''];
         mysqli_close(connect_database());
         if ($result->num_rows > 0) {
             return true;
@@ -124,7 +124,8 @@ function check_if_already_added($people_id)
     }
 }
 
-function all_added_users($user_id){
+function all_added_users($user_id)
+{
 
     $check_query = "SELECT requested_to FROM tb_request WHERE added_by='$user_id' AND status='accepted'";
     if ($result = connect_database()->query($check_query)) {
@@ -150,4 +151,36 @@ function retrive_all_post()
     $result = connect_database()->query($query);
     $row = $result->fetch_all();
     return $row;
+}
+
+function retrive_all_comments($post_id)
+{
+    $query = "Select * from tb_reactions where post_id ='$post_id'";
+    $result = connect_database()->query($query);
+    $all_data = $result->fetch_all();
+    return $all_data;
+}
+
+function check_if_already_liked($post_id)
+{
+    $current_user_id = $_COOKIE['login_auth'];
+    $check_query = "SELECT * FROM tb_reactions WHERE liked='1' AND added_by='$current_user_id' AND post_id = '$post_id'";
+    if ($result = connect_database()->query($check_query)) {
+        // $row = $result->fetch_assoc();
+        // $status = $row[''];
+        mysqli_close(connect_database());
+        if ($result->num_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+function like_count($post_id){
+    $count_query = "select liked from tb_reactions where post_id = '$post_id'";
+	$result = connect_database()->query($count_query)->fetch_all();
+	$count = count($result);
+    return $count;
 }
