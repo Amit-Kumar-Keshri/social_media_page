@@ -1,19 +1,48 @@
 jQuery(document).ready(function () {
-
+  jQuery(".badge-notification-button").hide();
   jQuery(document).on("click", ".liked-btn", function () {
     var post_id = jQuery(this).attr("post-id");
+    var button_index = jQuery(".liked-btn").index();
+    var like;
+    $(this).eq(button_index).prop("disabled", true);
     jQuery.ajax({
       url: "http://localhost/social_media_page/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
-      data:  {
+      data: {
         action: "add_like_react",
         post_id: post_id,
       },
       success: function (response) {
         console.log(response);
+        like = response.like;
+      },
+      error: function (xhr, status, error) {
+        //var err = eval("(" + xhr.responseText + ")");
+        console.log(error);
+      },
+    });
+    // jQuery(this).eq(button_index).val(like)
+  });
+});
 
+jQuery(document).ready(function () {
+  jQuery(document).on("click", ".comment-send", function () {
+    var post_id = jQuery(this).attr("post-id");
+    var comment_data =  jQuery(".post-comment").val();
+    jQuery.ajax({
+      url: "http://localhost/social_media_page/response-data.php",
+      type: "POST",
+      cache: false,
+      dataType: "JSON",
+      data: {
+        action: "add_comment",
+        post_id: post_id,
+        comment_data : comment_data,
+      },
+      success: function (response) {
+        console.log(response);
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");
@@ -24,12 +53,12 @@ jQuery(document).ready(function () {
 
   jQuery(document).on("click", ".postUploadBtn", function () {
     var post_file = jQuery(".post_media")[0].files;
-    var post_caption = jQuery('.post_caption').val();
-    var formdata =  new FormData();
-    
-    formdata.append('action', 'upload_post_action');
-    formdata.append('post_file', post_file[0]);
-    formdata.append('post_caption', post_caption);
+    var post_caption = jQuery(".post_caption").val();
+    var formdata = new FormData();
+
+    formdata.append("action", "upload_post_action");
+    formdata.append("post_file", post_file[0]);
+    formdata.append("post_caption", post_caption);
 
     console.log(post_file[0]);
     jQuery.ajax({
@@ -38,11 +67,14 @@ jQuery(document).ready(function () {
       cache: false,
       dataType: "JSON",
       data: formdata,
-      contentType: false,    
+      contentType: false,
       processData: false,
       success: function (response) {
         console.log(response);
-        jQuery(".profile-image, .header-profile-image").attr("src", response.image);
+        jQuery(".profile-image, .header-profile-image").attr(
+          "src",
+          response.image
+        );
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");
@@ -50,7 +82,6 @@ jQuery(document).ready(function () {
       },
     });
   });
-
 
   jQuery(document).on("click", ".edit-button", function () {
     jQuery(".disabled-box").prop("disabled", false);
@@ -83,7 +114,6 @@ jQuery(document).ready(function () {
     });
   });
 
-
   jQuery(document).on("click", ".btn-accept", function () {
     var sender_id = jQuery(this).attr("data-rqst-sender-id");
     console.log(sender_id);
@@ -98,29 +128,22 @@ jQuery(document).ready(function () {
       },
       success: function (response) {
         console.log(response);
-        if(response.status){
-            
-            console.log('working');
+        if (response.status) {
+          console.log("working");
         }
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");
         console.log(error);
       },
-
     });
-    jQuery(this).parents('li.user_item').hide();
+    jQuery(this).parents("li.user_item").hide();
   });
 
-  jQuery(document).on("click", ".comment-btn", function (){
+  jQuery(document).on("click", ".comment-btn", function () {
     var index = jQuery(".comment-btn").index(this);
     jQuery(".post-comment").eq(index).slideToggle();
   });
-
-  
-
-
-
 
   jQuery(document).on("click", ".btn-reject", function () {
     var sender_id = jQuery(this).attr("data-rqst-sender-id");
@@ -143,15 +166,15 @@ jQuery(document).ready(function () {
       },
     });
   });
-  
+
   jQuery(document).on("change", ".imgUploadBtn", function () {
     var user_id = jQuery(this).attr("data-id");
     var image_file = jQuery(".imgUploadBtn")[0].files;
     console.log(image_file);
-   var formdata =  new FormData();
-    formdata.append('action', 'upload_image_action');
-    formdata.append('user_id', user_id);
-    formdata.append('image_file', image_file[0]);
+    var formdata = new FormData();
+    formdata.append("action", "upload_image_action");
+    formdata.append("user_id", user_id);
+    formdata.append("image_file", image_file[0]);
 
     console.log(formdata);
     console.log(image_file[0]);
@@ -161,11 +184,14 @@ jQuery(document).ready(function () {
       cache: false,
       dataType: "JSON",
       data: formdata,
-      contentType: false,    
+      contentType: false,
       processData: false,
       success: function (response) {
         console.log(response);
-        jQuery(".profile-image, .header-profile-image").attr("src", response.image);
+        jQuery(".profile-image, .header-profile-image").attr(
+          "src",
+          response.image
+        );
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");

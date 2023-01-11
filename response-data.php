@@ -23,7 +23,23 @@ if (isset($_POST['action']) && $_POST['action'] == 'upload_post_action') {
 if (isset($_POST['action']) && $_POST['action'] == 'add_like_react') {
 	add_like_react_func($_POST['post_id'], $_COOKIE['login_auth']);
 }
+if (isset($_POST['action']) && $_POST['action'] == 'add_comment') {
+	add_comment_func( $_POST['comment_data'], $_POST['post_id'], $_COOKIE['login_auth']);
+}
 
+
+function add_comment_func($comment_data, $post_id, $current_user_id){
+	$post_insert_query = "update tb_reactions set added_comment='$comment_data', added_by='$current_user_id' where post_id='$post_id'";
+	if ($result = connect_database()->query($post_insert_query)) {
+		$status = true;
+		mysqli_close(connect_database());
+	} else {
+		$status = false;
+	}	
+	mysqli_close(connect_database());
+	echo json_encode(array('status' => $status));
+	exit();	
+}
 function add_like_react_func($post_id, $current_user_id)
 {
 	$date_added = date("l jS \of F Y h:i:s A");
@@ -34,7 +50,17 @@ function add_like_react_func($post_id, $current_user_id)
 	} else {
 		$status = false;
 	}
-	echo json_encode(array('status' => 200));
+
+	$count_query = "select count(liked),added_by from tb_reactions where post_id = '$post_id'";
+	$result = connect_database()->query($count_query);
+	$row = $result->fetch_assoc();
+	$count = $row['count(liked)'];
+	$check = $row['added_by'];
+	if ($check == $_COOKIE['login_auth']){
+		$button_status = 'disabled';
+	}
+	mysqli_close(connect_database());
+	echo json_encode(array('status' => $status,'like' => $count));
 	exit();
 }
 

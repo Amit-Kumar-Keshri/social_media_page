@@ -56,7 +56,8 @@ include('includes/header.php');
                             <div class="row ">
 
                                 <div class="col text-center ">
-                                    <button type="button" class="btn btn-secondary liked-btn" post-id="<?= $value[0]; ?>"><i class="fa-solid fa-thumbs-up"></i>Like</button>
+                                    <button type="button" class="btn btn-secondary liked-btn" value="LIKE" post-id="<?= $value[0]; ?>"><i class="fa-solid fa-thumbs-up"></i>Like</button>
+                                    <span class="badge rounded-pill badge-notification-button bg-danger"></span>
                                 </div>
                                 <div class="col text-center">
                                     <button type="button" class="btn btn-secondary comment-btn"><i class="fa-solid fa-comment"></i>Comment</button>
@@ -66,7 +67,7 @@ include('includes/header.php');
                                 </div>
                                 <div class="col-12 mt-3 post-comment-sec">
                                     <input type="text" class="form-control post-comment " id="comment" name="comment" placeholder="Write a Comment" />
-                                    <a href="#"><img src="assets/images/send.png" alt=""></a>
+                                    <a href="#" class="comment-send" post-id="<?= $value[0]; ?>" ><img src="assets/images/send.png" alt=""></a>
                                     
                                 </div>
                             </div>
