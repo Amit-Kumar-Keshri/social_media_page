@@ -179,7 +179,7 @@ function check_if_already_liked($post_id)
     }
 }
 function like_count($post_id){
-    $count_query = "select liked from tb_reactions where post_id = '$post_id'";
+    $count_query = "Select liked from tb_reactions where post_id = '$post_id' and liked='1'";
 	$result = connect_database()->query($count_query)->fetch_all();
 	$count = count($result);
     return $count;

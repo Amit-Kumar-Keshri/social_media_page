@@ -28,8 +28,7 @@ if (!isset($_COOKIE['login_auth'])) {
           $all_data = retrive_all_data();
 
           $all_added_users = all_added_users($_COOKIE['login_auth']);
-
-          if(count($all_added_users)>0){
+          if(count($all_added_users)>0 && $all_added_users){
             foreach ($all_added_users as $key => $value) {
               $already_added_user[]  = $value[0];
             }

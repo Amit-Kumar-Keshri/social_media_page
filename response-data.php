@@ -29,7 +29,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_comment') {
 
 
 function add_comment_func($comment_data, $post_id, $current_user_id){
-	$post_insert_query = "update tb_reactions set added_comment='$comment_data' where id='$current_user_id' and post_id = '$post_id'";
+	$date_added = date("l jS \of F Y h:i:s A");
+	$post_insert_query = "INSERT INTO tb_reactions (added_by, post_id, added_comment, liked, date_added) VALUES ('$current_user_id' , '$post_id' , '$comment_data' , '' , '$date_added');";
 	if ($result = connect_database()->query($post_insert_query)) {
 		$status = true;
 		mysqli_close(connect_database());
@@ -51,12 +52,9 @@ function add_like_react_func($post_id, $current_user_id)
 		$status = false;
 	}
 
-	$count_query = "select liked from tb_reactions where post_id = '$post_id'";
-	$result = connect_database()->query($count_query)->fetch_all();
-	$count = count($result);
 	
 	mysqli_close(connect_database());
-	echo json_encode(array('status' => $status,'like' => $count));
+	echo json_encode(array('status' => $status));
 	exit();
 }
 
