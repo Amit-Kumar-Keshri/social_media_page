@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 11, 2023 at 11:18 AM
+-- Generation Time: Jan 12, 2023 at 12:36 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -72,7 +72,12 @@ CREATE TABLE `tb_reactions` (
 --
 
 INSERT INTO `tb_reactions` (`id`, `added_by`, `post_id`, `added_comment`, `liked`, `date_added`) VALUES
-(1, 1, 1, '', 1, 'Tuesday 10th of January 2023 02:46:01 PM');
+(1, 1, 1, '', 1, 'Wednesday 11th of January 2023 03:22:33 PM'),
+(2, 1, 2, '', 1, 'Wednesday 11th of January 2023 03:22:36 PM'),
+(3, 2, 1, '', 1, 'Thursday 12th of January 2023 11:55:14 AM'),
+(4, 2, 2, '', 1, 'Thursday 12th of January 2023 11:55:45 AM'),
+(5, 2, 3, '', 1, 'Thursday 12th of January 2023 11:55:51 AM'),
+(6, 1, 3, '', 1, 'Thursday 12th of January 2023 11:56:13 AM');
 
 -- --------------------------------------------------------
 
@@ -135,7 +140,8 @@ INSERT INTO `tb_request` (`id`, `added_by`, `requested_to`, `status`, `date_of_a
 (10, 3, 6, 'requested', 'Friday 6th of January 2023 02:06:48 PM'),
 (11, 3, 5, 'requested', 'Friday 6th of January 2023 02:06:49 PM'),
 (12, 3, 2, 'accepted', 'Friday 6th of January 2023 02:06:50 PM'),
-(13, 3, 4, 'requested', 'Friday 6th of January 2023 02:06:51 PM');
+(13, 3, 4, 'requested', 'Friday 6th of January 2023 02:06:51 PM'),
+(14, 4, 1, 'accepted', 'Thursday 12th of January 2023 11:46:40 AM');
 
 --
 -- Indexes for dumped tables
@@ -180,7 +186,7 @@ ALTER TABLE `tb_post`
 -- AUTO_INCREMENT for table `tb_reactions`
 --
 ALTER TABLE `tb_reactions`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tb_registration`
@@ -192,7 +198,7 @@ ALTER TABLE `tb_registration`
 -- AUTO_INCREMENT for table `tb_request`
 --
 ALTER TABLE `tb_request`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

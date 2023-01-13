@@ -93,14 +93,14 @@ function retrive_all_data()
 }
 function retrive_all_request($reciever_id)
 {
-    $query = "Select * from tb_request where requested_to = '$reciever_id'";
+    $query = "Select * from tb_request where requested_to = '$reciever_id' and status='requested'";
     $result = connect_database()->query($query);
     $row = $result->fetch_all();
     return $row;
 }
 function retrive_all_friends($user_id)
 {
-    $query = "Select * from tb_request where added_by = '$user_id'";
+    $query = "Select * from tb_request where added_by = '$user_id' and status='accepted'";
     $result = connect_database()->query($query);
     $row = $result->fetch_all();
     return $row;
@@ -111,8 +111,6 @@ function check_if_already_added($people_id)
     $current_user_id = $_COOKIE['login_auth'];
     $check_query = "SELECT * FROM tb_request WHERE requested_to='$people_id' AND added_by='$current_user_id'";
     if ($result = connect_database()->query($check_query)) {
-        // $row = $result->fetch_assoc();
-        // $status = $row[''];
         mysqli_close(connect_database());
         if ($result->num_rows > 0) {
             return true;
