@@ -39,6 +39,15 @@ $profile_image = $row['profile_image'];
                     <h4 class="m-t-sm">
                         <?= $name ?>
                     </h4>
+                    <p class="m-t-sm">
+                        <?= $email ?>
+                    </p>
+                    <p class="m-t-sm">
+                        <?= $phone ?>
+                    </p>
+                    <p class="m-t-sm">
+                        <?= $address ?>
+                    </p>
                     <a href="my-account.php" class="btn btn-xs btn-primary mb-2">Edit Profile</a>
                 </div>
             </div>

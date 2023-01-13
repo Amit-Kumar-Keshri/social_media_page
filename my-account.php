@@ -23,7 +23,6 @@ $update_name = $update_email = $update_phone = $update_address = $update_gender 
 
 
 $row = retrive_data($_COOKIE["login_auth"]);
-//var_dump($row);
 $id = $row['id'];
 $name = $row['name'];
 $email = $row['email'];
@@ -41,7 +40,7 @@ if (isset($_POST['update'])) {
       $update_query = "UPDATE tb_registration SET name='$update_name' where id = '$id'";
       connect_database()->query($update_query);
     } else {
-      $name_error = "";
+      $name_error = "Same nothing to update";
     }
   } else {
     $name_error = "Required";
@@ -131,17 +130,16 @@ if (isset($_POST['update'])) {
           </form>
         </div>
       </div>
-      <div class="col-lg-7">
-        <form class="mt-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+      <div class="col-lg-7 mt-3">
           <div class="row my-3">
             <div class="col-lg-3">
               <label for="name">Name</label>
             </div>
             <div class="col-lg-9">
-              <input type="text" class="form-control disabled-box bg-transparent" id="name" name="name"
-                placeholder="Name" value="<?= $name ?>" disabled />
+              <input type="text" class="form-control disabled-box" id="updateName" name="name"
+                placeholder="Name" value="<?= $name ?>"  />
               <small class="form-text text-danger">
-                <?php echo $name_error ?>
+                
               </small>
             </div>
           </div>
@@ -150,10 +148,10 @@ if (isset($_POST['update'])) {
               <label for="email">E-mail</label>
             </div>
             <div class="col-lg-9">
-              <input type="email" class="form-control disabled-box bg-transparent" id="email" name="email"
-                placeholder="Email" value="<?= $email ?>" disabled />
+              <input type="email" class="form-control disabled-box " id="updateEmail" name="email"
+                placeholder="Email" value="<?= $email ?>"  />
               <small class="form-text text-danger">
-                <?php echo $email_error ?>
+                
               </small>
             </div>
           </div>
@@ -162,10 +160,10 @@ if (isset($_POST['update'])) {
               <label for="phone">Phone Number</label>
             </div>
             <div class="col-lg-9">
-              <input type="tel" class="form-control disabled-box bg-transparent" id="phone" name="phone"
-                value="<?= $phone ?>" placeholder="Phone Number" disabled />
+              <input type="tel" class="form-control disabled-box " id="updatePhone" name="phone"
+                value="<?= $phone ?>" placeholder="Phone Number" />
               <small class="form-text text-danger">
-                <?php echo $phone_error ?>
+                
               </small>
             </div>
           </div>
@@ -174,10 +172,10 @@ if (isset($_POST['update'])) {
               <label for="address">Address</label>
             </div>
             <div class="col-lg-9">
-              <input type="address" class="form-control disabled-box bg-transparent" id="address" name="address"
-                placeholder="Address" value="<?= $address ?>" disabled />
+              <input type="address" class="form-control disabled-box " id="updateAddress" name="address"
+                placeholder="Address" value="<?= $address ?>" />
               <small class="form-text text-danger">
-                <?php echo $address_error ?>
+                
               </small>
             </div>
           </div>
@@ -187,13 +185,13 @@ if (isset($_POST['update'])) {
             </div>
             <div class="col-lg-9">
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" id="male" value="Male" <?php if (strtolower($gender) == "male") {
+                <input class="form-check-input" type="radio" name="gender" id="updateMale" value="Male" <?php if (strtolower($gender) == "male") {
                   echo "checked";
                 } ?> />
                 <label class="form-check-label" for="male"> Male </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" id="female" value="Female" <?php if (strtolower($gender) == "female") {
+                <input class="form-check-input" type="radio" name="gender" id="updateFemale" value="Female" <?php if (strtolower($gender) == "female") {
                   echo "checked";
                 } ?> />
                 <label class="form-check-label" for="female"> Female </label>
@@ -203,17 +201,15 @@ if (isset($_POST['update'])) {
               <input type="radio" class="form-control disabled-box" id="gender" name="gender" placeholder="Gender" value="female"  />
               <label class="form-check-label" for="female"> Female </label> -->
               <small class="form-text text-danger">
-                <?php echo $gender_error ?>
+                
               </small>
             </div>
           </div>
           <div class="row my-3">
             <div class="col-lg-6">
-              <a class=" btn btn-primary edit-button gy-3">Edit</a>
-              <button class="btn btn-primary" type="submit" name="update" disabled>Update</button>
+              <button class="btn btn-primary updateProfileBtn" type="submit" name="update">Update</button>
             </div>
           </div>
-        </form>
       </div>
     </div>
   </div>

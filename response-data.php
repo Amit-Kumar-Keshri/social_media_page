@@ -26,6 +26,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_like_react') {
 if (isset($_POST['action']) && $_POST['action'] == 'add_comment') {
 	add_comment_func( $_POST['comment_data'], $_POST['post_id'], $_COOKIE['login_auth']);
 }
+if (isset($_POST['action']) && $_POST['action'] == 'update_data') {
+	update_data($_POST['name'],$_POST['email'],$_POST['phone'],$_POST['address'],$_POST['gender'],$_COOKIE['login_auth']);
+}
 
 
 function add_comment_func($comment_data, $post_id, $current_user_id){
@@ -153,5 +156,18 @@ function friend_request_reject_helper($sender_id)
 	}
 	mysqli_close(connect_database());
 	echo json_encode(array('status' => $status, 'request_status' => $reject_status));
+	exit();
+}
+
+function update_data($name, $email, $phone, $address, $gender, $user_id)
+{
+	$update_query = "UPDATE tb_registration SET name = '$name', email='$email', phone='$phone' address='$address' gender='$gender' where id = '$user_id'";
+	if ($result = connect_database()->query($update_query)) {
+		$status = true;
+	} else {
+		$status = false;
+	}
+	mysqli_close(connect_database());
+	echo json_encode(array('status' => $status));
 	exit();
 }

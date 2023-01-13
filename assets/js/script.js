@@ -1,5 +1,104 @@
-jQuery(document).ready(function () {
+function checkChange($this, index) {
+  var regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  var regex_phone =
+    /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[789]\d{9}|(\d[ -]?){10}\d$/;
+  var regex_name = /^([a-zA-Z' ]+)$/;
+  var value = $this.val();
+  var field_type = $this.attr("name");
+  var prevVal = $this.data("prevVal");
+  var formdata = new FormData();
   
+
+  // name validation //
+
+  if (field_type == "name") {
+    var validName = regex_name.test(value);
+    if (!validName) {
+      jQuery(".form-text").eq(index).text("Enter a valid Name");
+      trigger_status = false;
+    } else if (value === "") {
+      jQuery(".form-text").eq(index).text("Cannot be empty");
+      trigger_status = false;
+    } else if (value == prevVal) {
+      trigger_status = false;
+    } else {
+      trigger_status = true;
+      jQuery(".form-text").eq(index).empty();
+      
+    }
+  }
+  // email validation //
+  if (field_type == "email") {
+    var validEmail = regex_email.test(value);
+    if (!validEmail) {
+      jQuery(".form-text").eq(index).text("Enter a valid Email");
+      trigger_status = false;
+    } else if (value == "") {
+      jQuery(".form-text").eq(index).text("Cannot be empty");
+      trigger_status = false;
+    } else if (value == prevVal) {
+      trigger_status = false;
+    } else {
+      trigger_status = true;
+      jQuery(".form-text").eq(index).empty();
+    }
+  }
+
+  if (field_type == "address") {
+    if (value === "") {
+      jQuery(".form-text").eq(index).text("Cannot be empty");
+      trigger_status = false;
+    } else if (value == prevVal) {
+      trigger_status = false;
+    } else {
+      trigger_status = true;
+      jQuery(".form-text").eq(index).empty();
+    }
+  }
+
+  // phone validation //
+  if (field_type == "phone") {
+    var validPhone = regex_phone.test(value);
+    if (!validPhone) {
+      jQuery(".form-text").eq(index).text("Enter a valid Email");
+      trigger_status = false;
+    } else if (value === "") {
+      jQuery(".form-text").eq(index).text("Cannot be empty");
+      trigger_status = false;
+    } else if (value == prevVal) {
+      trigger_status = false;
+    } else {
+      trigger_status = true;
+      jQuery(".form-text").eq(index).empty();
+    }
+  }
+
+  if (trigger_status == true) {
+    $this.trigger("simpleChange");
+    console.log("triggering....")
+  }
+}
+
+jQuery(document).ready(function () {
+  jQuery(document).on("click", "input.disabled-box", function () {
+    var index = jQuery("input.disabled-box").index(this);
+    console.log(index);
+    jQuery("input.disabled-box")
+      .eq(index)
+      .data("prevVal", jQuery("input.disabled-box").eq(index).val());
+    jQuery("input.disabled-box")
+      .eq(index)
+      .bind("", function () {
+        checkChange(jQuery(this), index);
+      });
+
+    jQuery("input.disabled-box")
+      .eq(index)
+      .bind("simpleChange", function () {
+        console.log("validator working");
+      });
+  });
+
   jQuery(document).on("click", ".liked-btn", function () {
     var post_id = jQuery(this).attr("post-id");
     var button_index = jQuery(".liked-btn").index();
@@ -29,7 +128,10 @@ jQuery(document).ready(function () {
 jQuery(document).ready(function () {
   jQuery(document).on("click", ".comment-send", function () {
     var post_id = jQuery(this).attr("post-id");
-    var comment_data =  jQuery(this).parents(".panel-default").find(".post-comment1").val();
+    var comment_data = jQuery(this)
+      .parents(".panel-default")
+      .find(".post-comment1")
+      .val();
     console.log(comment_data);
     jQuery.ajax({
       url: "http://localhost/social_media_page/response-data.php",
@@ -39,7 +141,7 @@ jQuery(document).ready(function () {
       data: {
         action: "add_comment",
         post_id: post_id,
-        comment_data : comment_data,
+        comment_data: comment_data,
       },
       success: function (response) {
         console.log(response);
@@ -83,15 +185,39 @@ jQuery(document).ready(function () {
     });
   });
 
-  jQuery(document).on("click", ".edit-button", function () {
-    jQuery(".disabled-box").prop("disabled", false);
-    jQuery(".edit-button").hide();
+  jQuery(document).on("click", ".updateProfileBtn", function () {
+    var name = jQuery("#updateName").val();
+    var email = jQuery("#updateEmail").val();
+    var phone = jQuery("#updatePhone").val();
+    var address = jQuery("#updateAddress").val();
+    var gender = jQuery("input[name='gender']:checked").val();
+
+    var formdata = new FormData();
+
+    formdata.append("action", "update_data");
+    formdata.append("name", name);
+    formdata.append("email", email);
+    formdata.append("phone", phone);
+    formdata.append("address", address);
+    formdata.append("gender", gender);
+
+    jQuery.ajax({
+      url: "http://localhost/social_media_page/response-data.php",
+      type: "POST",
+      cache: false,
+      dataType: "JSON",
+      data: formdata,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        console.log(response);
+      },
+      error: function (xhr, status, error) {
+        console.log(error);
+      },
+    });
   });
-  jQuery(
-    'input[name="name"], input[name="email"] , input[name="phone"], input[name="address"], input[name="gender"]'
-  ).change(function () {
-    jQuery("button[name='update']").removeAttr("disabled");
-  });
+
   jQuery(document).on("click", ".add_friend_btn", function () {
     var people_id = jQuery(this).attr("data-id");
     console.log(people_id);
@@ -108,7 +234,6 @@ jQuery(document).ready(function () {
         console.log(response);
       },
       error: function (xhr, status, error) {
-        //var err = eval("(" + xhr.responseText + ")");
         console.log(error);
       },
     });
