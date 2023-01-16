@@ -64,7 +64,7 @@ function checkChange($this, index) {
     } else if (value === "") {
       jQuery(".form-text").eq(index).text("Cannot be empty");
       trigger_status = false;
-    } else if (value == prevVal) {
+    } else if (value.toLowerCase() == prevVal.toLowerCase()) {
       jQuery(".form-text").eq(index).empty();
       trigger_status = false;
     } else {
