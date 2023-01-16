@@ -160,14 +160,14 @@ function friend_request_reject_helper($sender_id)
 }
 
 function update_data($name, $email, $phone, $address, $gender, $user_id)
-{
-	$update_query = "UPDATE tb_registration SET name = '$name', email='$email', phone='$phone' address='$address' gender='$gender' where id = '$user_id'";
+{	$user_id = $_COOKIE['login_auth'];
+	$update_query = "UPDATE tb_registration SET name = '$name', email='$email', phone='$phone', address='$address', gender='$gender' where id = '$user_id'";
 	if ($result = connect_database()->query($update_query)) {
 		$status = true;
 	} else {
 		$status = false;
 	}
 	mysqli_close(connect_database());
-	echo json_encode(array('status' => $status));
+	echo json_encode(array('status' => $status,'name' => $name ,'email' => $email, 'phone' => $phone ,'address' => $address ,'gender' => $gender));
 	exit();
 }

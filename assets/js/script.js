@@ -1,18 +1,15 @@
+var trigger_status = false;
 function checkChange($this, index) {
   var regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  var regex_phone =
-    /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[789]\d{9}|(\d[ -]?){10}\d$/;
+  var regex_phone = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/;
   var regex_name = /^([a-zA-Z' ]+)$/;
   var value = $this.val();
   var field_type = $this.attr("name");
   var prevVal = $this.data("prevVal");
-  var formdata = new FormData();
-  
-
-  // name validation //
 
   if (field_type == "name") {
     var validName = regex_name.test(value);
+    console.log(validName);
     if (!validName) {
       jQuery(".form-text").eq(index).text("Enter a valid Name");
       trigger_status = false;
@@ -20,11 +17,11 @@ function checkChange($this, index) {
       jQuery(".form-text").eq(index).text("Cannot be empty");
       trigger_status = false;
     } else if (value == prevVal) {
+      jQuery(".form-text").eq(index).empty();
       trigger_status = false;
     } else {
       trigger_status = true;
       jQuery(".form-text").eq(index).empty();
-      
     }
   }
   // email validation //
@@ -37,6 +34,7 @@ function checkChange($this, index) {
       jQuery(".form-text").eq(index).text("Cannot be empty");
       trigger_status = false;
     } else if (value == prevVal) {
+      jQuery(".form-text").eq(index).empty();
       trigger_status = false;
     } else {
       trigger_status = true;
@@ -49,6 +47,7 @@ function checkChange($this, index) {
       jQuery(".form-text").eq(index).text("Cannot be empty");
       trigger_status = false;
     } else if (value == prevVal) {
+      jQuery(".form-text").eq(index).empty();
       trigger_status = false;
     } else {
       trigger_status = true;
@@ -66,6 +65,7 @@ function checkChange($this, index) {
       jQuery(".form-text").eq(index).text("Cannot be empty");
       trigger_status = false;
     } else if (value == prevVal) {
+      jQuery(".form-text").eq(index).empty();
       trigger_status = false;
     } else {
       trigger_status = true;
@@ -73,13 +73,12 @@ function checkChange($this, index) {
     }
   }
 
-  if (trigger_status == true) {
-    $this.trigger("simpleChange");
-    console.log("triggering....")
-  }
 }
 
 jQuery(document).ready(function () {
+  jQuery(".updateProfileBtn").prop("disabled", true);
+
+
   jQuery(document).on("click", "input.disabled-box", function () {
     var index = jQuery("input.disabled-box").index(this);
     console.log(index);
@@ -88,16 +87,17 @@ jQuery(document).ready(function () {
       .data("prevVal", jQuery("input.disabled-box").eq(index).val());
     jQuery("input.disabled-box")
       .eq(index)
-      .bind("", function () {
+      .bind("keyup", function () {
         checkChange(jQuery(this), index);
-      });
-
-    jQuery("input.disabled-box")
-      .eq(index)
-      .bind("simpleChange", function () {
-        console.log("validator working");
+        if(!trigger_status){
+          jQuery(".updateProfileBtn").prop("disabled", true);
+      }else{
+        jQuery(".updateProfileBtn").prop("disabled", false);
+      }
       });
   });
+
+  
 
   jQuery(document).on("click", ".liked-btn", function () {
     var post_id = jQuery(this).attr("post-id");
@@ -185,6 +185,8 @@ jQuery(document).ready(function () {
     });
   });
 
+  
+
   jQuery(document).on("click", ".updateProfileBtn", function () {
     var name = jQuery("#updateName").val();
     var email = jQuery("#updateEmail").val();
@@ -216,6 +218,7 @@ jQuery(document).ready(function () {
         console.log(error);
       },
     });
+    jQuery(this).prop("disabled", true);
   });
 
   jQuery(document).on("click", ".add_friend_btn", function () {
