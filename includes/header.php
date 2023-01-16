@@ -1,13 +1,21 @@
 <?php
 
+if (isset($_GET['logout']) && isset($_COOKIE["login_auth"])) {
+    header("Location:login.php");
+    unset($_COOKIE['login_auth']);
+    setcookie('login_auth', null, -1, '/');
+    return true;
+}
+
+
 if (isset($_COOKIE['login_auth'])) {
   $id = $_COOKIE["login_auth"];
   $query = "Select * from tb_registration where id='$id'";
   $result = connect_database()->query($query);
   $row = $result->fetch_assoc();
   $profile_image = $row['profile_image'];
+  $profile_name = $row['name'];
 }
-$request_counter = 0;
 ?>
 
 
@@ -50,7 +58,7 @@ $request_counter = 0;
         <!-- Collapsible wrapper -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Navbar brand -->
-          <a class="navbar-brand mt-2 mt-lg-0" href="#">
+          <a class="navbar-brand mt-2 mt-lg-0" href="https://pws-translate.dvlpsite.com/social-media/">
             Social Media
           </a>
         </div>
@@ -71,11 +79,12 @@ $request_counter = 0;
               <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button"
                 data-mdb-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-plus"></i>
-                <span class="badge rounded-pill badge-notification bg-danger"><?=$request_counter?></span>
+                <?php $all_data = retrive_all_request($id); ?>
+                <span class="badge rounded-pill badge-notification bg-danger"><?=count($all_data)?></span>
               </a>
               <ul class="dropdown-menu dropdown-menu-end friend-request-list" aria-labelledby="navbarDropdownMenuLink">
                 <?php
-                $all_data = retrive_all_request($id);
+                
                 
                 foreach ($all_data as $key => $value) {
                   $sender_id = $value[1];
@@ -117,37 +126,17 @@ $request_counter = 0;
 
               </ul>
             </div>
-            <!-- <div class="dropdown">
-              <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button"
-                data-mdb-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-bell"></i>
-                <span class="badge rounded-pill badge-notification bg-danger">1</span>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                <li>
-                  <a class="dropdown-item" href="#">Some news</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">Another news</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
-              </ul>
-            </div> -->
+
             <!-- Avatar -->
             <div class="dropdown">
               <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
                 role="button" data-mdb-toggle="dropdown" aria-expanded="false">
                 <img src="uploads/<?= $profile_image ?>" class="rounded-circle header-profile-image" height="25"
-                  alt="Black and White Portrait of a Man" loading="lazy" />
+                  alt="<?=$profile_name;?>" loading="lazy" />
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                 <li>
-                  <a class="dropdown-item" href="my-account-new.php">My profile</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">Settings</a>
+                  <a class="dropdown-item" href="profile.php">My profile</a>
                 </li>
                 <li>
                   <a class="dropdown-item"

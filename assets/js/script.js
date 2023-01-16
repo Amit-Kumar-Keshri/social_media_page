@@ -59,7 +59,7 @@ function checkChange($this, index) {
   if (field_type == "phone") {
     var validPhone = regex_phone.test(value);
     if (!validPhone) {
-      jQuery(".form-text").eq(index).text("Enter a valid Email");
+      jQuery(".form-text").eq(index).text("Enter a valid Phone No");
       trigger_status = false;
     } else if (value === "") {
       jQuery(".form-text").eq(index).text("Cannot be empty");
@@ -72,12 +72,11 @@ function checkChange($this, index) {
       jQuery(".form-text").eq(index).empty();
     }
   }
-
 }
 
 jQuery(document).ready(function () {
+  jQuery(".loading").hide();
   jQuery(".updateProfileBtn").prop("disabled", true);
-
 
   jQuery(document).on("click", "input.disabled-box", function () {
     var index = jQuery("input.disabled-box").index(this);
@@ -89,15 +88,13 @@ jQuery(document).ready(function () {
       .eq(index)
       .bind("keyup", function () {
         checkChange(jQuery(this), index);
-        if(!trigger_status){
+        if (!trigger_status) {
           jQuery(".updateProfileBtn").prop("disabled", true);
-      }else{
-        jQuery(".updateProfileBtn").prop("disabled", false);
-      }
+        } else {
+          jQuery(".updateProfileBtn").prop("disabled", false);
+        }
       });
   });
-
-  
 
   jQuery(document).on("click", ".liked-btn", function () {
     var post_id = jQuery(this).attr("post-id");
@@ -105,7 +102,7 @@ jQuery(document).ready(function () {
     var like;
     $(this).eq(button_index).prop("disabled", true);
     jQuery.ajax({
-      url: "http://localhost/social_media_page/response-data.php",
+      url: "http://localhost/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -123,9 +120,7 @@ jQuery(document).ready(function () {
       },
     });
   });
-});
 
-jQuery(document).ready(function () {
   jQuery(document).on("click", ".comment-send", function () {
     var post_id = jQuery(this).attr("post-id");
     var comment_data = jQuery(this)
@@ -134,7 +129,7 @@ jQuery(document).ready(function () {
       .val();
     console.log(comment_data);
     jQuery.ajax({
-      url: "http://localhost/social_media_page/response-data.php",
+      url: "http://localhost/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -154,7 +149,7 @@ jQuery(document).ready(function () {
   });
 
   jQuery(document).on("click", ".postUploadBtn", function () {
-    var post_file = jQuery(".post_media")[0].files;
+    var post_file = jQuery("#post_file")[0].files;
     var post_caption = jQuery(".post_caption").val();
     var formdata = new FormData();
 
@@ -164,7 +159,7 @@ jQuery(document).ready(function () {
 
     console.log(post_file[0]);
     jQuery.ajax({
-      url: "http://localhost/social_media_page/response-data.php",
+      url: "http://localhost/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -173,10 +168,6 @@ jQuery(document).ready(function () {
       processData: false,
       success: function (response) {
         console.log(response);
-        jQuery(".profile-image, .header-profile-image").attr(
-          "src",
-          response.image
-        );
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");
@@ -184,8 +175,6 @@ jQuery(document).ready(function () {
       },
     });
   });
-
-  
 
   jQuery(document).on("click", ".updateProfileBtn", function () {
     var name = jQuery("#updateName").val();
@@ -204,7 +193,7 @@ jQuery(document).ready(function () {
     formdata.append("gender", gender);
 
     jQuery.ajax({
-      url: "http://localhost/social_media_page/response-data.php",
+      url: "http://localhost/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -225,7 +214,7 @@ jQuery(document).ready(function () {
     var people_id = jQuery(this).attr("data-id");
     console.log(people_id);
     jQuery.ajax({
-      url: "http://localhost/social_media_page/response-data.php",
+      url: "http://localhost/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -246,7 +235,7 @@ jQuery(document).ready(function () {
     var sender_id = jQuery(this).attr("data-rqst-sender-id");
     console.log(sender_id);
     jQuery.ajax({
-      url: "http://localhost/social_media_page/response-data.php",
+      url: "http://localhost/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -277,7 +266,7 @@ jQuery(document).ready(function () {
     var sender_id = jQuery(this).attr("data-rqst-sender-id");
     console.log(sender_id);
     jQuery.ajax({
-      url: "http://localhost/social_media_page/response-data.php",
+      url: "http://localhost/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -299,6 +288,7 @@ jQuery(document).ready(function () {
     var user_id = jQuery(this).attr("data-id");
     var image_file = jQuery(".imgUploadBtn")[0].files;
     console.log(image_file);
+    jQuery(".loading").show();
     var formdata = new FormData();
     formdata.append("action", "upload_image_action");
     formdata.append("user_id", user_id);
@@ -307,7 +297,7 @@ jQuery(document).ready(function () {
     console.log(formdata);
     console.log(image_file[0]);
     jQuery.ajax({
-      url: "http://localhost/social_media_page/response-data.php",
+      url: "http://localhost/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -320,11 +310,34 @@ jQuery(document).ready(function () {
           "src",
           response.image
         );
+        jQuery(".loading").hide();
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");
         console.log(error);
       },
     });
+  });
+
+  jQuery(document).on("click", ".chat_bubble", function () {
+    jQuery(".chat_window_section").slideToggle();
+  });
+
+  jQuery(document).on(
+    "click",
+    ".chat_window_section > ul.friend-list > li",
+    function () {
+      jQuery(this).parent("ul.friend-list").find("li").not(this).hide();
+      jQuery(this).addClass("active");
+      jQuery(".chat_box").slideDown();
+    }
+  );
+
+  jQuery(document).on("click", ".chat-send-btn", function () {
+    var chat_request = jQuery(this).parents(".chat_box").find("textarea").val();
+
+    jQuery(".chat_box_message").append(
+      '<p class="current_user">' + chat_request + "</p>"
+    );
   });
 });

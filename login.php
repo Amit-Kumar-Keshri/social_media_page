@@ -1,6 +1,12 @@
 <?php
-include("db.php");
-include('functions.php');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+define('ROOT_DIR', realpath(__DIR__.'/..'));
+include ROOT_DIR.'/social-media/db.php';
+include ROOT_DIR.'/social-media/functions.php';
+
 if (isset($_COOKIE['login_auth'])) {
     header("Location: index.php");
 }
@@ -8,7 +14,7 @@ if (isset($_COOKIE['login_auth'])) {
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $pass = md5($_POST['password']);
-    if (sm_login_user($email, $pass) == 'success') {
+    if (sm_login_user($email, $pass)) {
         header("Location: index.php");
     } else {
         $error_message = 'Invalid Credentials';

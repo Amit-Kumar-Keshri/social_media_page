@@ -1,15 +1,13 @@
-<?php include("db.php");
-include("functions.php");
-if (isset($_GET['logout']) && isset($_COOKIE["login_auth"])) {
-    header("Location:login.php");
-    unset($_COOKIE['login_auth']);
-    setcookie('login_auth', null, -1, '/');
-    return true;
-}
+<?php 
+define('ROOT_DIR', realpath(__DIR__.'/..'));
+include ROOT_DIR.'/social-media/db.php';
+include ROOT_DIR.'/social-media/functions.php';
+
 if (!isset($_COOKIE['login_auth'])) {
     header("Location:login.php");
 }
 include('includes/header.php');
+
 
 ?>
 <div class="gradient">
@@ -54,12 +52,11 @@ include('includes/header.php');
                         </div>
                         <div class="panel-footer my-3">
                             <div class="row ">
-
-                                <div class="col text-center ">
+                                <div class="col text-center liked_sec">
                                     <?php if(!check_if_already_liked($value[0])){?>
                                     <button type="button" class="btn btn-secondary liked-btn" value="LIKE" post-id="<?= $value[0]; ?>"><i class="fa-solid fa-thumbs-up"></i>Like</button>
                                     <?php } else { ?>
-                                    <span class="badge rounded-pill badge-notification-button bg-danger"> <?php echo $count=like_count($value[0]) ?> </span>
+                                    <span class="badge rounded-pill badge-notification-button bg-danger"> <?php echo $count=like_count($value[0]) ?> People Liked </span>
                                     <?php } ?>
                                 </div>
                                 <div class="col text-center">
@@ -74,7 +71,7 @@ include('includes/header.php');
                                             <input type="text" class="form-control post-comment1" id="comment" name="comment" placeholder="Write a Comment" />
                                             <a class="comment-send" post-id="<?= $value[0]; ?>"><img class="send-btn-icon" src="assets/images/send.png" alt=""></a>
                                         </div>
-                                        <div class="mt-3 ms-3">
+                                        <div class="mt-3 ms-3 comment-boxes">
                                             <?php
                                             $all_comments = retrive_all_comments($value[0]);
                                             foreach ($all_comments as $key => $comments) {

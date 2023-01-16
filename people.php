@@ -1,12 +1,12 @@
 <?php
-include("db.php");
-include('functions.php');
-if (isset($_GET['logout']) && isset($_COOKIE["login_auth"])) {
-  header("Location:login.php");
-  unset($_COOKIE['login_auth']);
-  setcookie('login_auth', null, -1, '/');
-  return true;
-}
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+define('ROOT_DIR', realpath(__DIR__.'/..'));
+include ROOT_DIR.'/social-media/db.php';
+include ROOT_DIR.'/social-media/functions.php';
+
 if (!isset($_COOKIE['login_auth'])) {
   header("Location:login.php");
 }
@@ -27,24 +27,20 @@ if (!isset($_COOKIE['login_auth'])) {
           <?php
           $all_data = retrive_all_data();
 
-          $all_added_users = all_added_users($_COOKIE['login_auth']);
-          if (count($all_added_users) > 0) {
-            foreach ($all_added_users as $key => $value) {
-              $already_added_user[] = $value[0];
-            }
-          }
+          $already_added_user = all_added_users($_COOKIE['login_auth']);
+
+          //var_dump($already_added_user);
+
 
           foreach ($all_data as $key => $value) {
             $user_id = $value[0];
-
             if (!in_array($user_id, $already_added_user)) {
-              if ($user_id != $_COOKIE['login_auth']) {
                 //echo $user_id;
                 ?>
                 <div class="card card-one m-3">
                   <div class="header">
                     <div class="avatar">
-                      <img src="uploads/<?= $value[8]; ?>" alt="user" class="profile-photo-lg">
+                      <img src="uploads/<?= $value[7]; ?>" alt="user" class="profile-photo-lg">
                     </div>
                   </div>
                   <h3><a href="#" class="profile-link">
@@ -64,7 +60,6 @@ if (!isset($_COOKIE['login_auth'])) {
                   <div class="footer"></div>
                 </div>
                 <?php
-              }
             }
           }
           ?>

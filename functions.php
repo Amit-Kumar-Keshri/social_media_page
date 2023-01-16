@@ -1,27 +1,7 @@
 <?php
 
-function sm_login_user($email_address, $password)
-{
-    $query = "SELECT * FROM tb_registration where email='$email_address' and password='$password'";
-    if ($result = connect_database()->query($query)) {
-        if ($result->num_rows == 1) {
-            $row = $result->fetch_assoc();
-            $name = $row['name'];
-            $id = $row['id'];
-            setcookie('login_auth', $id, time() + (86400 * 30), "/");
-            $message = true;
-        } else {
-            $message = false;
-        }
-    } else {
-        $message = false;
-    }
-    mysqli_close(connect_database());
 
-    return $message;
-}
-function reg_validation_check($fullname, $email_address, $password, $phone_number, $address, $gender)
-{
+function reg_validation_check($fullname, $email_address, $password, $phone_number, $address, $gender) {
     $VALID_EMAIL_PATTERN = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
     $VALID_PHONE_PATTERN = "/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/";
     $VALID_NAME_PATTERN = "/^([a-zA-Z' ]+)$/";
@@ -48,28 +28,54 @@ function reg_validation_check($fullname, $email_address, $password, $phone_numbe
     $response = array('status' => $status, 'message' => $message);
     return $response;
 }
-function insert_registration_data($fullname, $email_address, $password, $phone_number, $address, $gender)
-{
+function insert_registration_data($fullname, $email_address, $password, $phone_number, $address, $gender) {
     $profile_image = 'demo.png';
     $sql = "SELECT * FROM tb_registration WHERE email='$email_address'";
-    $result = connect_database()->query($sql);
+    $result = mysqli_query(connect_database(), $sql);
+
     if ($result->num_rows > 0) {
         $status = false;
         $message = "Email Already Registered";
     } else {
         $insert_query = "INSERT INTO tb_registration (name, email, password, phone, address, gender, profile_image) VALUES ('$fullname', '$email_address', '$password', '$phone_number', '$address', '$gender','$profile_image')";
-        if ($result = connect_database()->query($insert_query)) {
+        if (mysqli_query(connect_database(), $insert_query)) {
             $status = true;
             $message = 'User Successfully Registered';
         } else {
             $status = false;
-            $message = 'Failed' . connect_database()->error;
+            $message = 'Failed Database Connection' . mysqli_error(connect_database());;
         }
     }
     mysqli_close(connect_database());
     $response = array('status' => $status, 'message' => $message);
     return $response;
 }
+
+
+
+function sm_login_user($email_address, $password) {
+    $query = "SELECT * FROM tb_registration where email='$email_address' and password='$password'";
+    if ($result = connect_database()->query($query)) {
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            $name = $row['name'];
+            $id = $row['id'];
+            setcookie('login_auth', $id, time() + (86400 * 30), "/");
+            $message = true;
+        } else {
+            $message = false;
+        }
+    } else {
+        $message = false;
+    }
+    mysqli_close(connect_database());
+    return $message;
+}
+
+
+
+
+
 function retrive_data($id)
 {
     $query = "Select * from tb_registration where id='$id'";
@@ -98,15 +104,8 @@ function retrive_all_request($reciever_id)
     $row = $result->fetch_all();
     return $row;
 }
-function retrive_all_friends($user_id)
-{
-    $query = "Select * from tb_request where added_by = '$user_id' and status='accepted'";
-    $result = connect_database()->query($query);
-    $row = $result->fetch_all();
-    return $row;
-}
-function check_if_already_added($people_id)
-{
+
+function check_if_already_added($people_id) {
 
     $current_user_id = $_COOKIE['login_auth'];
     $check_query = "SELECT * FROM tb_request WHERE requested_to='$people_id' AND added_by='$current_user_id'";
@@ -122,14 +121,33 @@ function check_if_already_added($people_id)
     }
 }
 
-function all_added_users($user_id)
-{
+function all_added_users($user_id) {
+    $already_added_user[] = $_COOKIE['login_auth'];
 
     $check_query = "SELECT requested_to FROM tb_request WHERE added_by='$user_id' AND status='accepted'";
     if ($result = connect_database()->query($check_query)) {
-        $row = $result->fetch_all();
+        $row_user = $result->fetch_all();
         mysqli_close(connect_database());
-        return $row;
+
+        
+        if (count($row_user) > 0) {
+            foreach ($row_user as $key => $value) {
+              $already_added_user[] = $value[0];
+            }
+        }
+
+        $check_query_2 = "SELECT added_by FROM tb_request WHERE requested_to='$user_id' AND status='accepted'";
+        if ($result = connect_database()->query($check_query_2)) {
+            $row_user = $result->fetch_all();
+            mysqli_close(connect_database());
+            if (count($row_user) > 0) {
+                foreach ($row_user as $key => $value) {
+                  $already_added_user[] = $value[0];
+                }
+            }
+        }
+        $already_added_user = array_unique($already_added_user);
+        return $already_added_user;
     } else {
         return false;
     }
