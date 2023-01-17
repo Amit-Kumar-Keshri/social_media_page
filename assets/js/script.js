@@ -174,6 +174,7 @@ jQuery(document).ready(function () {
         console.log(response);
         if (response.status) {
           jQuery(".loading").hide();
+          jQuery(".close_modal").click();
         }
       },
       error: function (xhr, status, error) {
