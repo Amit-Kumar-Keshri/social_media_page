@@ -137,7 +137,7 @@ if (isset($_COOKIE['login_auth'])) {
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                 <li>
-                  <a class="dropdown-item" href="profile.php">My profile</a>
+                  <a class="dropdown-item" href="profile.php?chatlist=true">My profile</a>
                 </li>
                 <li>
                   <a class="dropdown-item"

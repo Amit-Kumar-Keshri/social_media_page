@@ -23,7 +23,7 @@ if (!isset($_COOKIE['login_auth'])) {
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <div class="d-flex flex-wrap">
+        <div class="d-flex flex-wrap justify-content-center">
           <?php
           $all_data = retrive_all_data();
 

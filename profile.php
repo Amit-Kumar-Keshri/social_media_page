@@ -101,8 +101,8 @@ $profile_image = $row['profile_image'];
                                 ?>
                                         <li>
                                             <a href="profile.php?view_user=<?= $row['id']; ?>" class="">
-                                                <div class="friend-img"><img src="uploads/<?= $row['profile_image'] ?>" alt="user profile photo" /></div>
-                                                <div class="friend-info">
+                                                <div class=" col friend-img "><img src="uploads/<?= $row['profile_image'] ?>" alt="user profile photo" /></div>
+                                                <div class=" col friend-info">
                                                     <h4>
                                                         <?= $row['name']; ?>
                                                     </h4>

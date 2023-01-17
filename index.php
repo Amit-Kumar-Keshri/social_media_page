@@ -71,17 +71,17 @@ include('includes/header.php');
                                             <input type="text" class="form-control post-comment1" id="comment" name="comment" placeholder="Write a Comment" />
                                             <a class="comment-send" post-id="<?= $value[0]; ?>"><img class="send-btn-icon" src="assets/images/send.png" alt=""></a>
                                         </div>
-                                        <div class="mt-3 ms-3 comment-boxes">
+                                        <div class="mt-3 ms-3 comment-boxes d-flex flex-column">
                                             <?php
                                             $all_comments = retrive_all_comments($value[0]);
                                             foreach ($all_comments as $key => $comments) {
                                                 if(!empty($comments[3])){
                                                 $commenter_data = retrive_data($comments[1]);
                                             ?>
-                                                <a class="friend-list comments clearfix">
-                                                    <div class="friend-img rounded-circle d-inline"><img src="uploads/<?= $commenter_data['profile_image'] ?>" alt="user profile photo" /></div>
-                                                    <div class="friend-info comments-ctn d-inline-block">
-                                                        <h4><?= $commenter_data['name']; ?></h4>
+                                                <a class="friend-list comments d-flex mb-3">
+                                                    <div class="friend-img rounded-circle"><img class="rounded-circle" src="uploads/<?= $commenter_data['profile_image'] ?>" alt="user profile photo" /></div>
+                                                    <div class="friend-info px-3 ">
+                                                        <h4 class="mb-1"><?= $commenter_data['name']; ?></h4>
                                                         <p><?= $comments[3] ?></p>
                                                     </div>
                                                 </a>

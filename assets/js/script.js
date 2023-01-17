@@ -341,10 +341,11 @@ jQuery(document).ready(function () {
   );
 
   jQuery(document).on("click", ".chat-send-btn", function () {
-    var chat_request = jQuery(this).parents(".chat_box").find("textarea").val();
+    var chat_request = jQuery(this).parents(".chat_box").find("input").val();
+    jQuery(this).parents(".chat_box").find("input").val('');
 
     jQuery(".chat_box_message").append(
-      '<p class="current_user">' + chat_request + "</p>"
+      '<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50">' + chat_request + "</p>"
     );
   });
 });
