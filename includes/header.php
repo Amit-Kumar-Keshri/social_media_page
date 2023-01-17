@@ -1,10 +1,10 @@
 <?php
 
 if (isset($_GET['logout']) && isset($_COOKIE["login_auth"])) {
-    header("Location:login.php");
-    unset($_COOKIE['login_auth']);
-    setcookie('login_auth', null, -1, '/');
-    return true;
+  header("Location:login.php");
+  unset($_COOKIE['login_auth']);
+  setcookie('login_auth', null, -1, '/');
+  return true;
 }
 
 
@@ -80,19 +80,20 @@ if (isset($_COOKIE['login_auth'])) {
                 data-mdb-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-plus"></i>
                 <?php $all_data = retrive_all_request($id); ?>
-                <span class="badge rounded-pill badge-notification bg-danger"><?=count($all_data)?></span>
+                <span class="badge rounded-pill badge-notification bg-danger">
+                  <?= count($all_data) ?>
+                </span>
               </a>
               <ul class="dropdown-menu dropdown-menu-end friend-request-list" aria-labelledby="navbarDropdownMenuLink">
                 <?php
-                
-                
+
+
                 foreach ($all_data as $key => $value) {
                   $sender_id = $value[1];
                   $row = retrive_data($sender_id);
                   $sender_profile_image = $row['profile_image'];
                   $sender_name = $row['name'];
                   $status = $value[3];
-                  $request_counter = $request_counter + 1;
                   ?>
                   <?php if ($status == "requested") { ?>
                     <li class="m-3 user_item">
@@ -101,18 +102,18 @@ if (isset($_COOKIE['login_auth'])) {
                           <img src="uploads/<?= $sender_profile_image ?>" class="img-fluid rounded-circle" alt="">
                         </div>
                         <div class="col-4">
-                          <h3 class="text-center">
+                          <p class="text-center">
                             <?= $sender_name ?>
-                          </h3>
+                          </p>
                         </div>
                         <div class="col-4">
                           <div class="row">
                             <div class="col-12 gy-2">
-                              <button class="btn btn-success btn-accept"
+                              <button class="btn btn-success btn-accept d-block m-auto"
                                 data-rqst-sender-id="<?= $sender_id ?>">Accept</button>
                             </div>
                             <div class="col-12 gy-2">
-                              <button class="btn btn-danger btn-reject"
+                              <button class="btn btn-danger btn-reject d-block m-auto"
                                 data-rqst-sender-id="<?= $sender_id ?>">Reject</button>
                             </div>
                           </div>
@@ -121,7 +122,7 @@ if (isset($_COOKIE['login_auth'])) {
                     </li>
                     <?php
                   }
-                } 
+                }
                 ?>
 
               </ul>
@@ -132,7 +133,7 @@ if (isset($_COOKIE['login_auth'])) {
               <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
                 role="button" data-mdb-toggle="dropdown" aria-expanded="false">
                 <img src="uploads/<?= $profile_image ?>" class="rounded-circle header-profile-image" height="25"
-                  alt="<?=$profile_name;?>" loading="lazy" />
+                  alt="<?= $profile_name; ?>" loading="lazy" />
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                 <li>

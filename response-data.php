@@ -63,7 +63,7 @@ function add_like_react_func($post_id, $current_user_id) {
 }
 
 function post_upload_function($post_caption, $post_file, $user_id)
-{
+ {
 	$target_dir = "uploads/posts/";
 	$filename = $post_file["name"];
 	$target_file = $target_dir . $filename;
@@ -90,8 +90,10 @@ function post_upload_function($post_caption, $post_file, $user_id)
 	} else {
 		$status = false;
 	}
-	echo json_encode(array('status' => $status, 'image' => $target_file, 'file_type' => $FileType, 'post_caption' => $post_caption));
+	echo json_encode(array('status' => $status,'image' => $target_file, 'file_type' => $FileType, 'post_caption' => $post_caption));
 	exit();
+
+	//'image' => $target_file, 'file_type' => $FileType, 'post_caption' => $post_caption
 }
 
 

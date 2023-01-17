@@ -149,8 +149,10 @@ jQuery(document).ready(function () {
   });
 
   jQuery(document).on("click", ".postUploadBtn", function () {
-    var post_file = jQuery("#post_file")[0].files;
+    jQuery(".loading").show();
+    var post_file = jQuery(".post_file")[0].files;
     var post_caption = jQuery(".post_caption").val();
+
     var formdata = new FormData();
 
     formdata.append("action", "upload_post_action");
@@ -158,6 +160,8 @@ jQuery(document).ready(function () {
     formdata.append("post_caption", post_caption);
 
     console.log(post_file[0]);
+    console.log(post_caption);
+
     jQuery.ajax({
       url: "http://localhost/social-media/response-data.php",
       type: "POST",
@@ -168,6 +172,9 @@ jQuery(document).ready(function () {
       processData: false,
       success: function (response) {
         console.log(response);
+        if (response.status) {
+          jQuery(".loading").hide();
+        }
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");
@@ -288,7 +295,7 @@ jQuery(document).ready(function () {
     var user_id = jQuery(this).attr("data-id");
     var image_file = jQuery(".imgUploadBtn")[0].files;
     console.log(image_file);
-    jQuery(".loading").show();
+
     var formdata = new FormData();
     formdata.append("action", "upload_image_action");
     formdata.append("user_id", user_id);
@@ -310,7 +317,6 @@ jQuery(document).ready(function () {
           "src",
           response.image
         );
-        jQuery(".loading").hide();
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");
