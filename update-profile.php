@@ -60,7 +60,7 @@ $profile_image = $row['profile_image'];
               <label for="file-input" class="custom-file-upload position-absolute">
                 <img src="assets/images/camera.png" alt="Upload image">
               </label>
-              <input type="file" class=" imgUploadBtn" data-id="<?= $id; ?>" accept="image/*" id="file-input">
+              <input type="file" class="imgUploadBtn" data-id="<?= $id; ?>" accept="image/*" id="file-input">
             </div>
           <!-- </form> -->
         </div>

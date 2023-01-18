@@ -42,7 +42,7 @@ function add_comment_func($comment_data, $post_id, $current_user_id) {
 	} else {
 		$status = false;
 	}
-	echo json_encode(array('status' => 200));
+	echo json_encode(array('status' => $status));
 	exit();	
 }
 
@@ -182,7 +182,7 @@ function update_data($name, $email, $phone, $address, $gender, $user_id)
 function message_insert($message_data, $reciever_id, $current_user_id){
 	$message_status = "unseen";
 	$date_added = date("l jS \of F Y h:i:s A");
-	$insert_query = "INSERT INTO tb_chat (sender, reciever, message, date_added, status) VALUES ('$current_user_id', '$reciever_id', '$message_data', '$date_added', '$message_status')";
+	$insert_query = "INSERT INTO tb_chat (sender, receiver, message, date_added, status) VALUES ('$current_user_id', '$reciever_id', '$message_data', '$date_added', '$message_status')";
 	if ($result = connect_database()->query($insert_query)) {
 		$status = true;
 	} else {

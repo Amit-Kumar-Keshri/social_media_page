@@ -43,7 +43,7 @@ body {
 
 .custom-file-upload{
   top: 56%;
-  right: -58%;
+  right: 27%;
 }
 
 
@@ -1006,6 +1006,7 @@ input.post-comment1 {
     display: inline-block;
     padding: 6px 12px;
     cursor: pointer;
+    width: auto;
   }
   .custom-file-upload img {
     width: 53px;

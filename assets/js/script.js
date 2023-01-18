@@ -325,9 +325,7 @@ jQuery(document).ready(function () {
     formdata.append("action", "upload_image_action");
     formdata.append("user_id", user_id);
     formdata.append("image_file", image_file[0]);
-
-    console.log(formdata);
-    console.log(image_file[0]);
+    
     jQuery.ajax({
       url: "http://localhost/social-media/response-data.php",
       type: "POST",
@@ -371,7 +369,6 @@ jQuery(document).ready(function () {
   jQuery(document).on("click", ".chat-send-btn", function () {
     var chat_request = jQuery(this).parents(".chat_box").find("input").val();
     var reciever_id = jQuery('.user').attr("data-user-id");
-    
     jQuery(this).parents(".chat_box").find("input").val('');
     jQuery.ajax({
       url: "http://localhost/social-media/response-data.php",
