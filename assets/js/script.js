@@ -147,12 +147,12 @@ jQuery(document).ready(function () {
         var profile_image = jQuery('.header-profile-image').attr('src');
         var profile_name = jQuery('.header-profile-image').attr('alt');
 
-        var comment_html = '<a class="friend-list comments clearfix">';
-        comment_html += '<div class="friend-img rounded-circle d-inline">';
-        comment_html += '<img src="'+profile_image+'" alt="user profile photo" />';
+        var comment_html = '<a class="friend-list comments d-flex mb-3">';
+        comment_html += '<div class="friend-img rounded-circle">';
+        comment_html += '<img class="rounded-circle" src="'+profile_image+'" alt="user profile photo" />';
         comment_html += '</div>';
-        comment_html += '<div class="friend-info comments-ctn d-inline-block">';
-        comment_html += '<h4>'+profile_name+'</h4>';
+        comment_html += '<div class="friend-info px-3 ">';
+        comment_html += '<h4 class="mb-1">'+profile_name+'</h4>';
         comment_html += '<p>'+comment_data+'</p>';
         comment_html += '</div>';
         comment_html += '</a>';
