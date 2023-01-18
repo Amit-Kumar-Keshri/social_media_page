@@ -325,8 +325,8 @@ ul.friend-list .right p {
 }
 .friend-request-list {
   width: 400px !important;
-  height: 290px;
-  overflow: scroll;
+  height: 130px;
+  overflow-y: scroll;
 }
 
 .round-edges {
@@ -566,8 +566,9 @@ iframe.post-video video {
 .profile-info-list > li.title {
   font-size: 0.625rem;
   font-weight: 700;
-  color: #8a8a8f;
+  color: black;
   padding: 0 0 0.3125rem;
+  text-transform: uppercase;
 }
 .profile-info-list > li + li.title {
   padding-top: 1.5625rem;
@@ -955,4 +956,12 @@ input.post-comment1 {
 .friend-list.comments img{
   height: auto;
   width: 48px;
+}
+
+
+.user_item p {
+  text-transform: capitalize;
+  font-size: 30px;
+  font-weight: 300;
+  
 }

@@ -348,4 +348,12 @@ jQuery(document).ready(function () {
       '<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50">' + chat_request + "</p>"
     );
   });
+
+  jQuery( ".chat-list-toggler" ).click(function() {
+    jQuery(this).find('i').toggle();
+  });
+
+
+
+
 });

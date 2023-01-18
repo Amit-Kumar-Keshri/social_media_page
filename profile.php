@@ -5,8 +5,8 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 define('ROOT_DIR', realpath(__DIR__ . '/..'));
-include ROOT_DIR . '/social-media/db.php';
-include ROOT_DIR . '/social-media/functions.php';
+include ROOT_DIR . '/social-media/includes/db.php';
+include ROOT_DIR . '/social-media/includes/functions.php';
 
 
 include('includes/header.php');
@@ -170,7 +170,7 @@ $profile_image = $row['profile_image'];
                         <!-- About -->
                         <div class="tab-pane fade" id="profile-about">
                             <ul class="profile-info-list">
-                                <li class="title">PERSONAL INFORMATION</li>
+                                <li class="title">ABOUT <?=$name?></li>
                                 <li>
                                     <div class="field">Gender:</div>
                                     <div class="value">

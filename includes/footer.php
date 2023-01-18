@@ -34,8 +34,8 @@
                     if ($value != $_COOKIE['login_auth']) {
                         $row = retrive_data($value);
                         ?>
-                        <li class="row align-items-center" data-user-id="<?= $row['id']; ?>">
-                            <div class=" col friend-img rounded-circle gx-3"><img class="rounded-circle"
+                        <li class="row align-items-center p-3" data-user-id="<?= $row['id']; ?>">
+                            <div class=" col-4 w-auto friend-img rounded-circle gx-3"><img class="rounded-circle"
                                     src="uploads/<?= $row['profile_image'] ?>" alt="user profile photo" /></div>
                             <div class=" col friend-info">
                                 <h4 class="m-0">
@@ -48,14 +48,11 @@
             </ul>
             <div class="chat_box_message">
             </div>
-
-
-
             <div class="chat_box" style="display: none;">
                 <div class=" d-flex justify-content-start align-items-center p-3  border-0">
                     <img class="rounded-circle" src="uploads/<?= $profile_image; ?>" alt=""
                         style="width: 40px; height: 100%;">
-                    <input type="text" class="form-control form-control-lg ms-1" id="exampleFormControlInput3"
+                    <input type="text" class="form-control form-control-lg ms-1"
                         placeholder="Type message">
                     <a class="ms-1 text-black" href="#!"><i class="fas fa-paperclip"></i></a>
                     <a class="ms-3 text-black" href="#!"><i class="fas fa-smile"></i></a>
@@ -68,7 +65,8 @@
         aria-expanded="false" aria-controls="collapseExample">
         <div class="d-flex justify-content-between align-items-center">
             <span>Collapsible Chat App</span>
-            <i class="fas fa-chevron-down"></i>
+            <i class="fas fa-chevron-up"></i>
+            <i class="fas fa-chevron-down" style="display: none;"></i>
         </div>
     </a>
 

@@ -49,9 +49,7 @@ if (isset($_COOKIE['login_auth'])) {
       <!-- Container wrapper -->
       <div class="container-fluid">
         <!-- Toggle button -->
-        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-          data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-          aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <i class="fas fa-bars"></i>
         </button>
 
@@ -76,15 +74,14 @@ if (isset($_COOKIE['login_auth'])) {
 
             <!-- Notifications -->
             <div class="dropdown">
-              <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button"
-                data-mdb-toggle="dropdown" aria-expanded="false">
+              <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-plus"></i>
                 <?php $all_data = retrive_all_request($id); ?>
                 <span class="badge rounded-pill badge-notification bg-danger">
                   <?= count($all_data) ?>
                 </span>
               </a>
-              <ul class="dropdown-menu dropdown-menu-end friend-request-list" aria-labelledby="navbarDropdownMenuLink">
+              <ul class="dropdown-menu dropdown-menu-end friend-request-list gradient" aria-labelledby="navbarDropdownMenuLink">
                 <?php
 
 
@@ -94,33 +91,35 @@ if (isset($_COOKIE['login_auth'])) {
                   $sender_profile_image = $row['profile_image'];
                   $sender_name = $row['name'];
                   $status = $value[3];
-                  ?>
+                ?>
                   <?php if ($status == "requested") { ?>
-                    <li class="m-3 user_item">
+                    <li class="m-3 user_item bg-light rounded-5 p-2">
                       <div class="row align-items-center">
-                        <div class="col-4">
-                          <img src="uploads/<?= $sender_profile_image ?>" class="img-fluid rounded-circle" alt="">
+                        <div class="col-4 w-auto">
+                          <img src="uploads/<?= $sender_profile_image ?>" class="img-fluid rounded-circle" alt="" height="60" width="60">
                         </div>
-                        <div class="col-4">
-                          <p class="text-center">
-                            <?= $sender_name ?>
-                          </p>
-                        </div>
-                        <div class="col-4">
+                        <div class="col-8 ms-3">
                           <div class="row">
-                            <div class="col-12 gy-2">
-                              <button class="btn btn-success btn-accept d-block m-auto"
-                                data-rqst-sender-id="<?= $sender_id ?>">Accept</button>
+                            <div class="col-12">
+                              <p class="m-0">
+                                <?= $sender_name ?>
+                              </p>
                             </div>
-                            <div class="col-12 gy-2">
-                              <button class="btn btn-danger btn-reject d-block m-auto"
-                                data-rqst-sender-id="<?= $sender_id ?>">Reject</button>
+                            <div class="col-12">
+                              <div class="row">
+                                <div class="col">
+                                  <button class="btn btn-success btn-accept" data-rqst-sender-id="<?= $sender_id ?>">Accept</button>
+                                </div>
+                                <div class="col">
+                                  <button class="btn btn-danger btn-reject" data-rqst-sender-id="<?= $sender_id ?>">Reject</button>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </li>
-                    <?php
+                <?php
                   }
                 }
                 ?>
@@ -130,18 +129,15 @@ if (isset($_COOKIE['login_auth'])) {
 
             <!-- Avatar -->
             <div class="dropdown">
-              <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
-                role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                <img src="uploads/<?= $profile_image ?>" class="rounded-circle header-profile-image" height="25"
-                  alt="<?= $profile_name; ?>" loading="lazy" />
+              <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                <img src="uploads/<?= $profile_image ?>" class="rounded-circle header-profile-image" height="25" alt="<?= $profile_name; ?>" loading="lazy" />
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                 <li>
                   <a class="dropdown-item" href="profile.php?chatlist=true">My profile</a>
                 </li>
                 <li>
-                  <a class="dropdown-item"
-                    href="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>?logout=true">Logout</a>
+                  <a class="dropdown-item" href="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>?logout=true">Logout</a>
                 </li>
               </ul>
             </div>

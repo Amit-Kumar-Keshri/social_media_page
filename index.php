@@ -1,7 +1,7 @@
 <?php 
 define('ROOT_DIR', realpath(__DIR__.'/..'));
-include ROOT_DIR.'/social-media/db.php';
-include ROOT_DIR.'/social-media/functions.php';
+include ROOT_DIR.'/social-media/includes/db.php';
+include ROOT_DIR.'/social-media/includes/functions.php';
 
 if (!isset($_COOKIE['login_auth'])) {
     header("Location:login.php");
