@@ -49,103 +49,100 @@ $profile_image = $row['profile_image'];
       <div class="col-lg-5 my-3 highlight">
         <div class="image-container position-relative">
           <!-- <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data"> -->
-            <div class="image-container">
-              <img class="profile-image" src="uploads/<?= $profile_image ?>" />
-            </div>
+          <div class="image-container">
+            <img class="profile-image" src="uploads/<?= $profile_image ?>" />
             <div class="row my-3 justify-content-center align-items-center custom-input-box">
-              <!-- <img type="file" data-id="<?= $id; ?>" id="file" name="file" class="imgUploadBtn rounded-circle" src="assets/images/camera.png" alt="">
-              <input type="file" class="form-control imgUploadBtn" data-id="<?= $id; ?>" id="file" name="file" placeholder="Upload Your Photo" /> -->
-
-
               <label for="file-input" class="custom-file-upload position-absolute">
                 <img src="assets/images/camera.png" alt="Upload image">
               </label>
               <input type="file" class="imgUploadBtn" data-id="<?= $id; ?>" accept="image/*" id="file-input">
             </div>
+          </div>
+
           <!-- </form> -->
         </div>
       </div>
       <div class=" col-lg-7">
-              <!-- <form class="mt-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST"> -->
-                <div class="row my-3">
-                  <div class="col-lg-3">
-                    <label for="name">Name</label>
-                  </div>
-                  <div class="col-lg-9">
-                    <input type="text" class="form-control disabled-box bg-transparent" id="updateName" name="name" placeholder="Name" value="<?= $name ?>" />
-                    <small class="form-text text-danger">
-                      <?php echo $name_error ?>
-                    </small>
-                  </div>
-                </div>
-                <div class="row my-3">
-                  <div class="col-lg-3">
-                    <label for="email">E-mail</label>
-                  </div>
-                  <div class="col-lg-9">
-                    <input type="email" class="form-control disabled-box bg-transparent" id="updateEmail" name="email" placeholder="Email" value="<?= $email ?>" />
-                    <small class="form-text text-danger">
-                      <?php echo $email_error ?>
-                    </small>
-                  </div>
-                </div>
-                <div class="row my-3">
-                  <div class="col-lg-3">
-                    <label for="phone">Phone Number</label>
-                  </div>
-                  <div class="col-lg-9">
-                    <input type="tel" class="form-control disabled-box bg-transparent" id="updatePhone" name="phone" value="<?= $phone ?>" placeholder="Phone Number" />
-                    <small class="form-text text-danger">
-                      <?php echo $phone_error ?>
-                    </small>
-                  </div>
-                </div>
-                <div class="row my-3">
-                  <div class="col-lg-3">
-                    <label for="address">Address</label>
-                  </div>
-                  <div class="col-lg-9">
-                    <input type="address" class="form-control disabled-box bg-transparent" id="updateAddress" name="address" placeholder="Address" value="<?= $address ?>" />
-                    <small class="form-text text-danger">
-                      <?php echo $address_error ?>
-                    </small>
-                  </div>
-                </div>
-                <div class="row my-3">
-                  <div class="col-lg-3">
-                    <label for="gender">Gender</label>
-                  </div>
-                  <div class="col-lg-9">
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gender" id="male" value="Male" <?php if (strtolower($gender) == "male") {
-                                                                                                          echo "checked";
-                                                                                                        } ?> />
-                      <label class="form-check-label" for="male"> Male </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gender" id="female" value="Female" <?php if (strtolower($gender) == "female") {
-                                                                                                              echo "checked";
-                                                                                                            } ?> />
-                      <label class="form-check-label" for="female"> Female </label>
-                    </div>
-                    <!-- <input type="radio" class="form-control disabled-box" id="gender" name="gender" placeholder="Gender" value="male"  />
+        <!-- <form class="mt-3" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST"> -->
+        <div class="row my-3">
+          <div class="col-lg-3">
+            <label for="name">Name</label>
+          </div>
+          <div class="col-lg-9">
+            <input type="text" class="form-control disabled-box bg-transparent" id="updateName" name="name" placeholder="Name" value="<?= $name ?>" />
+            <small class="form-text text-danger">
+              <?php echo $name_error ?>
+            </small>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-lg-3">
+            <label for="email">E-mail</label>
+          </div>
+          <div class="col-lg-9">
+            <input type="email" class="form-control disabled-box bg-transparent" id="updateEmail" name="email" placeholder="Email" value="<?= $email ?>" />
+            <small class="form-text text-danger">
+              <?php echo $email_error ?>
+            </small>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-lg-3">
+            <label for="phone">Phone Number</label>
+          </div>
+          <div class="col-lg-9">
+            <input type="tel" class="form-control disabled-box bg-transparent" id="updatePhone" name="phone" value="<?= $phone ?>" placeholder="Phone Number" />
+            <small class="form-text text-danger">
+              <?php echo $phone_error ?>
+            </small>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-lg-3">
+            <label for="address">Address</label>
+          </div>
+          <div class="col-lg-9">
+            <input type="address" class="form-control disabled-box bg-transparent" id="updateAddress" name="address" placeholder="Address" value="<?= $address ?>" />
+            <small class="form-text text-danger">
+              <?php echo $address_error ?>
+            </small>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-lg-3">
+            <label for="gender">Gender</label>
+          </div>
+          <div class="col-lg-9">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="male" value="Male" <?php if (strtolower($gender) == "male") {
+                                                                                                  echo "checked";
+                                                                                                } ?> />
+              <label class="form-check-label" for="male"> Male </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="female" value="Female" <?php if (strtolower($gender) == "female") {
+                                                                                                      echo "checked";
+                                                                                                    } ?> />
+              <label class="form-check-label" for="female"> Female </label>
+            </div>
+            <!-- <input type="radio" class="form-control disabled-box" id="gender" name="gender" placeholder="Gender" value="male"  />
               <label class="form-check-label" for="male"> Male </label>
               <input type="radio" class="form-control disabled-box" id="gender" name="gender" placeholder="Gender" value="female"  />
               <label class="form-check-label" for="female"> Female </label> -->
-                    <small class="form-text text-danger">
-                      <?php echo $gender_error ?>
-                    </small>
-                  </div>
-                </div>
-                <div class="row my-3">
-                  <div class="col-lg-6">
-                    <button class="btn btn-primary updateProfileBtn" type="submit" name="update">Update</button>
-                  </div>
-                </div>
-              <!-- </form> -->
-            </div>
+            <small class="form-text text-danger">
+              <?php echo $gender_error ?>
+            </small>
+          </div>
         </div>
+        <div class="row my-3">
+          <div class="col-lg-6">
+            <button class="btn btn-primary updateProfileBtn" type="submit" name="update">Update</button>
+          </div>
+        </div>
+        <!-- </form> -->
       </div>
     </div>
+  </div>
+</div>
 
-    <?php include('includes/footer.php'); ?>
+<?php include('includes/footer.php'); ?>

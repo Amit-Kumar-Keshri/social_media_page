@@ -38,12 +38,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
 
 .custom-file-upload{
   top: 56%;
-  right: 27%;
 }
 
 
@@ -1009,5 +1007,5 @@ input.post-comment1 {
     width: auto;
   }
   .custom-file-upload img {
-    width: 53px;
+    width: 40px;
   }
