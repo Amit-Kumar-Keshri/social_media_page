@@ -1,4 +1,5 @@
 var trigger_status = false;
+var custon_url = "localhost";
 function checkChange($this, index) {
   var regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   var regex_phone = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/;
@@ -103,7 +104,7 @@ jQuery(document).ready(function () {
     var like;
     $(this).eq(button_index).prop("disabled", true);
     jQuery.ajax({
-      url: "http://localhost/social-media/response-data.php",
+      url: "http://"+custon_url+"/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -132,7 +133,7 @@ jQuery(document).ready(function () {
     var comment_data =  jQuery(this).parents(".panel-default").find(".post-comment1").val();
     console.log(comment_data);
     jQuery.ajax({
-      url: "http://localhost/social-media/response-data.php",
+      url: "http://"+custon_url+"/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -181,7 +182,7 @@ jQuery(document).ready(function () {
     console.log(post_caption);
 
     jQuery.ajax({
-      url: "http://localhost/social-media/response-data.php",
+      url: "http://"+custon_url+"/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -219,7 +220,7 @@ jQuery(document).ready(function () {
     formdata.append("gender", gender);
 
     jQuery.ajax({
-      url: "http://localhost/social-media/response-data.php",
+      url: "http://"+custon_url+"/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -245,7 +246,7 @@ jQuery(document).ready(function () {
     var instance =  jQuery(this);
     console.log(people_id);
     jQuery.ajax({
-      url: "http://localhost/social-media/response-data.php",
+      url: "http://"+custon_url+"/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -268,7 +269,7 @@ jQuery(document).ready(function () {
     var sender_id = jQuery(this).attr("data-rqst-sender-id");
     console.log(sender_id);
     jQuery.ajax({
-      url: "http://localhost/social-media/response-data.php",
+      url: "http://"+custon_url+"/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -299,7 +300,7 @@ jQuery(document).ready(function () {
     var sender_id = jQuery(this).attr("data-rqst-sender-id");
     console.log(sender_id);
     jQuery.ajax({
-      url: "http://localhost/social-media/response-data.php",
+      url: "http://"+custon_url+"/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -328,7 +329,7 @@ jQuery(document).ready(function () {
     formdata.append("image_file", image_file[0]);
     
     jQuery.ajax({
-      url: "http://localhost/social-media/response-data.php",
+      url: "http://"+custon_url+"/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -340,9 +341,9 @@ jQuery(document).ready(function () {
         jQuery(".profile-image, .header-profile-image").attr(
           "src",
           response.image);
-          jQuery("header").after('<p class="notification_sec bg-success text-center w-100 text-white">Updated Successfully</p>');
+          jQuery("header").after('<p class="notification_sec bg-success text-center w-100 text-white">Profile Image Updated Successfully</p>');
         setTimeout(function () {
-          jQuery(".notification_sec").hide();
+          jQuery(".notification_sec").hide(1000);
         }, 5000);
       },
       error: function (xhr, status, error) {
@@ -372,7 +373,7 @@ jQuery(document).ready(function () {
     var reciever_id = jQuery('.user').attr("data-user-id");
     jQuery(this).parents(".chat_box").find("input").val('');
     jQuery.ajax({
-      url: "http://localhost/social-media/response-data.php",
+      url: "http://"+custon_url+"/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
