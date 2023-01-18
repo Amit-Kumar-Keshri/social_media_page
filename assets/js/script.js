@@ -230,7 +230,7 @@ jQuery(document).ready(function () {
         console.log(response);
         jQuery("header").after('<p class="notification_sec bg-success text-center w-100 text-white">Updated Successfully</p>');
         setTimeout(function () {
-          jQuery(".notification_sec").hide();
+          jQuery(".notification_sec").hide(1000);
         }, 5000);
       },
       error: function (xhr, status, error) {
@@ -242,6 +242,7 @@ jQuery(document).ready(function () {
 
   jQuery(document).on("click", ".add_friend_btn", function () {
     var people_id = jQuery(this).attr("data-id");
+    var instance =  jQuery(this);
     console.log(people_id);
     jQuery.ajax({
       url: "http://localhost/social-media/response-data.php",
@@ -254,8 +255,8 @@ jQuery(document).ready(function () {
       },
       success: function (response) {
         console.log(response);
-        jQuery(".add_friend_btn").hide();
-        jQuery(".desc").append("<button class='btn btn-success pull-right add_friend_btn'>Pending Request</button>")
+        jQuery(instance).hide();
+        jQuery(instance).parents(".desc").append("<button class='btn btn-success pull-right add_friend_btn'>Pending Request</button>")
       },
       error: function (xhr, status, error) {
         console.log(error);
