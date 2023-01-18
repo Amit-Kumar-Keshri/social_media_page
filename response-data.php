@@ -1,7 +1,7 @@
 <?php
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-include_once('/includes/db.php');
+include_once('includes/db.php');
 
 if (isset($_POST['action']) && $_POST['action'] == 'add_friend_action') {
 	add_as_friend_func($_POST['people_id']);
@@ -32,14 +32,14 @@ if (isset($_POST['action']) && $_POST['action'] == 'update_data') {
 
 function add_comment_func($comment_data, $post_id, $current_user_id) {
 	$date_added = date("l jS \of F Y h:i:s A");
-	$post_insert_query = "INSERT INTO tb_reactions (added_by, post_id, added_comment, liked, date_added) VALUES ('$current_user_id' , '$post_id' , '$comment_data' , 0 , '$date_added');";
+	$post_insert_query = "INSERT INTO tb_reactions (added_by, post_id, added_comment, liked, date_added) VALUES ('$current_user_id' , '$post_id' , '$comment_data' , 0 , '$date_added')";
 	if ($result = connect_database()->query($post_insert_query)) {
 		$status = true;
 		mysqli_close(connect_database());
 	} else {
 		$status = false;
 	}
-	echo json_encode(array('status' => $status));
+	echo json_encode(array('status' => 200));
 	exit();	
 }
 

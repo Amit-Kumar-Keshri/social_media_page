@@ -1,35 +1,17 @@
-<footer class="">
+
     <div class="container">
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
             <div class="col-md-4 d-flex align-items-center">
-                <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                    <svg class="bi" width="30" height="24">
-                        <use xlink:href="#bootstrap" />
-                    </svg>
-                </a>
-                <span class="mb-3 mb-md-0 text-black">&copy; 2022 Company, Inc</span>
+                <span class="mb-3 mb-md-0 text-black">&copy; 2023 Social Media Company, Inc</span>
             </div>
-
-            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
-                            <use xlink:href="#twitter" />
-                        </svg></a></li>
-                <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
-                            <use xlink:href="#instagram" />
-                        </svg></a></li>
-                <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
-                            <use xlink:href="#facebook" />
-                        </svg></a></li>
-            </ul>
         </footer>
-    </div>
-</footer>
-<?php if (isset($_GET['chatlist'])) { ?>
-    <div class="collapse mt-3" id="collapseExample">
+<?php if (!isset($_GET['logout']) && isset($_COOKIE["login_auth"])) { ?>
+    <div class="collapse" id="collapseExample">
         <div class="chat_window_section">
             <ul class="friend-list ">
                 <!-- /* curently this showing user profile but it needs to shown friend list here */ -->
                 <?php
+                $all_friends = all_added_users($_COOKIE['login_auth']);
                 foreach ($all_friends as $key => $value) {
                     if ($value != $_COOKIE['login_auth']) {
                         $row = retrive_data($value);

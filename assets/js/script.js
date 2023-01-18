@@ -97,6 +97,7 @@ jQuery(document).ready(function () {
   });
 
   jQuery(document).on("click", ".liked-btn", function () {
+    jQuery(this).parents('.liked_sec').addClass('active');
     var post_id = jQuery(this).attr("post-id");
     var button_index = jQuery(".liked-btn").index();
     var like;
@@ -112,7 +113,12 @@ jQuery(document).ready(function () {
       },
       success: function (response) {
         console.log(response);
-        like = response.like;
+        jQuery('.liked_sec.active').find('.liked-btn').remove();
+        var like_html = '<span class="badge rounded-pill badge-notification-button bg-danger">';
+        like_html += response.total_likes;
+        like_html += ' People Liked</span>';
+        jQuery('.liked_sec.active').append(like_html);
+        jQuery('.liked_sec').removeClass('active');
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");
@@ -123,10 +129,7 @@ jQuery(document).ready(function () {
 
   jQuery(document).on("click", ".comment-send", function () {
     var post_id = jQuery(this).attr("post-id");
-    var comment_data = jQuery(this)
-      .parents(".panel-default")
-      .find(".post-comment1")
-      .val();
+    var comment_data =  jQuery(this).parents(".panel-default").find(".post-comment1").val();
     console.log(comment_data);
     jQuery.ajax({
       url: "http://localhost/social-media/response-data.php",
@@ -136,10 +139,25 @@ jQuery(document).ready(function () {
       data: {
         action: "add_comment",
         post_id: post_id,
-        comment_data: comment_data,
+        comment_data : comment_data,
       },
       success: function (response) {
         console.log(response);
+
+        var profile_image = jQuery('.header-profile-image').attr('src');
+        var profile_name = jQuery('.header-profile-image').attr('alt');
+
+        var comment_html = '<a class="friend-list comments clearfix">';
+        comment_html += '<div class="friend-img rounded-circle d-inline">';
+        comment_html += '<img src="'+profile_image+'" alt="user profile photo" />';
+        comment_html += '</div>';
+        comment_html += '<div class="friend-info comments-ctn d-inline-block">';
+        comment_html += '<h4>'+profile_name+'</h4>';
+        comment_html += '<p>'+comment_data+'</p>';
+        comment_html += '</div>';
+        comment_html += '</a>';
+        jQuery('.comment-boxes').append(comment_html);
+        jQuery(".post-comment1").val('');
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");
@@ -232,6 +250,8 @@ jQuery(document).ready(function () {
       },
       success: function (response) {
         console.log(response);
+        jQuery(".add_friend_btn").hide();
+        jQuery(".desc").append("<button class='btn btn-success pull-right add_friend_btn'>Pending Request</button>")
       },
       error: function (xhr, status, error) {
         console.log(error);

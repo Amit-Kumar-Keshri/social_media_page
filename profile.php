@@ -251,6 +251,7 @@ $profile_image = $row['profile_image'];
                                 <div class="loader"><i></i></div>
                             </div>
                         </div>
+                        <!-- <progress id="fileProgress" style="display: none"></progress> -->
                     </form>
                 </div>
                 <div class="modal-footer">
