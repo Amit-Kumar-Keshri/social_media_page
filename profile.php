@@ -67,9 +67,11 @@ $profile_image = $row['profile_image'];
                 <li class="nav-item" role="presentation">
                     <a class="nav-link active" id="ex1-tab-1" data-mdb-toggle="tab" href="#profile-friends" role="tab" aria-controls="ex1-tabs-1" aria-selected="true">FRIENDS</a>
                 </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="ex1-tab-2" data-mdb-toggle="tab" href="#profile-posts" role="tab" aria-controls="ex1-tabs-2" aria-selected="false">POSTS</a>
-                </li>
+                <?php if (!isset($_GET['view_user'])) { ?>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="ex1-tab-2" data-mdb-toggle="tab" href="#profile-posts" role="tab" aria-controls="ex1-tabs-2" aria-selected="false">POSTS</a>
+                    </li>
+                <?php } ?>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#profile-photos" role="tab" aria-controls="ex1-tabs-3" aria-selected="false">PHOTOS</a>
                 </li>

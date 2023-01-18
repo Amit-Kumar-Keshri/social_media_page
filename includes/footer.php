@@ -15,7 +15,7 @@
                         if ($value != $_COOKIE['login_auth']) {
                             $row = retrive_data($value);
                     ?>
-                            <li class="row align-items-center p-3" data-user-id="<?= $row['id']; ?>">
+                            <li class="row align-items-center p-3 user" data-user-id="<?= $row['id']; ?>">
                                 <div class=" col-4 w-auto friend-img rounded-circle gx-3"><img class="rounded-circle" src="uploads/<?= $row['profile_image'] ?>" alt="user profile photo" /></div>
                                 <div class="col friend-info">
                                     <h4 class="m-0">
@@ -26,7 +26,14 @@
                         <?php } ?>
                     <?php } ?>
                 </ul>
-                <div class="chat_box_message">
+                <div class="chat_box_message" style="display: none;">
+                    <?php
+                    $all_message = retrive_message_record($_COOKIE["login_auth"], );
+                    foreach ($all_message as $key => $value) {
+                    ?>
+                        <p class="small p-2 m-3  text-white rounded-5 bg-primary w-50"><?= $value[0] ?></p>
+
+                    <?php } ?>
                 </div>
                 <div class="chat_box" style="display: none;">
                     <div class=" d-flex justify-content-start align-items-center p-3  border-0">

@@ -73,9 +73,6 @@ function sm_login_user($email_address, $password) {
 }
 
 
-
-
-
 function retrive_data($id)
 {
     $query = "Select * from tb_registration where id='$id'";
@@ -83,13 +80,13 @@ function retrive_data($id)
     $row = $result->fetch_assoc();
     return $row;
 }
-// function retrive_data_request($id)
-// {
-//     $query = "Select * from tb_request where added_by = '$id'";
-//     $result = connect_database()->query($query);
-//     $row = $result->fetch_assoc();
-//     return $row;
-// }
+function retrive_message_record($sender_id, $reciever_id)
+{
+    $query = "Select message from tb_chat where sender = '$sender_id' AND reciever = '$reciever_id'";
+    $result = connect_database()->query($query);
+    $row = $result->fetch_all();
+    return $row;
+}
 function retrive_all_data()
 {
     $query = "Select * from tb_registration";

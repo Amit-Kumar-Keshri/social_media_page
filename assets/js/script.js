@@ -364,22 +364,44 @@ jQuery(document).ready(function () {
       jQuery(this).parent("ul.friend-list").find("li").not(this).hide();
       jQuery(this).addClass("active");
       jQuery(".chat_box").slideDown();
+      jQuery(".chat_box_message").show();
     }
   );
 
   jQuery(document).on("click", ".chat-send-btn", function () {
     var chat_request = jQuery(this).parents(".chat_box").find("input").val();
+    var reciever_id = jQuery('.user').attr("data-user-id");
+    
     jQuery(this).parents(".chat_box").find("input").val('');
-
-    jQuery(".chat_box_message").append(
-      '<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50">' + chat_request + "</p>"
-    );
+    jQuery.ajax({
+      url: "http://localhost/social-media/response-data.php",
+      type: "POST",
+      cache: false,
+      dataType: "JSON",
+      data: {
+        action: "msg_sent",
+        message_data: chat_request,
+        reciever_id: reciever_id,
+      },
+      success: function (response) {
+        console.log(response);
+        jQuery(".chat_box_message").append(
+          '<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50">' +
+            chat_request +
+            "</p>");
+      },
+      error: function (xhr, status, error) {
+        //var err = eval("(" + xhr.responseText + ")");
+        console.log(error);
+      },
+    });
+    
   });
 
   jQuery( ".chat-list-toggler" ).click(function() {
     jQuery(this).find('i').toggle();
   });
-
+  
 
 
 

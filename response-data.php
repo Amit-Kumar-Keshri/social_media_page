@@ -29,6 +29,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_comment') {
 if (isset($_POST['action']) && $_POST['action'] == 'update_data') {
 	update_data($_POST['name'],$_POST['email'],$_POST['phone'],$_POST['address'],$_POST['gender'],$_COOKIE['login_auth']);
 }
+if (isset($_POST['action']) && $_POST['action'] == 'msg_sent') {
+	message_insert($_POST['message_data'], $_POST['reciever_id'], $_COOKIE['login_auth']);
+}
 
 function add_comment_func($comment_data, $post_id, $current_user_id) {
 	$date_added = date("l jS \of F Y h:i:s A");
@@ -172,5 +175,20 @@ function update_data($name, $email, $phone, $address, $gender, $user_id)
 	}
 	mysqli_close(connect_database());
 	echo json_encode(array('status' => $status,'name' => $name ,'email' => $email, 'phone' => $phone ,'address' => $address ,'gender' => $gender));
+	exit();
+}
+
+
+function message_insert($message_data, $reciever_id, $current_user_id){
+	$message_status = "unseen";
+	$date_added = date("l jS \of F Y h:i:s A");
+	$insert_query = "INSERT INTO tb_chat (sender, reciever, message, date_added, status) VALUES ('$current_user_id', '$reciever_id', '$message_data', '$date_added', '$message_status')";
+	if ($result = connect_database()->query($insert_query)) {
+		$status = true;
+	} else {
+		$status = false;
+	}
+	mysqli_close(connect_database());
+	echo json_encode(array('status' => $status));
 	exit();
 }
