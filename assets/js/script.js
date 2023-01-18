@@ -228,6 +228,10 @@ jQuery(document).ready(function () {
       processData: false,
       success: function (response) {
         console.log(response);
+        jQuery("header").after('<p class="notification_sec bg-success text-center w-100 text-white">Updated Successfully</p>');
+        setTimeout(function () {
+          jQuery(".notification_sec").hide();
+        }, 5000);
       },
       error: function (xhr, status, error) {
         console.log(error);
@@ -336,8 +340,11 @@ jQuery(document).ready(function () {
         console.log(response);
         jQuery(".profile-image, .header-profile-image").attr(
           "src",
-          response.image
-        );
+          response.image);
+          jQuery("header").after('<p class="notification_sec bg-success text-center w-100 text-white">Updated Successfully</p>');
+        setTimeout(function () {
+          jQuery(".notification_sec").hide();
+        }, 5000);
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");

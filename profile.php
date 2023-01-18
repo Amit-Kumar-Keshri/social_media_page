@@ -57,7 +57,7 @@ $profile_image = $row['profile_image'];
                         <?= $name ?>
                     </h4>
                     <?php if (!isset($_GET['view_user'])) { ?>
-                        <a href="my-account.php" class="btn btn-xs btn-primary mb-2">Edit Profile</a>
+                        <a href="update-profile.php" class="btn btn-xs btn-primary mb-2">Edit Profile</a>
                     <?php } ?>
                 </div>
             </div>
@@ -93,16 +93,16 @@ $profile_image = $row['profile_image'];
                             <?php  } else { ?>
                                 <div class="m-b-10"><b>Friend List (<?= count($all_friends) - 1; ?>)</b></div>
                             <?php } ?>
-                            <ul class="friend-list clearfix">
+                            <ul class="friend-list clearfix d-flex flex-wrap">
                                 <?php
                                 foreach ($all_friends as $key => $value) {
                                     if ($value != $active_user_id) {
                                         $row = retrive_data($value);
                                 ?>
-                                        <li>
-                                            <a href="profile.php?view_user=<?= $row['id']; ?>" class="">
-                                                <div class=" col friend-img "><img src="uploads/<?= $row['profile_image'] ?>" alt="user profile photo" /></div>
-                                                <div class=" col friend-info">
+                                        <li class="py-1 pe-1">
+                                            <a href="profile.php?view_user=<?= $row['id']; ?>" class="d-flex bg-white">
+                                                <div class="friend-img"><img src="uploads/<?= $row['profile_image'] ?>" alt="photo" /></div>
+                                                <div class="friend-info mx-3">
                                                     <h4>
                                                         <?= $row['name']; ?>
                                                     </h4>
@@ -170,7 +170,7 @@ $profile_image = $row['profile_image'];
                         <!-- About -->
                         <div class="tab-pane fade" id="profile-about">
                             <ul class="profile-info-list">
-                                <li class="title">ABOUT <?=$name?></li>
+                                <li class="title">ABOUT <?= $name ?></li>
                                 <li>
                                     <div class="field">Gender:</div>
                                     <div class="value">
