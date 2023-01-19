@@ -393,8 +393,9 @@ jQuery(document).ready(function () {
     var chat_request = jQuery(this).parents(".chat_box").find("input").val();
     var reciever_id = jQuery(".user").attr("data-user-id");
     jQuery(this).parents(".chat_box").find("input").val("");
+    console.log(chat_request);
     jQuery.ajax({
-      url: "http://" + custon_url + "/social-media/response-data.php",
+      url: "http://"+custon_url+"/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
