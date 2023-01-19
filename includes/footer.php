@@ -29,9 +29,7 @@
                 <div class="chat_box_message" style="display: none;">
                 <?php
                         $all_message = retrive_message_record($_COOKIE["login_auth"]);
-                        if(!empty($all_message)){
-
-                        
+                        if($all_message){
                             foreach ($all_message as $key => $value) {
                             ?>
                         <p class="small p-2 m-3  text-white rounded-5 bg-primary w-50"><?= $value[0]; ?></p>

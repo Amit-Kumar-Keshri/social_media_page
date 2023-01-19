@@ -1,7 +1,7 @@
-<?php 
-define('ROOT_DIR', realpath(__DIR__.'/..'));
-include ROOT_DIR.'/social-media/includes/db.php';
-include ROOT_DIR.'/social-media/includes/functions.php';
+<?php
+define('ROOT_DIR', realpath(__DIR__ . '/..'));
+include ROOT_DIR . '/social-media/includes/db.php';
+include ROOT_DIR . '/social-media/includes/functions.php';
 
 if (!isset($_COOKIE['login_auth'])) {
     header("Location:login.php");
@@ -53,10 +53,10 @@ include('includes/header.php');
                         <div class="panel-footer my-3">
                             <div class="row ">
                                 <div class="col text-center liked_sec">
-                                    <?php if(!check_if_already_liked($value[0])){?>
-                                    <button type="button" class="btn btn-secondary liked-btn" value="LIKE" post-id="<?= $value[0]; ?>"><i class="fa-solid fa-thumbs-up"></i>Like</button>
+                                    <?php if (!check_if_already_liked($value[0])) { ?>
+                                        <button type="button" class="btn btn-secondary liked-btn" value="LIKE" post-id="<?= $value[0]; ?>"><i class="fa-solid fa-thumbs-up"></i>Like</button>
                                     <?php } else { ?>
-                                    <span class="badge rounded-pill badge-notification-button bg-danger"> <?php echo $count=like_count($value[0]) ?> People Liked </span>
+                                        <span class="badge rounded-pill badge-notification-button bg-danger"> <?php echo $count = like_count($value[0]) ?> People Liked </span>
                                     <?php } ?>
                                 </div>
                                 <div class="col text-center">
@@ -75,17 +75,17 @@ include('includes/header.php');
                                             <?php
                                             $all_comments = retrive_all_comments($value[0]);
                                             foreach ($all_comments as $key => $comments) {
-                                                if(!empty($comments[3])){
-                                                $commenter_data = retrive_data($comments[1]);
+                                                if (!empty($comments[3])) {
+                                                    $commenter_data = retrive_data($comments[1]);
                                             ?>
-                                                <a class="friend-list comments d-flex mb-3">
-                                                    <div class="friend-img rounded-circle"><img class="rounded-circle" src="uploads/<?= $commenter_data['profile_image'] ?>" alt="user profile photo" /></div>
-                                                    <div class="friend-info px-3 ">
-                                                        <h4 class="mb-1"><?= $commenter_data['name']; ?></h4>
-                                                        <p><?= $comments[3] ?></p>
-                                                    </div>
-                                                </a>
-                                            <?php } ?>
+                                                    <a class="friend-list comments d-flex mb-3">
+                                                        <div class="friend-img rounded-circle"><img class="rounded-circle" src="uploads/<?= $commenter_data['profile_image'] ?>" alt="user profile photo" /></div>
+                                                        <div class="friend-info px-3 ">
+                                                            <h4 class="mb-1"><?= $commenter_data['name']; ?></h4>
+                                                            <p><?= $comments[3] ?></p>
+                                                        </div>
+                                                    </a>
+                                                <?php } ?>
                                             <?php } ?>
                                         </div>
                                     </div>

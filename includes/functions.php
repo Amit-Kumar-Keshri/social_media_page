@@ -88,10 +88,16 @@ function retrive_data($id)
 function retrive_message_record($sender_id)
 {
     $query = "Select message from tb_chat where sender = '$sender_id'";
-    $result = connect_database()->query($query);
-    mysqli_close(connect_database());
+   if($result = connect_database()->query($query)) {
     $row = $result->fetch_all();
+    mysqli_close(connect_database());
     return $row;
+   }else{
+        return false;
+   }
+   
+   
+    
 }
 function retrive_all_data()
 {
@@ -105,8 +111,9 @@ function retrive_all_request($reciever_id)
 {
     $query = "Select * from tb_request where requested_to = '$reciever_id' and status='requested'";
     $result = connect_database()->query($query);
-    mysqli_close(connect_database());
+    
     $row = $result->fetch_all();
+    mysqli_close(connect_database());
     return $row;
 
 

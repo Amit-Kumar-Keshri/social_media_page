@@ -56,7 +56,7 @@ $profile_image = $row['profile_image'];
                     <h4 class="m-t-sm">
                         <?= $name ?>
                     </h4>
-                    <?php if (!isset($_GET['view_user'])) { ?>
+                    <?php if (!isset($_GET['view_user']) || $_GET['view_user'] == $_COOKIE['login_auth'] ) { ?>
                         <a href="update-profile.php" class="btn btn-xs btn-primary mb-2">Edit Profile</a>
                     <?php } ?>
                 </div>
@@ -67,7 +67,7 @@ $profile_image = $row['profile_image'];
                 <li class="nav-item" role="presentation">
                     <a class="nav-link active" id="ex1-tab-1" data-mdb-toggle="tab" href="#profile-friends" role="tab" aria-controls="ex1-tabs-1" aria-selected="true">FRIENDS</a>
                 </li>
-                <?php if (!isset($_GET['view_user'])) { ?>
+                <?php if (!isset($_GET['view_user']) || $_GET['view_user'] == $_COOKIE['login_auth']) { ?>
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="ex1-tab-2" data-mdb-toggle="tab" href="#profile-posts" role="tab" aria-controls="ex1-tabs-2" aria-selected="false">POSTS</a>
                     </li>
@@ -122,7 +122,7 @@ $profile_image = $row['profile_image'];
                             </ul>
                         </div>
                         <!-- Posts -->
-                        <?php if (!isset($_GET['view_user'])) { ?>
+                        <?php if (!isset($_GET['view_user']) || $_GET['view_user'] == $_COOKIE['login_auth']) { ?>
                             <div class="tab-pane fade" id="profile-posts">
                                 <div class="card card-body">
                                     <div class="d-flex flex-colomn">

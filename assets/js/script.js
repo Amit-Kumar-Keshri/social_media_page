@@ -1,5 +1,6 @@
 var trigger_status = false;
 var custon_url = "localhost";
+
 function checkChange($this, index) {
   var regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   var regex_phone = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/;
@@ -97,14 +98,18 @@ jQuery(document).ready(function () {
       });
   });
 
+  jQuery("input[name='updateGender']").change(function(){
+    jQuery(".updateProfileBtn").prop("disabled", false);
+  });
+
   jQuery(document).on("click", ".liked-btn", function () {
-    jQuery(this).parents('.liked_sec').addClass('active');
+    jQuery(this).parents(".liked_sec").addClass("active");
     var post_id = jQuery(this).attr("post-id");
     var button_index = jQuery(".liked-btn").index();
     var like;
     $(this).eq(button_index).prop("disabled", true);
     jQuery.ajax({
-      url: "http://"+custon_url+"/social-media/response-data.php",
+      url: "http://" + custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -114,12 +119,13 @@ jQuery(document).ready(function () {
       },
       success: function (response) {
         console.log(response);
-        jQuery('.liked_sec.active').find('.liked-btn').remove();
-        var like_html = '<span class="badge rounded-pill badge-notification-button bg-danger">';
+        jQuery(".liked_sec.active").find(".liked-btn").remove();
+        var like_html =
+          '<span class="badge rounded-pill badge-notification-button bg-danger">';
         like_html += response.total_likes;
-        like_html += ' People Liked</span>';
-        jQuery('.liked_sec.active').append(like_html);
-        jQuery('.liked_sec').removeClass('active');
+        like_html += " People Liked</span>";
+        jQuery(".liked_sec.active").append(like_html);
+        jQuery(".liked_sec").removeClass("active");
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");
@@ -130,35 +136,41 @@ jQuery(document).ready(function () {
 
   jQuery(document).on("click", ".comment-send", function () {
     var post_id = jQuery(this).attr("post-id");
-    var comment_data =  jQuery(this).parents(".panel-default").find(".post-comment1").val();
+    var comment_data = jQuery(this)
+      .parents(".panel-default")
+      .find(".post-comment1")
+      .val();
     console.log(comment_data);
     jQuery.ajax({
-      url: "http://"+custon_url+"/social-media/response-data.php",
+      url: "http://" + custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
       data: {
         action: "add_comment",
         post_id: post_id,
-        comment_data : comment_data,
+        comment_data: comment_data,
       },
       success: function (response) {
         console.log(response);
 
-        var profile_image = jQuery('.header-profile-image').attr('src');
-        var profile_name = jQuery('.header-profile-image').attr('alt');
+        var profile_image = jQuery(".header-profile-image").attr("src");
+        var profile_name = jQuery(".header-profile-image").attr("alt");
 
         var comment_html = '<a class="friend-list comments d-flex mb-3">';
         comment_html += '<div class="friend-img rounded-circle">';
-        comment_html += '<img class="rounded-circle" src="'+profile_image+'" alt="user profile photo" />';
-        comment_html += '</div>';
+        comment_html +=
+          '<img class="rounded-circle" src="' +
+          profile_image +
+          '" alt="user profile photo" />';
+        comment_html += "</div>";
         comment_html += '<div class="friend-info px-3 ">';
-        comment_html += '<h4 class="mb-1">'+profile_name+'</h4>';
-        comment_html += '<p>'+comment_data+'</p>';
-        comment_html += '</div>';
-        comment_html += '</a>';
-        jQuery('.comment-boxes').append(comment_html);
-        jQuery(".post-comment1").val('');
+        comment_html += '<h4 class="mb-1">' + profile_name + "</h4>";
+        comment_html += "<p>" + comment_data + "</p>";
+        comment_html += "</div>";
+        comment_html += "</a>";
+        jQuery(".comment-boxes").append(comment_html);
+        jQuery(".post-comment1").val("");
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");
@@ -182,7 +194,7 @@ jQuery(document).ready(function () {
     console.log(post_caption);
 
     jQuery.ajax({
-      url: "http://"+custon_url+"/social-media/response-data.php",
+      url: "http://" + custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -208,7 +220,7 @@ jQuery(document).ready(function () {
     var email = jQuery("#updateEmail").val();
     var phone = jQuery("#updatePhone").val();
     var address = jQuery("#updateAddress").val();
-    var gender = jQuery("input[name='gender']:checked").val();
+    var gender = jQuery("input[name='updateGender']:checked").val();
 
     var formdata = new FormData();
 
@@ -220,7 +232,7 @@ jQuery(document).ready(function () {
     formdata.append("gender", gender);
 
     jQuery.ajax({
-      url: "http://"+custon_url+"/social-media/response-data.php",
+      url: "http://" + custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -229,7 +241,9 @@ jQuery(document).ready(function () {
       processData: false,
       success: function (response) {
         console.log(response);
-        jQuery("header").after('<p class="notification_sec bg-success text-center w-100 text-white">Updated Successfully</p>');
+        jQuery("header").after(
+          '<p class="notification_sec bg-success text-center w-100 text-white">Updated Successfully</p>'
+        );
         setTimeout(function () {
           jQuery(".notification_sec").hide(1000);
         }, 5000);
@@ -243,10 +257,10 @@ jQuery(document).ready(function () {
 
   jQuery(document).on("click", ".add_friend_btn", function () {
     var people_id = jQuery(this).attr("data-id");
-    var instance =  jQuery(this);
+    var instance = jQuery(this);
     console.log(people_id);
     jQuery.ajax({
-      url: "http://"+custon_url+"/social-media/response-data.php",
+      url: "http://" + custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -257,7 +271,11 @@ jQuery(document).ready(function () {
       success: function (response) {
         console.log(response);
         jQuery(instance).hide();
-        jQuery(instance).parents(".desc").append("<button class='btn btn-success pull-right add_friend_btn'>Pending Request</button>")
+        jQuery(instance)
+          .parents(".desc")
+          .append(
+            "<button class='btn btn-success pull-right add_friend_btn'>Pending Request</button>"
+          );
       },
       error: function (xhr, status, error) {
         console.log(error);
@@ -269,7 +287,7 @@ jQuery(document).ready(function () {
     var sender_id = jQuery(this).attr("data-rqst-sender-id");
     console.log(sender_id);
     jQuery.ajax({
-      url: "http://"+custon_url+"/social-media/response-data.php",
+      url: "http://" + custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -300,7 +318,7 @@ jQuery(document).ready(function () {
     var sender_id = jQuery(this).attr("data-rqst-sender-id");
     console.log(sender_id);
     jQuery.ajax({
-      url: "http://"+custon_url+"/social-media/response-data.php",
+      url: "http://" + custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -327,9 +345,9 @@ jQuery(document).ready(function () {
     formdata.append("action", "upload_image_action");
     formdata.append("user_id", user_id);
     formdata.append("image_file", image_file[0]);
-    
+
     jQuery.ajax({
-      url: "http://"+custon_url+"/social-media/response-data.php",
+      url: "http://" + custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -340,8 +358,11 @@ jQuery(document).ready(function () {
         console.log(response);
         jQuery(".profile-image, .header-profile-image").attr(
           "src",
-          response.image);
-          jQuery("header").after('<p class="notification_sec bg-success text-center w-100 text-white">Profile Image Updated Successfully</p>');
+          response.image
+        );
+        jQuery("header").after(
+          '<p class="notification_sec bg-success text-center w-100 text-white">Profile Image Updated Successfully</p>'
+        );
         setTimeout(function () {
           jQuery(".notification_sec").hide(1000);
         }, 5000);
@@ -370,10 +391,10 @@ jQuery(document).ready(function () {
 
   jQuery(document).on("click", ".chat-send-btn", function () {
     var chat_request = jQuery(this).parents(".chat_box").find("input").val();
-    var reciever_id = jQuery('.user').attr("data-user-id");
-    jQuery(this).parents(".chat_box").find("input").val('');
+    var reciever_id = jQuery(".user").attr("data-user-id");
+    jQuery(this).parents(".chat_box").find("input").val("");
     jQuery.ajax({
-      url: "http://"+custon_url+"/social-media/response-data.php",
+      url: "http://" + custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -387,21 +408,17 @@ jQuery(document).ready(function () {
         jQuery(".chat_box_message").append(
           '<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50">' +
             chat_request +
-            "</p>");
+            "</p>"
+        );
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");
         console.log(error);
       },
     });
-    
   });
 
-  jQuery( ".chat-list-toggler" ).click(function() {
-    jQuery(this).find('i').toggle();
+  jQuery(".chat-list-toggler").click(function () {
+    jQuery(this).find("i").toggle();
   });
-  
-
-
-
 });

@@ -114,13 +114,13 @@ $profile_image = $row['profile_image'];
           </div>
           <div class="col-lg-9">
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="gender" id="male" value="Male" <?php if (strtolower($gender) == "male") {
+              <input class="form-check-input" type="radio" name="updateGender" id="male" value="Male" <?php if (strtolower($gender) == "male") {
                                                                                                   echo "checked";
                                                                                                 } ?> />
               <label class="form-check-label" for="male"> Male </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="gender" id="female" value="Female" <?php if (strtolower($gender) == "female") {
+              <input class="form-check-input" type="radio" name="updateGender" id="female" value="Female" <?php if (strtolower($gender) == "female") {
                                                                                                       echo "checked";
                                                                                                     } ?> />
               <label class="form-check-label" for="female"> Female </label>
