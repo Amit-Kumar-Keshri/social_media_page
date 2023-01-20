@@ -98,7 +98,7 @@ jQuery(document).ready(function () {
       });
   });
 
-  jQuery("input[name='updateGender']").change(function(){
+  jQuery("input[name='updateGender']").change(function () {
     jQuery(".updateProfileBtn").prop("disabled", false);
   });
 
@@ -232,7 +232,7 @@ jQuery(document).ready(function () {
     formdata.append("gender", gender);
 
     jQuery.ajax({
-      url:  custon_url + "/social-media/response-data.php",
+      url: custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -260,7 +260,7 @@ jQuery(document).ready(function () {
     var instance = jQuery(this);
     console.log(people_id);
     jQuery.ajax({
-      url:  custon_url + "/social-media/response-data.php",
+      url: custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -382,20 +382,55 @@ jQuery(document).ready(function () {
     "click",
     ".chat_window_section > ul.friend-list > li",
     function () {
+      var reciever_id = jQuery(this).attr("data-reciever-id");
       jQuery(this).parent("ul.friend-list").find("li").not(this).hide();
       jQuery(this).addClass("active");
       jQuery(".chat_box").slideDown();
-      jQuery(".chat_box_message").show();
+      jQuery.ajax({
+        url: custon_url + "/social-media/response-data.php",
+        type: "POST",
+        cache: false,
+        dataType: "JSON",
+        data: {
+          action: "msg_populator",
+          reciever_id: reciever_id,
+        },
+        success: function (response) {
+          console.log(response);
+          jQuery(".chat_box_message").show();
+          jQuery.each(response.status, function (index, value) {
+            jQuery(".chat_box_message").append(
+              '<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50">' +
+                value +
+                "</p>"
+            );
+          });
+        },
+        error: function (xhr, status, error) {
+          //var err = eval("(" + xhr.responseText + ")");
+          console.log(error);
+        },
+      });
     }
   );
 
+  jQuery(".chat_box input").on("input", function () {
+    
+    if (jQuery(this).val() !== "") {
+      jQuery(".chat-send-btn ").prop("disabled", false);
+    } else {
+      jQuery(".chat-send-btn").prop("disabled", true);
+    }
+  });
+
   jQuery(document).on("click", ".chat-send-btn", function () {
     var chat_request = jQuery(this).parents(".chat_box").find("input").val();
-    var reciever_id = jQuery(".user").attr("data-user-id");
+    var reciever_id = jQuery(".active").attr("data-reciever-id");
     jQuery(this).parents(".chat_box").find("input").val("");
+    jQuery(".chat-send-btn").prop("disabled", true);
     console.log(chat_request);
     jQuery.ajax({
-      url: custon_url+"/social-media/response-data.php",
+      url: custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",

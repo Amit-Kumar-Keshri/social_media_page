@@ -85,20 +85,20 @@ function retrive_data($id)
     $row = $result->fetch_assoc();
     return $row;
 }
-function retrive_message_record($sender_id)
-{
-    $query = "Select message from tb_chat where sender = '$sender_id'";
-   if($result = connect_database()->query($query)) {
-    $row = $result->fetch_all();
-    mysqli_close(connect_database());
-    return $row;
-   }else{
-        return false;
-   }
-   
-   
-    
-}
+// function retrive_message_record($sender_id)
+// {
+//     $query = "Select message from tb_chat where sender = '$sender_id'";
+//     if ($result = connect_database()->query($query)) {
+//         $row = $result->fetch_all();
+//         mysqli_close(connect_database());
+//         return $row;
+//     } else {
+//         return false;
+//     }
+
+
+
+// }
 function retrive_all_data()
 {
     $query = "Select * from tb_registration";
@@ -111,12 +111,9 @@ function retrive_all_request($reciever_id)
 {
     $query = "Select * from tb_request where requested_to = '$reciever_id' and status='requested'";
     $result = connect_database()->query($query);
-    
     $row = $result->fetch_all();
     mysqli_close(connect_database());
     return $row;
-
-
 }
 
 function check_if_already_added($people_id)

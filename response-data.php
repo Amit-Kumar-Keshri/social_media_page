@@ -32,6 +32,24 @@ if (isset($_POST['action']) && $_POST['action'] == 'update_data') {
 if (isset($_POST['action']) && $_POST['action'] == 'msg_sent') {
 	message_insert($_POST['message_data'], $_POST['reciever_id'], $_COOKIE['login_auth']);
 }
+if (isset($_POST['action']) && $_POST['action'] == 'msg_populator') {
+	message_populator($_POST['reciever_id'], $_COOKIE['login_auth']);
+}
+
+function message_populator($reciever_id, $sender_id){
+
+	$query = "Select message from tb_chat where sender = '$sender_id' AND receiver = '$reciever_id'";
+    if ($result = connect_database()->query($query)) {
+        $row = $result->fetch_all();
+        mysqli_close(connect_database());
+		$status = $row;
+    }
+       
+	echo json_encode(array('status' => $status));
+	exit();	
+}
+
+
 
 function add_comment_func($comment_data, $post_id, $current_user_id) {
 	$date_added = date("l jS \of F Y h:i:s A");
