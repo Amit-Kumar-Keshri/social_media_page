@@ -1,5 +1,5 @@
 var trigger_status = false;
-var custon_url = "localhost";
+var custon_url = "http://localhost";
 
 function checkChange($this, index) {
   var regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -109,7 +109,7 @@ jQuery(document).ready(function () {
     var like;
     $(this).eq(button_index).prop("disabled", true);
     jQuery.ajax({
-      url: "http://" + custon_url + "/social-media/response-data.php",
+      url: custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -142,7 +142,7 @@ jQuery(document).ready(function () {
       .val();
     console.log(comment_data);
     jQuery.ajax({
-      url: "http://" + custon_url + "/social-media/response-data.php",
+      url: custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -194,7 +194,7 @@ jQuery(document).ready(function () {
     console.log(post_caption);
 
     jQuery.ajax({
-      url: "http://" + custon_url + "/social-media/response-data.php",
+      url: custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -232,7 +232,7 @@ jQuery(document).ready(function () {
     formdata.append("gender", gender);
 
     jQuery.ajax({
-      url: "http://" + custon_url + "/social-media/response-data.php",
+      url:  custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -260,7 +260,7 @@ jQuery(document).ready(function () {
     var instance = jQuery(this);
     console.log(people_id);
     jQuery.ajax({
-      url: "http://" + custon_url + "/social-media/response-data.php",
+      url:  custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -287,7 +287,7 @@ jQuery(document).ready(function () {
     var sender_id = jQuery(this).attr("data-rqst-sender-id");
     console.log(sender_id);
     jQuery.ajax({
-      url: "http://" + custon_url + "/social-media/response-data.php",
+      url: custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -318,7 +318,7 @@ jQuery(document).ready(function () {
     var sender_id = jQuery(this).attr("data-rqst-sender-id");
     console.log(sender_id);
     jQuery.ajax({
-      url: "http://" + custon_url + "/social-media/response-data.php",
+      url: custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -347,7 +347,7 @@ jQuery(document).ready(function () {
     formdata.append("image_file", image_file[0]);
 
     jQuery.ajax({
-      url: "http://" + custon_url + "/social-media/response-data.php",
+      url: custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
@@ -395,7 +395,7 @@ jQuery(document).ready(function () {
     jQuery(this).parents(".chat_box").find("input").val("");
     console.log(chat_request);
     jQuery.ajax({
-      url: "http://"+custon_url+"/social-media/response-data.php",
+      url: custon_url+"/social-media/response-data.php",
       type: "POST",
       cache: false,
       dataType: "JSON",
