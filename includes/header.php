@@ -13,7 +13,7 @@ if (isset($_COOKIE['login_auth'])) {
   $query = "Select * from tb_registration where id='$id'";
   $result = connect_database()->query($query);
   $row = $result->fetch_assoc();
-  $profile_image = $row['profile_image'];
+  $current_user_profile_image = $row['profile_image'];
   $profile_name = $row['name'];
 }
 ?>
@@ -56,7 +56,7 @@ if (isset($_COOKIE['login_auth'])) {
         <!-- Collapsible wrapper -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Navbar brand -->
-          <a class="navbar-brand mt-2 mt-lg-0" href="https://localhost/social-media/">
+          <a class="navbar-brand mt-2 mt-lg-0" href="https://pws-translate.dvlpsite.com/social-media/">
             Social Media
           </a>
         </div>
@@ -130,7 +130,7 @@ if (isset($_COOKIE['login_auth'])) {
             <!-- Avatar -->
             <div class="dropdown">
               <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                <img src="uploads/<?= $profile_image ?>" class="rounded-circle header-profile-image" height="25" alt="<?= $profile_name; ?>" loading="lazy" />
+                <img src="uploads/<?= $current_user_profile_image ?>" class="rounded-circle header-profile-image" height="25" alt="<?= $profile_name; ?>" loading="lazy" />
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                 <li>

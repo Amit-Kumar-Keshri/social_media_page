@@ -29,23 +29,60 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_comment') {
 if (isset($_POST['action']) && $_POST['action'] == 'update_data') {
 	update_data($_POST['name'],$_POST['email'],$_POST['phone'],$_POST['address'],$_POST['gender'],$_COOKIE['login_auth']);
 }
+
 if (isset($_POST['action']) && $_POST['action'] == 'msg_sent') {
-	message_insert($_POST['message_data'], $_POST['reciever_id'], $_COOKIE['login_auth']);
+	chat_message_insert($_POST['message_data'], $_POST['reciever_id'], $_COOKIE['login_auth']);
 }
 if (isset($_POST['action']) && $_POST['action'] == 'msg_populator') {
-	message_populator($_POST['reciever_id'], $_COOKIE['login_auth']);
+	chat_message_populator($_POST['reciever_id'], $_COOKIE['login_auth']);
 }
 
-function message_populator($reciever_id, $sender_id){
 
-	$query = "Select message from tb_chat where sender = '$sender_id' AND receiver = '$reciever_id'";
+function chat_message_insert($message_data, $reciever_id, $current_user_id){
+	$message_status = "unseen";
+
+	$date_added = date("l jS \of F Y h:i:s A");
+	$insert_query = "INSERT INTO tb_chat (sender, receiver, message, date_added, status) VALUES ('$current_user_id', '$reciever_id', '$message_data', '$date_added', '$message_status')";
+	if ($result = connect_database()->query($insert_query)) {
+		$status = true;
+	} else {
+		$status = false;
+	}
+	mysqli_close(connect_database());
+	echo json_encode(array('status' => $message_status));
+	exit();
+}
+function chat_message_populator($reciever_id, $sender_id){
+
+	$message_data = [];
+
+	$query = "Select id,message from tb_chat where sender = '$sender_id' AND receiver = '$reciever_id' ORDER BY id ASC";
     if ($result = connect_database()->query($query)) {
-        $row = $result->fetch_all();
+        $row_message = $result->fetch_all();
         mysqli_close(connect_database());
-		$status = $row;
     }
+    foreach ($row_message  as $key => $value) {
+    	$row_id = $value[0];
+    	$row_message = $value[1];
+    	$message_data[$row_id] = '<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50 crrnt_user">'.$row_message.'</p>';
+    }
+
+    
+
+    $query = "Select id,message from tb_chat where sender = '$reciever_id' AND receiver = '$sender_id' ORDER BY id ASC";
+    if ($result = connect_database()->query($query)) {
+        $row_message = $result->fetch_all();
+        mysqli_close(connect_database());
+    }
+    foreach ($row_message  as $key => $value) {
+    	$row_id = $value[0];
+    	$row_message = $value[1];
+    	$message_data[$row_id] = '<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50 frnd_user">'.$row_message.'</p>';
+    }
+
+	ksort($message_data);
        
-	echo json_encode(array('status' => $status));
+	echo json_encode(array('status' => $message_data));
 	exit();	
 }
 
@@ -197,16 +234,3 @@ function update_data($name, $email, $phone, $address, $gender, $user_id)
 }
 
 
-function message_insert($message_data, $reciever_id, $current_user_id){
-	$message_status = "unseen";
-	$date_added = date("l jS \of F Y h:i:s A");
-	$insert_query = "INSERT INTO tb_chat (sender, receiver, message, date_added, status) VALUES ('$current_user_id', '$reciever_id', '$message_data', '$date_added', '$message_status')";
-	if ($result = connect_database()->query($insert_query)) {
-		$status = true;
-	} else {
-		$status = false;
-	}
-	mysqli_close(connect_database());
-	echo json_encode(array('status' => $status));
-	exit();
-}

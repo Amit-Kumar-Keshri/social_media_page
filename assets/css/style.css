@@ -1009,3 +1009,15 @@ input.post-comment1 {
   .custom-file-upload img {
     width: 40px;
   }
+
+
+
+p.crrnt_user {
+    float: left;
+}
+
+
+p.frnd_user {
+    background: #63d063 !important;
+    float: right;
+}

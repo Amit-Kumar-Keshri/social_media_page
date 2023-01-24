@@ -1,5 +1,5 @@
 var trigger_status = false;
-var custon_url = "http://localhost";
+var custon_url = "https://localhost";
 
 function checkChange($this, index) {
   var regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -378,10 +378,7 @@ jQuery(document).ready(function () {
     jQuery(".chat_window_section").slideToggle();
   });
 
-  jQuery(document).on(
-    "click",
-    ".chat_window_section > ul.friend-list > li",
-    function () {
+  jQuery(document).on("click", ".chat_window_section > ul.friend-list > li", function () {
       var reciever_id = jQuery(this).attr("data-reciever-id");
       jQuery(this).parent("ul.friend-list").find("li").not(this).hide();
       jQuery(this).addClass("active");
@@ -399,11 +396,7 @@ jQuery(document).ready(function () {
           console.log(response);
           jQuery(".chat_box_message").show();
           jQuery.each(response.status, function (index, value) {
-            jQuery(".chat_box_message").append(
-              '<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50">' +
-                value +
-                "</p>"
-            );
+            jQuery(".chat_box_message").append(value);
           });
         },
         error: function (xhr, status, error) {
@@ -424,10 +417,13 @@ jQuery(document).ready(function () {
 
   jQuery(document).on("click", ".chat-send-btn", function () {
     var chat_request = jQuery(this).parents(".chat_box").find("input").val();
-    var reciever_id = jQuery(".active").attr("data-reciever-id");
+    var reciever_id = jQuery("ul.friend-list").find("li.active").attr("data-reciever-id");
     jQuery(this).parents(".chat_box").find("input").val("");
     jQuery(".chat-send-btn").prop("disabled", true);
+
     console.log(chat_request);
+    console.log(reciever_id);
+
     jQuery.ajax({
       url: custon_url + "/social-media/response-data.php",
       type: "POST",
@@ -440,11 +436,7 @@ jQuery(document).ready(function () {
       },
       success: function (response) {
         console.log(response);
-        jQuery(".chat_box_message").append(
-          '<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50">' +
-            chat_request +
-            "</p>"
-        );
+        jQuery(".chat_box_message").append('<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50">' +chat_request +"</p>");
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");

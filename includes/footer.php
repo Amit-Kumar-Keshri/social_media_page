@@ -34,7 +34,7 @@
                 </div>
                 <div class="chat_box" style="display: none;">
                     <div class=" d-flex justify-content-start align-items-center p-3  border-0">
-                        <img class="rounded-circle" src="uploads/<?= $profile_image; ?>" alt=""
+                        <img class="rounded-circle" src="uploads/<?= $current_user_profile_image; ?>" alt=""
                             style="width: 40px; height: 100%;">
                         <input type="text" class="form-control form-control-lg ms-1" placeholder="Type message">
                         <a class="ms-1 text-white" href="#!"><i class="fas fa-paperclip"></i></a>
