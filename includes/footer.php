@@ -6,9 +6,9 @@
     </footer>
     <?php if (!isset($_GET['logout']) && isset($_COOKIE["login_auth"])) { ?>
         <div class="collapse" id="collapseExample">
-
+            <button id="back-button">Back</button>
             <div class="chat_window_section chat-box-body ">
-                <button onclick="window.history.back();">Back </button>
+
                 <ul class="friend-list chat-box-card">
                     <!-- /* curently this showing user profile but it needs to shown friend list here */ -->
                     <?php

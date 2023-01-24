@@ -414,8 +414,7 @@ jQuery(document).ready(function () {
     }
   );
 
-  jQuery(".chat_box input").on("input", function () {
-    
+  jQuery(document).on("input",".chat_box input", function () {
     if (jQuery(this).val() !== "") {
       jQuery(".chat-send-btn ").prop("disabled", false);
     } else {
@@ -457,4 +456,29 @@ jQuery(document).ready(function () {
   jQuery(".chat-list-toggler").click(function () {
     jQuery(this).find("i").toggle();
   });
+
+  jQuery("#back-button").click(function () {
+    jQuery(".chat_window_section").html(
+      sessionStorage.getItem("previous-state")
+    );
+  });
+
+  //save the current state of the div
+  jQuery(".chat_window_section").click(function () {
+    sessionStorage.setItem("previous-state", jQuery(this).html());
+  });
+
+
+
+
+  // jQuery("#back-button").click(function() {
+  //   jQuery(".chat_window_section").html(jQuery(".chat_window_section").data("previous-state"));
+  // });
+  
+  // //save the current state of the div
+  // jQuery(".chat_window_section").click(function() {
+  //   jQuery(this).data("previous-state", jQuery(this).html());
+  // });
+
+
 });

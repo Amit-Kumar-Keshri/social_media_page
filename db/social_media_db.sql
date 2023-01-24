@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2023 at 09:05 AM
+-- Generation Time: Jan 20, 2023 at 02:28 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -29,12 +29,33 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tb_chat` (
   `id` int(10) NOT NULL,
-  `user_1` int(10) NOT NULL,
-  `user_2` int(10) NOT NULL,
+  `sender` int(10) NOT NULL,
+  `receiver` int(10) NOT NULL,
   `message` text NOT NULL,
   `date_added` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `tb_chat`
+--
+
+INSERT INTO `tb_chat` (`id`, `sender`, `receiver`, `message`, `date_added`, `status`) VALUES
+(1, 5, 2, 'hi', 'Friday 20th of January 2023 09:27:08 AM', 'unseen'),
+(2, 5, 1, 'hi', 'Friday 20th of January 2023 09:27:25 AM', 'unseen'),
+(3, 5, 1, 'hello', 'Friday 20th of January 2023 09:27:40 AM', 'unseen'),
+(5, 5, 2, 'hi', 'Friday 20th of January 2023 09:29:35 AM', 'unseen'),
+(6, 5, 2, 'hi', 'Friday 20th of January 2023 09:30:07 AM', 'unseen'),
+(7, 5, 2, 'hi', 'Friday 20th of January 2023 09:30:31 AM', 'unseen'),
+(8, 5, 1, 'hi', 'Friday 20th of January 2023 09:30:48 AM', 'unseen'),
+(9, 2, 4, 'hi', 'Friday 20th of January 2023 02:19:03 PM', 'unseen'),
+(10, 5, 1, 'dsd', 'Friday 20th of January 2023 02:21:17 PM', 'unseen'),
+(11, 5, 1, 'g', 'Friday 20th of January 2023 02:22:00 PM', 'unseen'),
+(12, 5, 2, 'fdsfsd', 'Friday 20th of January 2023 02:23:36 PM', 'unseen'),
+(13, 5, 1, 'fdsf', 'Friday 20th of January 2023 02:23:54 PM', 'unseen'),
+(14, 5, 1, 'fdf', 'Friday 20th of January 2023 02:24:01 PM', 'unseen'),
+(15, 5, 1, 'fdfd', 'Friday 20th of January 2023 02:24:05 PM', 'unseen'),
+(16, 5, 1, 'fdf', 'Friday 20th of January 2023 02:24:14 PM', 'unseen');
 
 -- --------------------------------------------------------
 
@@ -66,13 +87,13 @@ INSERT INTO `tb_post` (`id`, `user_id`, `post_text`, `media_path`, `date_added`,
 (8, '1', 'Hello How are you', '2133155.webp', 'Tuesday 10th of January 2023 11:04:05 AM', 'image'),
 (9, '1', 'Hello How are you', 'whatsapp dp image6-601.jpg', 'Tuesday 10th of January 2023 11:04:36 AM', 'image'),
 (10, '2', 'Hi how are you', 'Smiley-816x1024.jpg', 'Tuesday 10th of January 2023 11:15:15 AM', 'image'),
-(11, '19', 'Dummy Post', 'images.jpg', 'Monday 16th of January 2023 10:35:24 AM', 'image'),
-(12, '19', 'Hello Test Post', 'images.jpg', 'Monday 16th of January 2023 10:43:23 AM', 'image'),
-(13, '19', '', 'images.jpg', 'Monday 16th of January 2023 10:46:34 AM', 'image'),
 (14, '20', 'Test', 'hater_fr_mass_murder_3993c69b-f8a7-4ad1-97ff-414d7af5182e.png', 'Monday 16th of January 2023 10:46:56 AM', 'image'),
 (15, '21', 'test video', 'video.mp4', 'Monday 16th of January 2023 10:47:16 AM', 'video'),
 (16, '21', 'hi', 'avatar1.png', 'Tuesday 17th of January 2023 07:58:43 AM', 'image'),
-(17, '21', 'hiiii', 'avatar2.png', 'Tuesday 17th of January 2023 08:01:16 AM', 'image');
+(17, '21', 'hiiii', 'avatar2.png', 'Tuesday 17th of January 2023 08:01:16 AM', 'image'),
+(30, '4', 'hi', 'Smiley-816x1024.jpg', 'Wednesday 18th of January 2023 02:56:18 PM', 'image'),
+(31, '5', '', 'Smiley-816x1024.jpg', 'Thursday 19th of January 2023 01:40:36 PM', 'image'),
+(32, '5', '', 'video.mp4', 'Thursday 19th of January 2023 01:41:06 PM', 'video');
 
 -- --------------------------------------------------------
 
@@ -141,7 +162,15 @@ INSERT INTO `tb_reactions` (`id`, `added_by`, `post_id`, `added_comment`, `liked
 (45, 1, 7, '', 1, 'Wednesday 18th of January 2023 06:53:57 AM'),
 (46, 1, 8, '', 1, 'Wednesday 18th of January 2023 06:53:59 AM'),
 (47, 1, 9, '', 1, 'Wednesday 18th of January 2023 06:54:02 AM'),
-(48, 1, 17, '', 1, 'Wednesday 18th of January 2023 06:54:07 AM');
+(48, 1, 17, '', 1, 'Wednesday 18th of January 2023 06:54:07 AM'),
+(49, 4, 1, 'hi', 0, 'Wednesday 18th of January 2023 02:32:54 PM'),
+(50, 4, 1, 'hi hello test comment', 0, 'Wednesday 18th of January 2023 02:36:46 PM'),
+(51, 4, 1, 'hi sallu', 0, 'Wednesday 18th of January 2023 02:37:00 PM'),
+(52, 4, 1, '', 1, 'Wednesday 18th of January 2023 02:38:06 PM'),
+(53, 4, 2, '', 1, 'Wednesday 18th of January 2023 02:38:10 PM'),
+(54, 4, 1, 'Hello', 0, 'Wednesday 18th of January 2023 02:55:36 PM'),
+(55, 4, 8, '', 1, 'Thursday 19th of January 2023 07:27:27 AM'),
+(56, 4, 7, '', 1, 'Thursday 19th of January 2023 07:27:29 AM');
 
 -- --------------------------------------------------------
 
@@ -165,16 +194,16 @@ CREATE TABLE `tb_registration` (
 --
 
 INSERT INTO `tb_registration` (`id`, `name`, `email`, `password`, `phone`, `address`, `gender`, `profile_image`) VALUES
-(1, 'Bholu Singh', 'bholu@mail.com', '25d55ad283aa400af464c76d713c07ad', '8967120155', 'India', 'Male', 'avatar1.png'),
+(1, 'Bholu Singh', 'bholu@mail.com', '25d55ad283aa400af464c76d713c07ad', '8967120155', 'India', 'Male', '2133155.webp'),
 (2, 'mina', 'mina@gmail.com', '25d55ad283aa400af464c76d713c07ad', '8967120155', 'India', 'Female', 'demo.png'),
 (3, 'Sona', 'sona@gmail.com', '25d55ad283aa400af464c76d713c07ad', '8967120155', 'India', 'Female', 'avatar5.png'),
-(4, 'Babu', 'babu@gmail.com', '25d55ad283aa400af464c76d713c07ad', '8967120155', 'Australia', 'Male', 'avatar4.png'),
-(5, 'Ram', 'ram@mail.com', '25d55ad283aa400af464c76d713c07ad', '7889098909', 'London', 'Male', 'avatar1.png'),
+(4, 'Babu Bhaiya', 'babu@gmail.com', '25d55ad283aa400af464c76d713c07ad', '8967120155', 'Australia', 'Female', 'Smiley-816x1024.jpg'),
+(5, 'Ram Singh', 'ram@mail.com', '25d55ad283aa400af464c76d713c07ad', '7889098909', 'London', 'Female', 'avatar6.png'),
 (6, 'Subhas', 'subhas@mail.com', '25d55ad283aa400af464c76d713c07ad', '8967120144', 'America', 'Male', 'demo.png'),
 (19, 'Sayantan Das', 'sayantan.das@ewaycorp.com', '25d55ad283aa400af464c76d713c07ad', '7788998877', 'USA', 'Male', 'avatar5.png'),
 (20, 'Amit Keshri', 'amit.keshri@ewaycorp.com', '25d55ad283aa400af464c76d713c07ad', '8666679873', 'India', 'Male', 'hater_fr_mass_murder_3993c69b-f8a7-4ad1-97ff-414d7af5182e.png'),
 (21, 'Subham Banerjee', 'subham.banerjee@ewaycorp.com', '25d55ad283aa400af464c76d713c07ad', '8967120155', 'India', 'Male', 'brad.jpg'),
-(22, 'Nilakshi roy', 'nilakshi.roy@ewaycorp.com', '25f9e794323b453885f5181f1b624d0b', '9382840170', 'sdfbsabaj', 'Female', 'demo.png');
+(22, 'Nilakshi roy', 'nilakshi.roy@ewaycorp.com', '25d55ad283aa400af464c76d713c07ad', '9382840170', 'India', 'Female', 'demo.png');
 
 -- --------------------------------------------------------
 
@@ -200,8 +229,8 @@ INSERT INTO `tb_request` (`id`, `added_by`, `requested_to`, `status`, `date_of_a
 (3, 1, 4, 'accepted', 'Friday 6th of January 2023 10:56:48 AM'),
 (4, 2, 1, 'accepted', 'Friday 6th of January 2023 02:05:34 PM'),
 (5, 2, 3, 'requested', 'Friday 6th of January 2023 02:05:36 PM'),
-(6, 2, 4, 'requested', 'Friday 6th of January 2023 02:05:37 PM'),
-(7, 2, 5, 'requested', 'Friday 6th of January 2023 02:05:41 PM'),
+(6, 2, 4, 'accepted', 'Friday 6th of January 2023 02:05:37 PM'),
+(7, 2, 5, 'accepted', 'Friday 6th of January 2023 02:05:41 PM'),
 (8, 2, 6, 'requested', 'Friday 6th of January 2023 02:05:42 PM'),
 (9, 3, 1, 'accepted', 'Friday 6th of January 2023 02:06:46 PM'),
 (10, 3, 6, 'requested', 'Friday 6th of January 2023 02:06:48 PM'),
@@ -217,8 +246,19 @@ INSERT INTO `tb_request` (`id`, `added_by`, `requested_to`, `status`, `date_of_a
 (20, 22, 21, 'requested', 'Monday 16th of January 2023 10:45:42 AM'),
 (21, 21, 20, 'accepted', 'Monday 16th of January 2023 11:48:59 AM'),
 (22, 21, 22, 'accepted', 'Monday 16th of January 2023 11:49:00 AM'),
-(23, 1, 5, 'requested', 'Wednesday 18th of January 2023 08:23:51 AM'),
-(24, 1, 6, 'requested', 'Wednesday 18th of January 2023 08:49:12 AM');
+(23, 1, 5, 'accepted', 'Wednesday 18th of January 2023 08:23:51 AM'),
+(24, 1, 6, 'requested', 'Wednesday 18th of January 2023 08:49:12 AM'),
+(25, 1, 19, 'requested', 'Wednesday 18th of January 2023 02:07:59 PM'),
+(26, 1, 21, 'requested', 'Wednesday 18th of January 2023 02:11:09 PM'),
+(27, 1, 22, 'requested', 'Wednesday 18th of January 2023 02:12:47 PM'),
+(28, 4, 2, 'requested', 'Wednesday 18th of January 2023 02:13:03 PM'),
+(29, 4, 3, 'requested', 'Wednesday 18th of January 2023 02:13:04 PM'),
+(30, 4, 5, 'requested', 'Wednesday 18th of January 2023 02:13:04 PM'),
+(31, 4, 19, 'requested', 'Wednesday 18th of January 2023 02:13:05 PM'),
+(32, 4, 6, 'requested', 'Wednesday 18th of January 2023 02:13:06 PM'),
+(33, 4, 20, 'requested', 'Wednesday 18th of January 2023 02:13:06 PM'),
+(34, 4, 22, 'requested', 'Wednesday 18th of January 2023 02:13:07 PM'),
+(35, 4, 21, 'requested', 'Wednesday 18th of January 2023 02:13:08 PM');
 
 --
 -- Indexes for dumped tables
@@ -263,19 +303,19 @@ ALTER TABLE `tb_request`
 -- AUTO_INCREMENT for table `tb_chat`
 --
 ALTER TABLE `tb_chat`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tb_post`
 --
 ALTER TABLE `tb_post`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `tb_reactions`
 --
 ALTER TABLE `tb_reactions`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `tb_registration`
@@ -287,7 +327,7 @@ ALTER TABLE `tb_registration`
 -- AUTO_INCREMENT for table `tb_request`
 --
 ALTER TABLE `tb_request`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
