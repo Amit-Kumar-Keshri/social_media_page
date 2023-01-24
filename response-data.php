@@ -60,7 +60,11 @@ function chat_message_populator($reciever_id, $sender_id){
     if ($result = connect_database()->query($query)) {
         $row_message = $result->fetch_all();
         mysqli_close(connect_database());
+		$status = true;
     }
+	else{
+		$status = false;
+	}
     foreach ($row_message  as $key => $value) {
     	$row_id = $value[0];
     	$row_message = $value[1];
@@ -73,7 +77,11 @@ function chat_message_populator($reciever_id, $sender_id){
     if ($result = connect_database()->query($query)) {
         $row_message = $result->fetch_all();
         mysqli_close(connect_database());
+		$status = true;
     }
+	else{
+		$status = false;
+	}
     foreach ($row_message  as $key => $value) {
     	$row_id = $value[0];
     	$row_message = $value[1];

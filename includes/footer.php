@@ -37,8 +37,6 @@
                         <img class="rounded-circle" src="uploads/<?= $current_user_profile_image; ?>" alt=""
                             style="width: 40px; height: 100%;">
                         <input type="text" class="form-control form-control-lg ms-1" placeholder="Type message">
-                        <a class="ms-1 text-white" href="#!"><i class="fas fa-paperclip"></i></a>
-                        <a class="ms-3 text-white" href="#!"><i class="fas fa-smile"></i></a>
                         <button class="ms-3 text-black chat-send-btn" disabled><i class="fas fa-paper-plane"></i></button>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 var trigger_status = false;
-var custon_url = "https://localhost";
+var custon_url = "http://localhost";
 
 function checkChange($this, index) {
   var regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -285,6 +285,7 @@ jQuery(document).ready(function () {
 
   jQuery(document).on("click", ".btn-accept", function () {
     var sender_id = jQuery(this).attr("data-rqst-sender-id");
+    var pending_request = jQuery(".request-noti").text();
     console.log(sender_id);
     jQuery.ajax({
       url: custon_url + "/social-media/response-data.php",
@@ -298,7 +299,8 @@ jQuery(document).ready(function () {
       success: function (response) {
         console.log(response);
         if (response.status) {
-          console.log("working");
+          pending_request -= 1;
+          jQuery(".request-noti").text(pending_request);
         }
       },
       error: function (xhr, status, error) {
@@ -316,6 +318,8 @@ jQuery(document).ready(function () {
 
   jQuery(document).on("click", ".btn-reject", function () {
     var sender_id = jQuery(this).attr("data-rqst-sender-id");
+    var pending_request = jQuery(".request-noti").text();
+    
     console.log(sender_id);
     jQuery.ajax({
       url: custon_url + "/social-media/response-data.php",
@@ -328,6 +332,9 @@ jQuery(document).ready(function () {
       },
       success: function (response) {
         console.log(response);
+        pending_request -= 1;
+        jQuery(".request-noti").text(pending_request);
+        
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");
