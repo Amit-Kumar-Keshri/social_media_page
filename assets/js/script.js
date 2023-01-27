@@ -76,36 +76,83 @@ function checkChange($this, index) {
   }
 }
 
-function check_msg() {
-  var reciever_id = jQuery("ul.friend-list").find("li.active").attr("data-reciever-id");
-  jQuery.ajax({
-    url: custon_url + "/social-media/response-data.php",
-    type: "POST",
-    cache: false,
-    dataType: "JSON",
-    data: {
-      action: "check_msg",
-      reciever_id: reciever_id,
-    },
-    success: function (response) {
-      console.log(response);
-      if (response.status) {
-        if (jQuery(".chat_box_message").is(":visible")) {
-          jQuery.each(response.message_date, function (index, value) {
-            jQuery(".chat_box_message").append(value);
-          });
-        }else{
-          console.log("working");
-          jQuery(".unseen_msg_badge span").text(response.message_count)
+setInterval(check_msg_badge, 3000);
+
+function check_msg_badge() {
+  console.log("working");
+  var friend_list = jQuery(".chat_window_section ul.friend-list").find("li");
+  friend_list.each(function (idx, li) {
+    var reciever_id = jQuery(li).attr("data-reciever-id");
+    var instance = jQuery(this);
+    console.log(li);
+    jQuery.ajax({
+      url: custon_url + "/social-media/response-data.php",
+      type: "POST",
+      cache: false,
+      dataType: "JSON",
+      data: {
+        action: "check_msg_counter",
+        reciever_id: reciever_id,
+      },
+      success: function (response) {
+        // console.log(response);
+        if (response.status) {
+          console.log(response.message_counter);
+          if (response.message_counter != 0) {
+            jQuery(instance)
+              .find(".unseen_msg_badge")
+              .find("span")
+              .text(response.message_counter);
+          } else {
+            jQuery(instance)
+              .find(".unseen_msg_badge")
+              .find("span")
+              .hide();
+          }
         }
-      }
-    },
-    error: function (xhr, status, error) {
-      console.log(error);
-    },
+      },
+      error: function (xhr, status, error) {
+        console.log(error);
+      },
+    });
   });
 }
-setInterval(check_msg,1000);
+
+setInterval(check_msg, 3000);
+
+function check_msg() {
+  if (jQuery(".chat_window_section ul.friend-list").find("li.active").length) {
+    var reciever_id = jQuery(".chat_window_section ul.friend-list")
+      .find("li.active")
+      .attr("data-reciever-id");
+    jQuery.ajax({
+      url: custon_url + "/social-media/response-data.php",
+      type: "POST",
+      cache: false,
+      dataType: "JSON",
+      data: {
+        action: "check_msg",
+        reciever_id: reciever_id,
+      },
+      success: function (response) {
+        console.log(response);
+        if (response.status && response.message_count > 0) {
+          if (jQuery(".chat_box_message").is(":visible")) {
+            jQuery.each(response.message_data, function (index, value) {
+              jQuery(".chat_box_message").append(value);
+            });
+            jQuery(".chat_box_message").scrollTop(
+              jQuery(".chat_box_message")[0].scrollHeight
+            );
+          }
+        }
+      },
+      error: function (xhr, status, error) {
+        console.log(error);
+      },
+    });
+  }
+}
 
 jQuery(document).ready(function () {
   jQuery(".loading").hide();
@@ -438,12 +485,13 @@ jQuery(document).ready(function () {
           if (response.status) {
             jQuery(".chat_box_message").show();
             jQuery(instance).click(false);
-            var scroll = jQuery(".chat_box_message")[0].scrollHeight;
-            console.log(scroll);
-            jQuery(".chat_box_message").scrollTop(scroll);
+
             jQuery.each(response.message_date, function (index, value) {
               jQuery(".chat_box_message").append(value);
             });
+            jQuery(".chat_box_message").scrollTop(
+              $(".chat_box_message")[0].scrollHeight
+            );
             jQuery(".unseen_msg_badge").hide();
           }
         },
@@ -487,9 +535,12 @@ jQuery(document).ready(function () {
       success: function (response) {
         console.log(response);
         jQuery(".chat_box_message").append(
-          '<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50">' +
+          '<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50 crrnt_user">' +
             chat_request +
             "</p>"
+        );
+        jQuery(".chat_box_message").scrollTop(
+          $(".chat_box_message")[0].scrollHeight
         );
       },
       error: function (xhr, status, error) {

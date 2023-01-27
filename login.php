@@ -21,6 +21,8 @@ if (isset($_POST['login'])) {
     }
 }
 ?>
+
+
 <?php include('includes/header.php'); ?>
 <section class="min-vh-100 gradient">
     <div class="container py-5 h-100">

@@ -39,11 +39,25 @@ if (isset($_POST['action']) && $_POST['action'] == 'msg_populator') {
 if (isset($_POST['action']) && $_POST['action'] == 'check_msg') {
 	check_msg_interval($_POST['reciever_id'], $_COOKIE['login_auth']);
 }
+if (isset($_POST['action']) && $_POST['action'] == 'check_msg_counter') {
+	check_msg_counter($_POST['reciever_id'], $_COOKIE['login_auth']);
+}
 
-
+function check_msg_counter($reciever_id, $sender_id){
+	$count_query = "Select status from tb_chat where sender = '$reciever_id' AND receiver = '$sender_id' AND status = 'unseen'"; 
+	if ($result = connect_database()->query($count_query)) {
+		$result = $result->fetch_all();
+		$status = true;
+    }
+	else{
+		$status = false;
+	}
+	mysqli_close(connect_database());
+	echo json_encode(array('status' => $status, 'message_counter' => count($result)));
+	exit();
+}
 function chat_message_insert($message_data, $reciever_id, $current_user_id){
 	$message_status = "unseen";
-
 	$date_added = date("l jS \of F Y h:i:s A");
 	$insert_query = "INSERT INTO tb_chat (sender, receiver, message, date_added, status) VALUES ('$current_user_id', '$reciever_id', '$message_data', '$date_added', '$message_status')";
 	if ($result = connect_database()->query($insert_query)) {
@@ -106,21 +120,33 @@ function chat_message_populator($reciever_id, $sender_id){
 }
 
 function check_msg_interval($reciever_id, $sender_id){
-	$query = "Select id,message from tb_chat where sender = '$reciever_id' AND receiver = '$sender_id' AND status = 'unseen' ORDER BY id ASC";
-	if ($row_message  = connect_database()->query($query)->fetch_all()) {
-        mysqli_close(connect_database());
-		$status = true;
+	$message_data = [];
+
+	$query = "Select id,message from tb_chat WHERE sender = '$reciever_id' AND receiver = '$sender_id' AND status = 'unseen' ORDER BY id ASC";
+	if ($result = connect_database()->query($query)) {
+		$row_message = $result->fetch_all();
 		$msg_count = count($row_message);
-		foreach ($row_message  as $key => $value) {
-			$row_id = $value[0];
-			$row_message = $value[1];
-			$message_data[$row_id] = '<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50 frnd_user">'.$row_message.'</p>';
+		$status = true;
+		if($msg_count>0) {
+			foreach ($row_message  as $key => $value) {
+				$row_id = $value[0];
+				$row_message = $value[1];
+				$message_data[$row_id] = '<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50 frnd_user">'.$row_message.'</p>';
+			}
+			$update_chat_query = "update tb_chat set status='seen' where sender = '$reciever_id' AND receiver = '$sender_id' ";
+			if ($result  = connect_database()->query($update_chat_query)) {
+				$status = true;
+			}
+		} else {
+			$msg_count = 0;
 		}
-    }
-	else{
+	} else {
 		$status = false;
+		$msg_count = 0;
 	}
-	echo json_encode(array('status' => $status, 'message_date' => $message_data,'message_count' => $msg_count));
+	mysqli_close(connect_database());
+	//echo json_encode(array(, 'message_date' => $message_data));
+	echo json_encode(array('status' => $status, 'message_data' => $message_data, 'message_count' => $msg_count));
 	exit();	
 }
 

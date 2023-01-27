@@ -77,7 +77,7 @@ if (isset($_COOKIE['login_auth'])) {
               <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-plus"></i>
                 <?php $all_data = retrive_all_request($id); ?>
-                <span class="badge rounded-pill badge-notification bg-danger request-noti">
+                <span class="badge rounded-pill badge-notification bg-danger">
                   <?= count($all_data) ?>
                 </span>
               </a>

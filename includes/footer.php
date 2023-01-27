@@ -27,13 +27,12 @@
                                 </div>
                                 <?php
                                 $count = unseen_messgae_counter($value, $_COOKIE['login_auth']);
-                                if(!empty($count)) { ?>
+                                ?>
                                     <div class=" col unseen_msg_badge ">
                                     <span class="badge rounded-pill badge-notification bg-danger">
                                         <?= $count ?>
                                     </span>
                                 </div>
-                             <?php   } ?>
                 
                             </li>
 
