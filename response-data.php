@@ -36,6 +36,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'msg_sent') {
 if (isset($_POST['action']) && $_POST['action'] == 'msg_populator') {
 	chat_message_populator($_POST['reciever_id'], $_COOKIE['login_auth']);
 }
+if (isset($_POST['action']) && $_POST['action'] == 'check_msg') {
+	check_msg_interval($_POST['reciever_id'], $_COOKIE['login_auth']);
+}
 
 
 function chat_message_insert($message_data, $reciever_id, $current_user_id){
@@ -53,7 +56,7 @@ function chat_message_insert($message_data, $reciever_id, $current_user_id){
 	exit();
 }
 function chat_message_populator($reciever_id, $sender_id){
-
+	$message_status = "seen";
 	$message_data = [];
 
 	$query = "Select id,message from tb_chat where sender = '$sender_id' AND receiver = '$reciever_id' ORDER BY id ASC";
@@ -89,8 +92,35 @@ function chat_message_populator($reciever_id, $sender_id){
     }
 
 	ksort($message_data);
-       
-	echo json_encode(array('status' => $message_data));
+
+	$update_query = "update tb_chat set status='$message_status' where sender = '$reciever_id' AND receiver = '$sender_id' AND status = 'unseen'"; 
+	if ($result = connect_database()->query($update_query)) {
+        mysqli_close(connect_database());
+		$status = true;
+    }
+	else{
+		$status = false;
+	} 
+	echo json_encode(array('status' => $status, 'message_date' => $message_data));
+	exit();	
+}
+
+function check_msg_interval($reciever_id, $sender_id){
+	$query = "Select id,message from tb_chat where sender = '$reciever_id' AND receiver = '$sender_id' AND status = 'unseen' ORDER BY id ASC";
+	if ($row_message  = connect_database()->query($query)->fetch_all()) {
+        mysqli_close(connect_database());
+		$status = true;
+		$msg_count = count($row_message);
+		foreach ($row_message  as $key => $value) {
+			$row_id = $value[0];
+			$row_message = $value[1];
+			$message_data[$row_id] = '<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50 frnd_user">'.$row_message.'</p>';
+		}
+    }
+	else{
+		$status = false;
+	}
+	echo json_encode(array('status' => $status, 'message_date' => $message_data,'message_count' => $msg_count));
 	exit();	
 }
 
@@ -128,8 +158,7 @@ function add_like_react_func($post_id, $current_user_id) {
 	exit();
 }
 
-function post_upload_function($post_caption, $post_file, $user_id)
- {
+function post_upload_function($post_caption, $post_file, $user_id){
 	$target_dir = "uploads/posts/";
 	$filename = $post_file["name"];
 	$target_file = $target_dir . $filename;
@@ -163,8 +192,7 @@ function post_upload_function($post_caption, $post_file, $user_id)
 }
 
 
-function mya_fileupload($image_file, $user_id)
-{
+function mya_fileupload($image_file, $user_id){
 	$target_dir = "uploads/";
 	$filename = $image_file["name"];
 	$target_file = $target_dir . $filename;
@@ -183,8 +211,7 @@ function mya_fileupload($image_file, $user_id)
 }
 
 
-function add_as_friend_func($people_id)
-{
+function add_as_friend_func($people_id){
 	$request_status = "requested";
 	$current_user_id = $_COOKIE['login_auth'];
 	$date_added = date("l jS \of F Y h:i:s A");
@@ -198,9 +225,7 @@ function add_as_friend_func($people_id)
 	echo json_encode(array('status' => $status));
 	exit();
 }
-
-function friend_request_accept_helper($sender_id)
-{
+function friend_request_accept_helper($sender_id){
 	$accept_status = "accepted";
 	$current_user_id = $_COOKIE['login_auth'];
 	$update_query = "UPDATE tb_request SET status ='$accept_status' where added_by = '$sender_id' AND requested_to = '$current_user_id'";
@@ -213,8 +238,7 @@ function friend_request_accept_helper($sender_id)
 	echo json_encode(array('status' => $status, 'request_status' => $accept_status));
 	exit();
 }
-function friend_request_reject_helper($sender_id)
-{
+function friend_request_reject_helper($sender_id){
 	$reject_status = "rejected";
 	$current_user_id = $_COOKIE['login_auth'];
 	$update_query = "UPDATE tb_request SET status ='$reject_status' where added_by = '$sender_id' AND requested_to = '$current_user_id'";
@@ -228,8 +252,7 @@ function friend_request_reject_helper($sender_id)
 	exit();
 }
 
-function update_data($name, $email, $phone, $address, $gender, $user_id)
-{	$user_id = $_COOKIE['login_auth'];
+function update_data($name, $email, $phone, $address, $gender, $user_id){	$user_id = $_COOKIE['login_auth'];
 	$update_query = "UPDATE tb_registration SET name = '$name', email='$email', phone='$phone', address='$address', gender='$gender' where id = '$user_id'";
 	if ($result = connect_database()->query($update_query)) {
 		$status = true;

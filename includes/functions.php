@@ -214,3 +214,16 @@ function like_count($post_id)
     $count = count($result);
     return $count;
 }
+
+
+function unseen_messgae_counter($reciever_id, $sender_id){
+    $count_query = "Select status from tb_chat where sender = '$reciever_id' AND receiver = '$sender_id' AND status = 'unseen'"; 
+	if ($result = connect_database()->query($count_query)->fetch_all()) {
+        mysqli_close(connect_database());
+        $status = count($result);
+    }
+	else{
+		$status = false;
+	}
+    return $status; 
+}

@@ -76,6 +76,37 @@ function checkChange($this, index) {
   }
 }
 
+function check_msg() {
+  var reciever_id = jQuery("ul.friend-list").find("li.active").attr("data-reciever-id");
+  jQuery.ajax({
+    url: custon_url + "/social-media/response-data.php",
+    type: "POST",
+    cache: false,
+    dataType: "JSON",
+    data: {
+      action: "check_msg",
+      reciever_id: reciever_id,
+    },
+    success: function (response) {
+      console.log(response);
+      if (response.status) {
+        if (jQuery(".chat_box_message").is(":visible")) {
+          jQuery.each(response.message_date, function (index, value) {
+            jQuery(".chat_box_message").append(value);
+          });
+        }else{
+          console.log("working");
+          jQuery(".unseen_msg_badge span").text(response.message_count)
+        }
+      }
+    },
+    error: function (xhr, status, error) {
+      console.log(error);
+    },
+  });
+}
+setInterval(check_msg,1000);
+
 jQuery(document).ready(function () {
   jQuery(".loading").hide();
   jQuery(".updateProfileBtn").prop("disabled", true);
@@ -319,7 +350,7 @@ jQuery(document).ready(function () {
   jQuery(document).on("click", ".btn-reject", function () {
     var sender_id = jQuery(this).attr("data-rqst-sender-id");
     var pending_request = jQuery(".request-noti").text();
-    
+
     console.log(sender_id);
     jQuery.ajax({
       url: custon_url + "/social-media/response-data.php",
@@ -334,7 +365,6 @@ jQuery(document).ready(function () {
         console.log(response);
         pending_request -= 1;
         jQuery(".request-noti").text(pending_request);
-        
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");
@@ -385,11 +415,15 @@ jQuery(document).ready(function () {
     jQuery(".chat_window_section").slideToggle();
   });
 
-  jQuery(document).on("click", ".chat_window_section > ul.friend-list > li", function () {
+  jQuery(document).on(
+    "click",
+    ".chat_window_section > ul.friend-list > li",
+    function () {
       var reciever_id = jQuery(this).attr("data-reciever-id");
       jQuery(this).parent("ul.friend-list").find("li").not(this).hide();
       jQuery(this).addClass("active");
       jQuery(".chat_box").slideDown();
+      var instance = jQuery(this);
       jQuery.ajax({
         url: custon_url + "/social-media/response-data.php",
         type: "POST",
@@ -401,10 +435,17 @@ jQuery(document).ready(function () {
         },
         success: function (response) {
           console.log(response);
-          jQuery(".chat_box_message").show();
-          jQuery.each(response.status, function (index, value) {
-            jQuery(".chat_box_message").append(value);
-          });
+          if (response.status) {
+            jQuery(".chat_box_message").show();
+            jQuery(instance).click(false);
+            var scroll = jQuery(".chat_box_message")[0].scrollHeight;
+            console.log(scroll);
+            jQuery(".chat_box_message").scrollTop(scroll);
+            jQuery.each(response.message_date, function (index, value) {
+              jQuery(".chat_box_message").append(value);
+            });
+            jQuery(".unseen_msg_badge").hide();
+          }
         },
         error: function (xhr, status, error) {
           //var err = eval("(" + xhr.responseText + ")");
@@ -414,7 +455,7 @@ jQuery(document).ready(function () {
     }
   );
 
-  jQuery(document).on("input",".chat_box input", function () {
+  jQuery(document).on("input", ".chat_box input", function () {
     if (jQuery(this).val() !== "") {
       jQuery(".chat-send-btn ").prop("disabled", false);
     } else {
@@ -424,7 +465,9 @@ jQuery(document).ready(function () {
 
   jQuery(document).on("click", ".chat-send-btn", function () {
     var chat_request = jQuery(this).parents(".chat_box").find("input").val();
-    var reciever_id = jQuery("ul.friend-list").find("li.active").attr("data-reciever-id");
+    var reciever_id = jQuery("ul.friend-list")
+      .find("li.active")
+      .attr("data-reciever-id");
     jQuery(this).parents(".chat_box").find("input").val("");
     jQuery(".chat-send-btn").prop("disabled", true);
 
@@ -443,7 +486,11 @@ jQuery(document).ready(function () {
       },
       success: function (response) {
         console.log(response);
-        jQuery(".chat_box_message").append('<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50">' +chat_request +"</p>");
+        jQuery(".chat_box_message").append(
+          '<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50">' +
+            chat_request +
+            "</p>"
+        );
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");
@@ -467,17 +514,12 @@ jQuery(document).ready(function () {
     sessionStorage.setItem("previous-state", jQuery(this).html());
   });
 
-
-
-
   // jQuery("#back-button").click(function() {
   //   jQuery(".chat_window_section").html(jQuery(".chat_window_section").data("previous-state"));
   // });
-  
+
   // //save the current state of the div
   // jQuery(".chat_window_section").click(function() {
   //   jQuery(this).data("previous-state", jQuery(this).html());
   // });
-
-
 });

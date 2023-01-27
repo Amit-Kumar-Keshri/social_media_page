@@ -855,7 +855,7 @@ input.post-comment1 {
 }
 
 .chat_box_message {
-  max-height: 300px;
+  height: 300px;
   overflow-y: scroll;
   /* background: #fff; */
   
