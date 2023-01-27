@@ -84,7 +84,6 @@ function check_msg_badge() {
   friend_list.each(function (idx, li) {
     var reciever_id = jQuery(li).attr("data-reciever-id");
     var instance = jQuery(this);
-    console.log(li);
     jQuery.ajax({
       url: custon_url + "/social-media/response-data.php",
       type: "POST",
@@ -104,10 +103,7 @@ function check_msg_badge() {
               .find("span")
               .text(response.message_counter);
           } else {
-            jQuery(instance)
-              .find(".unseen_msg_badge")
-              .find("span")
-              .hide();
+            jQuery(instance).find(".unseen_msg_badge").find("span").hide();
           }
         }
       },
@@ -536,8 +532,8 @@ jQuery(document).ready(function () {
         console.log(response);
         jQuery(".chat_box_message").append(
           '<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50 crrnt_user">' +
-            chat_request +
-            "</p>"
+          chat_request +
+          "</p>"
         );
         jQuery(".chat_box_message").scrollTop(
           $(".chat_box_message")[0].scrollHeight

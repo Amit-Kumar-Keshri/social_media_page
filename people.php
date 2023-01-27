@@ -25,7 +25,7 @@ if (!isset($_COOKIE['login_auth'])) {
       <div class="col-lg-12">
         <div class="d-flex flex-wrap justify-content-center">
           <?php
-          $all_data = retrive_all_data();
+          $all_data = retrive_all_people();
 
           $already_added_user = all_added_users($_COOKIE['login_auth']);
 

@@ -99,7 +99,7 @@ function retrive_data($id)
 
 
 // }
-function retrive_all_data()
+function retrive_all_people()
 {
     $query = "Select * from tb_registration";
     $result = connect_database()->query($query);
