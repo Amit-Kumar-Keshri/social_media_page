@@ -98,6 +98,7 @@ function check_msg_badge() {
         if (response.status) {
           console.log(response.message_counter);
           if (response.message_counter != 0) {
+            jQuery(instance).find(".unseen_msg_badge").find("span").show();
             jQuery(instance)
               .find(".unseen_msg_badge")
               .find("span")
@@ -504,6 +505,46 @@ jQuery(document).ready(function () {
       jQuery(".chat-send-btn ").prop("disabled", false);
     } else {
       jQuery(".chat-send-btn").prop("disabled", true);
+    }
+  });
+  jQuery(document).on("keypress", ".chat_box input", function (e) {
+    if (e.which == 13) {
+      var chat_request = jQuery(this).parents(".chat_box").find("input").val();
+      var reciever_id = jQuery("ul.friend-list")
+        .find("li.active")
+        .attr("data-reciever-id");
+      jQuery(this).parents(".chat_box").find("input").val("");
+      jQuery(".chat-send-btn").prop("disabled", true);
+  
+      console.log(chat_request);
+      console.log(reciever_id);
+  
+      jQuery.ajax({
+        url: custon_url + "/social-media/response-data.php",
+        type: "POST",
+        cache: false,
+        dataType: "JSON",
+        data: {
+          action: "msg_sent",
+          message_data: chat_request,
+          reciever_id: reciever_id,
+        },
+        success: function (response) {
+          console.log(response);
+          jQuery(".chat_box_message").append(
+            '<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50 crrnt_user">' +
+            chat_request +
+            "</p>"
+          );
+          jQuery(".chat_box_message").scrollTop(
+            $(".chat_box_message")[0].scrollHeight
+          );
+        },
+        error: function (xhr, status, error) {
+          //var err = eval("(" + xhr.responseText + ")");
+          console.log(error);
+        },
+      });
     }
   });
 
