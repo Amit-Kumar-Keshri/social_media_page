@@ -960,7 +960,7 @@ input.post-comment1 {
 
 
 .friend-list.comments img{
-  height: auto;
+  height: 48px;
   width: 48px;
 }
 
