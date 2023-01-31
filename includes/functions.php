@@ -227,3 +227,11 @@ function unseen_messgae_counter($reciever_id, $sender_id){
 	}
     return $status; 
 }
+
+function retrive_post($post_id){
+    $query = "Select * from tb_post where id='$post_id'";
+    $result = connect_database()->query($query);
+    mysqli_close(connect_database());
+    $row = $result->fetch_assoc();
+    return $row;
+}

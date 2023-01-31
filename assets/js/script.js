@@ -269,6 +269,8 @@ jQuery(document).ready(function () {
     console.log(post_caption);
 
     jQuery.ajax({
+
+      
       url: custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
@@ -281,12 +283,25 @@ jQuery(document).ready(function () {
         if (response.status) {
           jQuery(".loading").hide();
           jQuery(".close_modal").click();
+          jQuery(".progress-bar").css("width", "0");
         }
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");
         console.log(error);
       },
+      xhr: function() {
+        var xhr = new window.XMLHttpRequest();
+        xhr.upload.addEventListener("progress", function(evt) {
+            if (evt.lengthComputable) {
+                var percentComplete = Math.round((evt.loaded / evt.total) * 100);
+                jQuery(".progress-bar").attr("aria-valuenow", percentComplete);
+                jQuery(".progress-bar").text(percentComplete)
+                jQuery(".progress-bar").css("width", percentComplete+"%");
+            }
+        }, false);
+        return xhr;
+    },
     });
   });
 
@@ -459,10 +474,7 @@ jQuery(document).ready(function () {
     jQuery(".chat_window_section").slideToggle();
   });
 
-  jQuery(document).on(
-    "click",
-    ".chat_window_section > ul.friend-list > li",
-    function () {
+  jQuery(document).on("click",".chat_window_section > ul.friend-list > li",function () {
       var reciever_id = jQuery(this).attr("data-reciever-id");
       jQuery(this).parent("ul.friend-list").find("li").not(this).hide();
       jQuery(this).addClass("active");
@@ -597,17 +609,13 @@ jQuery(document).ready(function () {
     );
   });
 
-  //save the current state of the div
   jQuery(".chat_window_section").click(function () {
     sessionStorage.setItem("previous-state", jQuery(this).html());
   });
 
-  // jQuery("#back-button").click(function() {
-  //   jQuery(".chat_window_section").html(jQuery(".chat_window_section").data("previous-state"));
-  // });
-
-  // //save the current state of the div
-  // jQuery(".chat_window_section").click(function() {
-  //   jQuery(this).data("previous-state", jQuery(this).html());
-  // });
+  jQuery(document).on("click",".share-button", function(){
+    var post_id = jQuery(this).attr("data-post-id");
+    var post_link = "sharepost.php?" + "post-id=" + post_id;
+    window.location.href= post_link;
+  });
 });

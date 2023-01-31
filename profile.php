@@ -245,15 +245,12 @@ $profile_image = $row['profile_image'];
                     <form class="w-100">
                         <textarea class="form-control post_caption" placeholder="enter your thoughts here..."></textarea>
                         <input type="file" class="form-control mt-3 post_file" id="post_file" name="post_file" placeholder="Upload Your Media" />
-                        <div class="loading">
-                            <div class="box">
-                                <div class="loader"><span></span></div>
-                                <div class="loader"><span></span></div>
-                                <div class="loader"><i></i></div>
-                                <div class="loader"><i></i></div>
-                            </div>
-                        </div>
-                        <!-- <progress id="fileProgress" style="display: none"></progress> -->
+                        <div class="progress" style="height: 20px;">
+  <div class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+                        
+
+        
                     </form>
                 </div>
                 <div class="modal-footer">
