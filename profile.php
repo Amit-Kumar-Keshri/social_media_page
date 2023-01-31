@@ -91,19 +91,19 @@ $profile_image = $row['profile_image'];
                         <div class="tab-pane fade active show" id="profile-friends">
                             <?php $all_friends = all_added_users($active_user_id);
                             if (isset($_GET['view_user']) && $_GET['view_user'] != $_COOKIE["login_auth"]) { ?>
-                                <div class="m-b-10"><b>Friend List (<?= count($all_friends); ?>)</b></div>
+                                <div class="m-b-10"><b>Friends (<?= count($all_friends); ?>)</b></div>
                             <?php  } else { ?>
-                                <div class="m-b-10"><b>Friend List (<?= count($all_friends) - 1; ?>)</b></div>
+                                <div class="m-b-10"><b>Friends (<?= count($all_friends) - 1; ?>)</b></div>
                             <?php } ?>
-                            <ul class="friend-list clearfix d-flex flex-wrap">
+                            <ul class="friend-list clearfix row">
                                 <?php
                                 foreach ($all_friends as $key => $value) {
                                     if ($value != $active_user_id) {
                                         $row = retrive_data($value);
                                 ?>
-                                        <li class="py-1 pe-1">
+                                        <li class="py-1 pe-1 col-md-6">
                                             <a href="profile.php?view_user=<?= $row['id']; ?>" class="d-flex bg-white">
-                                                <div class="friend-img"><img src="uploads/<?= $row['profile_image'] ?>" alt="photo" /></div>
+                                                <div class="friend-img"><img src="uploads/<?= $row['profile_image'] ?>" alt="photo" height="48" width="48" /></div>
                                                 <div class="friend-info mx-3">
                                                     <h4>
                                                         <?= $row['name']; ?>
@@ -146,7 +146,7 @@ $profile_image = $row['profile_image'];
                                 foreach ($all_user_post as $key => $value) {
                                 ?>
                                     <?php if ($value[5] == 'video') { ?>
-                                        <iframe width="320" height="240" src="uploads/posts/<?= $value[3]; ?>" autoplay="false">
+                                        <iframe width="auto" height="240" src="uploads/posts/<?= $value[3]; ?>" autoplay="false">
                                         </iframe>
                                     <?php } ?>
                                 <?php } ?>
@@ -162,8 +162,8 @@ $profile_image = $row['profile_image'];
                                 foreach ($all_user_post as $key => $value) {
                                 ?>
                                     <?php if ($value[5] == 'image') { ?>
-                                        <div class="d-inline-block">
-                                            <img width="320" height="240" src="uploads/posts/<?= $value[3]; ?>" alt="">
+                                        <div class="d-md-inline-block mt-2">
+                                            <img height="320" src="uploads/posts/<?= $value[3]; ?>" alt="" style="width: 100%;">
                                         </div>
                                     <?php } ?>
                                 <?php } ?>
@@ -245,7 +245,7 @@ $profile_image = $row['profile_image'];
                     <form class="w-100">
                         <textarea class="form-control post_caption" placeholder="enter your thoughts here..."></textarea>
                         <input type="file" class="form-control mt-3 post_file" id="post_file" name="post_file" placeholder="Upload Your Media" />
-                        <div class="progress" style="height: 20px;">
+                        <div class="mt-3 progress" style="height: 20px;display: none;">
   <div class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
                         

@@ -255,7 +255,7 @@ jQuery(document).ready(function () {
   });
 
   jQuery(document).on("click", ".postUploadBtn", function () {
-    jQuery(".loading").show();
+    jQuery(".progress").show();
     var post_file = jQuery(".post_file")[0].files;
     var post_caption = jQuery(".post_caption").val();
 
@@ -281,7 +281,7 @@ jQuery(document).ready(function () {
       success: function (response) {
         console.log(response);
         if (response.status) {
-          jQuery(".loading").hide();
+          jQuery(".progress").hide();
           jQuery(".close_modal").click();
           jQuery(".progress-bar").css("width", "0");
         }

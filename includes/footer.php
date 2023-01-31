@@ -19,7 +19,10 @@
                             ?>
                             <li class="row align-items-center p-3 user" data-reciever-id="<?= $row['id']; ?>">
                                 <div class=" col-4 w-auto friend-img rounded-circle gx-3"><img class="rounded-circle"
-                                        src="uploads/<?= $row['profile_image'] ?>" alt="user profile photo" /></div>
+                                        src="uploads/<?= $row['profile_image'] ?>" alt="user profile photo" />
+                                        <span class="badge rounded-pill badge-notification bg-danger">
+                                        <?= $count ?>
+                                    </span></div>
                                 <div class="col friend-info">
                                     <h4 class="m-0">
                                         <?= $row['name']; ?>
@@ -29,9 +32,7 @@
                                 $count = unseen_messgae_counter($value, $_COOKIE['login_auth']);
                                 ?>
                                     <div class=" col unseen_msg_badge ">
-                                    <span class="badge rounded-pill badge-notification bg-danger">
-                                        <?= $count ?>
-                                    </span>
+                                    
                                 </div>
                 
                             </li>

@@ -181,8 +181,7 @@ ul.friend-list {
 
 ul.friend-list li {
   list-style-type: none;
-  display: flex;
-  align-items: center;
+  
 }
 
 ul.friend-list li:hover {
@@ -631,7 +630,7 @@ iframe.post-video video {
 }
 .friend-list > li {
  
-  width: auto;
+ 
   cursor: pointer;
 }
 .friend-list > li > a {
@@ -1020,4 +1019,9 @@ p.crrnt_user {
 p.frnd_user {
     background: #63d063 !important;
     float: right;
+}
+@media(max-width:576px){
+  .profile-container .friend-list li{
+   width:100%;
+  }
 }
