@@ -96,7 +96,7 @@ if (isset($_COOKIE['login_auth'])) {
                     <li class="m-3 user_item bg-light rounded-5 p-2">
                       <div class="row align-items-center">
                         <div class="col-4 w-auto">
-                          <img src="uploads/<?= $sender_profile_image ?>" class="img-fluid rounded-circle" alt="" height="50" width="50">
+                          <img src="uploads/<?= $sender_profile_image ?>" class="img-fluid rounded-circle" alt="" height="60" width="60">
                         </div>
                         <div class="col-8 ms-3">
                           <div class="row">
@@ -130,7 +130,7 @@ if (isset($_COOKIE['login_auth'])) {
             <!-- Avatar -->
             <div class="dropdown">
               <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                <img src="uploads/<?= $current_user_profile_image ?>" class="rounded-circle header-profile-image" height="20" width="20" alt="<?= $profile_name; ?>" loading="lazy" />
+                <img src="uploads/<?= $current_user_profile_image ?>" class="rounded-circle header-profile-image" height="25" alt="<?= $profile_name; ?>" loading="lazy" />
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                 <li>

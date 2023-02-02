@@ -1,7 +1,7 @@
 <div class="container">
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <div class="col-md-4 d-flex align-items-center">
-            <span class="mb-3 mb-md-0 text-white">&copy; 2023 Social Media Company, Inc</span>
+            <span class="mb-3 mb-md-0 text-dark">&copy; 2023 Social Media Company, Inc</span>
         </div>
     </footer>
     <?php if (!isset($_GET['logout']) && isset($_COOKIE["login_auth"])) { ?>
@@ -17,24 +17,19 @@
                         if ($value != $_COOKIE['login_auth']) {
                             $row = retrive_data($value);
                             ?>
+                            <?php
+                            $count = unseen_messgae_counter($value, $_COOKIE['login_auth']);
+                            ?>
                             <li class="row align-items-center p-3 user" data-reciever-id="<?= $row['id']; ?>">
-                                <div class=" col-4 w-auto friend-img rounded-circle gx-3"><img class="rounded-circle"
-                                        src="uploads/<?= $row['profile_image'] ?>" alt="user profile photo" />
-                                        <span class="badge rounded-pill badge-notification bg-danger">
-                                        <?= $count ?>
-                                    </span></div>
+                                <div class=" col-4 w-auto friend-img rounded-circle gx-3 ">
+                                    <img class="rounded-circle" src="uploads/<?= $row['profile_image'] ?>" alt="user profile photo" />
+                                    <span class="badge rounded-pill badge-notification bg-danger unseen_msg_badge"><?= $count ?></span>
+                                </div>
                                 <div class="col friend-info">
                                     <h4 class="m-0">
                                         <?= $row['name']; ?>
                                     </h4>
                                 </div>
-                                <?php
-                                $count = unseen_messgae_counter($value, $_COOKIE['login_auth']);
-                                ?>
-                                    <div class=" col unseen_msg_badge ">
-                                    
-                                </div>
-                
                             </li>
 
                         <?php } ?>

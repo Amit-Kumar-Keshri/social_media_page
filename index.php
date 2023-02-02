@@ -68,7 +68,7 @@ include('includes/header.php');
                                     <button type="button" class="btn btn-secondary share-button" data-post-id="<?= $value[0]; ?>"><i class="fa-solid fa-share"></i>Share</button>
                                 </div>
                                 <div class="col-12 mt-3 ">
-                                    <div class="post-comment">
+                                    <div class="post-comment" style="display: none;">
                                         <div class="post-comment-sec">
                                             <input type="text" class="form-control post-comment1" id="comment" name="comment" placeholder="Write a Comment" />
                                             <a class="comment-send" post-id="<?= $value[0]; ?>"><img class="send-btn-icon" src="assets/images/send.png" alt=""></a>

@@ -1,5 +1,5 @@
 var trigger_status = false;
-var custon_url = "http://localhost";
+var custon_url = "https://pws-translate.dvlpsite.com";
 
 function checkChange($this, index) {
   var regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -98,13 +98,12 @@ function check_msg_badge() {
         if (response.status) {
           console.log(response.message_counter);
           if (response.message_counter != 0) {
-            jQuery(instance).find(".unseen_msg_badge").find("span").show();
+            jQuery(instance).find(".unseen_msg_badge").show();
             jQuery(instance)
               .find(".unseen_msg_badge")
-              .find("span")
               .text(response.message_counter);
           } else {
-            jQuery(instance).find(".unseen_msg_badge").find("span").hide();
+            jQuery(instance).find(".unseen_msg_badge").hide();
           }
         }
       },
@@ -215,6 +214,7 @@ jQuery(document).ready(function () {
       .parents(".panel-default")
       .find(".post-comment1")
       .val();
+      var instance = jQuery(this);
     console.log(comment_data);
     jQuery.ajax({
       url: custon_url + "/social-media/response-data.php",
@@ -244,7 +244,7 @@ jQuery(document).ready(function () {
         comment_html += "<p>" + comment_data + "</p>";
         comment_html += "</div>";
         comment_html += "</a>";
-        jQuery(".comment-boxes").append(comment_html);
+        jQuery(instance).parents(".post-comment").find(".comment-boxes").append(comment_html);
         jQuery(".post-comment1").val("");
       },
       error: function (xhr, status, error) {
