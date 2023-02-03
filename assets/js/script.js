@@ -376,6 +376,7 @@ jQuery(document).ready(function () {
   jQuery(document).on("click", ".btn-accept", function () {
     var sender_id = jQuery(this).attr("data-rqst-sender-id");
     var pending_request = jQuery(".request-noti").text();
+    var instance = jQuery(this);
     console.log(sender_id);
     jQuery.ajax({
       url: custon_url + "/social-media/response-data.php",
@@ -391,6 +392,7 @@ jQuery(document).ready(function () {
         if (response.status) {
           pending_request -= 1;
           jQuery(".request-noti").text(pending_request);
+          jQuery(instance).parents("li.user_item").hide();
         }
       },
       error: function (xhr, status, error) {
@@ -398,7 +400,6 @@ jQuery(document).ready(function () {
         console.log(error);
       },
     });
-    jQuery(this).parents("li.user_item").hide();
   });
 
   jQuery(document).on("click", ".comment-btn", function () {
@@ -409,7 +410,7 @@ jQuery(document).ready(function () {
   jQuery(document).on("click", ".btn-reject", function () {
     var sender_id = jQuery(this).attr("data-rqst-sender-id");
     var pending_request = jQuery(".request-noti").text();
-
+    var instance = jQuery(this);
     console.log(sender_id);
     jQuery.ajax({
       url: custon_url + "/social-media/response-data.php",
@@ -424,6 +425,7 @@ jQuery(document).ready(function () {
         console.log(response);
         pending_request -= 1;
         jQuery(".request-noti").text(pending_request);
+        jQuery(instance).parents("li.user_item").hide();
       },
       error: function (xhr, status, error) {
         //var err = eval("(" + xhr.responseText + ")");

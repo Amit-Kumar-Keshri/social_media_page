@@ -33,7 +33,7 @@ include('includes/header.php');
                                 <?= $address ?>
                             </div>
                         </div>
-                        <div class="panel-body d-flex justify-content-center flex-column post_media">
+                        <div class="panel-body d-flex justify-content-center flex-column ">
                             <?php if (!empty($value[2]) && $value[5] == "image") { ?>
                                 <p>
                                     <?= $value[2] ?>

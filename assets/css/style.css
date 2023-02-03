@@ -1019,4 +1019,15 @@ p.frnd_user {
   .profile-container .friend-list li{
    width:100%;
   }
+  .chat_window_section{
+    right:18px;
+    width:250px;
+  }
+  .chat-list-toggler{
+    right:18px;
+    width:250px;
+  }
+  .chat_box .img-mobile-view{
+    display:none;
+  }
 }

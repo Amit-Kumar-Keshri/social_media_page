@@ -22,7 +22,7 @@
                             ?>
                             <li class="row align-items-center p-3 user" data-reciever-id="<?= $row['id']; ?>">
                                 <div class=" col-4 w-auto friend-img rounded-circle gx-3 ">
-                                    <img class="rounded-circle" src="uploads/<?= $row['profile_image'] ?>" alt="user profile photo" />
+                                    <img class="rounded-circle " src="uploads/<?= $row['profile_image'] ?>" alt="user profile photo" />
                                     <span class="badge rounded-pill badge-notification bg-danger unseen_msg_badge"><?= $count ?></span>
                                 </div>
                                 <div class="col friend-info">
@@ -39,7 +39,7 @@
                 </div>
                 <div class="chat_box" style="display: none;">
                     <div class=" d-flex justify-content-start align-items-center p-3  border-0">
-                        <img class="rounded-circle" src="uploads/<?= $current_user_profile_image; ?>" alt=""
+                        <img class="rounded-circle img-mobile-view" src="uploads/<?= $current_user_profile_image; ?>" alt=""
                             style="width: 40px; height: 100%;">
                         <input type="text" class="form-control form-control-lg ms-1" placeholder="Type message">
                         <button class="ms-3 text-black chat-send-btn" disabled><i class="fas fa-paper-plane"></i></button>

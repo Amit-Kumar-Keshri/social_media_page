@@ -39,17 +39,16 @@ if (isset($_GET['post-id'])) {
                             <?php if (!empty($post_details['post_text']) && $post_details['file_type'] == "image") { ?>
                                 <p>
                                     <?= $post_details['post_text'] ?>
-                                </p>
-                                <img src="uploads/posts/<?= $post_details['media_path'] ?>" class="img-responsive img-fluid post_media">
+                                </p>img-responsive img-fluid">
                             <?php } elseif (!empty($post_details['post_text']) && $post_details['file_type'] == "video") { ?>
                                 <p>
                                     <?= $post_details['post_text'] ?>
                                 </p>
-                                <iframe src="uploads/posts/<?= $post_details['media_path'] ?>" height="320" width="500" class="post_media" frameborder="0" autoplay="false" controls></iframe>
+                                <iframe src="uploads/posts/<?= $post_details['media_path'] ?>" height="320" width="500" frameborder="0" autoplay="false" controls></iframe>
                             <?php } elseif (empty($post_details['post_text']) && $post_details['file_type'] == "image") { ?>
-                                <img src="uploads/posts/<?= $post_details['media_path'] ?>" class="img-responsive img-fluid post_media">
+                                <img src="uploads/posts/<?= $post_details['media_path'] ?>" class=" img-fluid ">
                             <?php } elseif (empty($post_details['post_text']) && $post_details['file_type'] == "video") { ?>
-                                <iframe src="uploads/posts/<?= $post_details['media_path'] ?>" height="320" width="500" class="post_media" frameborder="0" autoplay="false" controls></iframe>
+                                <iframe src="uploads/posts/<?= $post_details['media_path'] ?>" height="320" width="500" frameborder="0" autoplay="false" controls></iframe>
                             <?php } ?>
                         </div>
                         <div class="panel-footer my-3">
