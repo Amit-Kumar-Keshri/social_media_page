@@ -54,10 +54,15 @@ if (isset($_GET['post-id'])) {
                         </div>
                         <div class="panel-footer my-3">
                             <div class="row ">
-                                <div class="col text-center liked_sec">                                 
+                                <div class="col text-center liked_sec"> 
+                                    <?php if(isset($_COOKIE['login_auth']) && !check_if_already_liked($_GET['post-id'])) {
+                                        ?>  
+                                        <button type="button" class="btn btn-secondary liked-btn" value="LIKE" post-id="<?= $value[0]; ?>"><i class="fa-solid fa-thumbs-up"></i>Like</button> 
+                                        <?php }else { ?>                             
                                         <span class="badge rounded-pill badge-notification-button bg-danger">
-                                            <?php echo $count = like_count($post_details['id']) ?> People Liked
+                                            <?php echo $count = like_count($_GET['post-id']) ?> People Liked
                                         </span>
+                                        <?php } ?>
                                 </div>
                                 <div class="col text-center">
                                     <button type="button" class="btn btn-secondary comment-btn"><i class="fa-solid fa-comment"></i>Comment</button>
@@ -66,8 +71,11 @@ if (isset($_GET['post-id'])) {
                                 <div class="col-12 mt-3 ">
                                     <div class="post-comment">
                                         <div class="post-comment-sec">
+                                        <?php if(isset($_COOKIE['login_auth']) && !check_if_already_liked($_GET['post-id'])) {
+                                        ?>  
                                             <input type="text" class="form-control post-comment1" id="comment" name="comment" placeholder="Write a Comment" />
                                             <a class="comment-send" post-id="<?= $post_details['id']; ?>"><img class="send-btn-icon" src="assets/images/send.png" alt=""></a>
+                                            <?php } ?>
                                         </div>
                                         <div class="mt-3 ms-3 comment-boxes d-flex flex-column">
                                             <?php

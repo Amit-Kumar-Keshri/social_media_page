@@ -33,21 +33,21 @@ include('includes/header.php');
                                 <?= $address ?>
                             </div>
                         </div>
-                        <div class="panel-body d-flex justify-content-center flex-column">
+                        <div class="panel-body d-flex justify-content-center flex-column post_media">
                             <?php if (!empty($value[2]) && $value[5] == "image") { ?>
                                 <p>
                                     <?= $value[2] ?>
                                 </p>
-                                <img src="uploads/posts/<?= $value[3] ?>" class="img-responsive img-fluid post_media">
+                                <img src="uploads/posts/<?= $value[3] ?>" class=" img-fluid ">
                             <?php } elseif (!empty($value[2]) && $value[5] == "video") { ?>
                                 <p>
                                     <?= $value[2] ?>
                                 </p>
-                                <iframe src="uploads/posts/<?= $value[3] ?>" height="320" width="500" class="post_media" frameborder="0" autoplay="false" controls></iframe>
+                                <iframe src="uploads/posts/<?= $value[3] ?>" height="320" frameborder="0" autoplay="false" controls></iframe>
                             <?php } elseif (empty($value[2]) && $value[5] == "image") { ?>
-                                <img src="uploads/posts/<?= $value[3] ?>" class="img-responsive img-fluid post_media">
+                                <img src="uploads/posts/<?= $value[3] ?>" class="img-fluid">
                             <?php } elseif (empty($value[2]) && $value[5] == "video") { ?>
-                                <iframe src="uploads/posts/<?= $value[3] ?>" height="320" width="500" class="post_media" frameborder="0" autoplay="false" controls></iframe>
+                                <iframe src="uploads/posts/<?= $value[3] ?>" height="320" frameborder="0" autoplay="false" controls></iframe>
                             <?php } ?>
                         </div>
                         <div class="panel-footer my-3">

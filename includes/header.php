@@ -45,7 +45,7 @@ if (isset($_COOKIE['login_auth'])) {
 
   <header>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
       <!-- Container wrapper -->
       <div class="container-fluid">
         <!-- Toggle button -->
@@ -56,7 +56,7 @@ if (isset($_COOKIE['login_auth'])) {
         <!-- Collapsible wrapper -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Navbar brand -->
-          <a class="navbar-brand mt-2 mt-lg-0" href="https://pws-translate.dvlpsite.com/social-media/">
+          <a class="navbar-brand mt-2 mt-sm-0" href="https://pws-translate.dvlpsite.com/social-media/">
             Social Media
           </a>
         </div>

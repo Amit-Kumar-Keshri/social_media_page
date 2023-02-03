@@ -1,5 +1,5 @@
 var trigger_status = false;
-var custon_url = "https://pws-translate.dvlpsite.com";
+var custon_url = "http://localhost";
 
 function checkChange($this, index) {
   var regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;

@@ -101,7 +101,7 @@ $profile_image = $row['profile_image'];
                                     if ($value != $active_user_id) {
                                         $row = retrive_data($value);
                                 ?>
-                                        <li class="py-1 pe-1 col-md-6">
+                                        <li class="py-1 pe-1 col-sm-6">
                                             <a href="profile.php?view_user=<?= $row['id']; ?>" class="d-flex bg-white">
                                                 <div class="friend-img"><img src="uploads/<?= $row['profile_image'] ?>" alt="photo" height="48" width="48" /></div>
                                                 <div class="friend-info mx-3">
