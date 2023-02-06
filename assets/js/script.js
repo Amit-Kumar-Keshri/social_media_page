@@ -1,5 +1,5 @@
 var trigger_status = false;
-var custon_url = "http://localhost";
+var custon_url = "https://pws-translate.dvlpsite.com";
 
 function checkChange($this, index) {
   var regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -214,7 +214,7 @@ jQuery(document).ready(function () {
       .parents(".panel-default")
       .find(".post-comment1")
       .val();
-      var instance = jQuery(this);
+    var instance = jQuery(this);
     console.log(comment_data);
     jQuery.ajax({
       url: custon_url + "/social-media/response-data.php",
@@ -244,7 +244,10 @@ jQuery(document).ready(function () {
         comment_html += "<p>" + comment_data + "</p>";
         comment_html += "</div>";
         comment_html += "</a>";
-        jQuery(instance).parents(".post-comment").find(".comment-boxes").append(comment_html);
+        jQuery(instance)
+          .parents(".post-comment")
+          .find(".comment-boxes")
+          .append(comment_html);
         jQuery(".post-comment1").val("");
       },
       error: function (xhr, status, error) {
@@ -269,8 +272,6 @@ jQuery(document).ready(function () {
     console.log(post_caption);
 
     jQuery.ajax({
-
-      
       url: custon_url + "/social-media/response-data.php",
       type: "POST",
       cache: false,
@@ -290,18 +291,22 @@ jQuery(document).ready(function () {
         //var err = eval("(" + xhr.responseText + ")");
         console.log(error);
       },
-      xhr: function() {
+      xhr: function () {
         var xhr = new window.XMLHttpRequest();
-        xhr.upload.addEventListener("progress", function(evt) {
+        xhr.upload.addEventListener(
+          "progress",
+          function (evt) {
             if (evt.lengthComputable) {
-                var percentComplete = Math.round((evt.loaded / evt.total) * 100);
-                jQuery(".progress-bar").attr("aria-valuenow", percentComplete);
-                jQuery(".progress-bar").text(percentComplete)
-                jQuery(".progress-bar").css("width", percentComplete+"%");
+              var percentComplete = Math.round((evt.loaded / evt.total) * 100);
+              jQuery(".progress-bar").attr("aria-valuenow", percentComplete);
+              jQuery(".progress-bar").text(percentComplete);
+              jQuery(".progress-bar").css("width", percentComplete + "%");
             }
-        }, false);
+          },
+          false
+        );
         return xhr;
-    },
+      },
     });
   });
 
@@ -476,7 +481,10 @@ jQuery(document).ready(function () {
     jQuery(".chat_window_section").slideToggle();
   });
 
-  jQuery(document).on("click",".chat_window_section > ul.friend-list > li",function () {
+  jQuery(document).on(
+    "click",
+    ".chat_window_section > ul.friend-list > li",
+    function () {
       var reciever_id = jQuery(this).attr("data-reciever-id");
       jQuery(this).parent("ul.friend-list").find("li").not(this).hide();
       jQuery(this).addClass("active");
@@ -529,10 +537,10 @@ jQuery(document).ready(function () {
         .attr("data-reciever-id");
       jQuery(this).parents(".chat_box").find("input").val("");
       jQuery(".chat-send-btn").prop("disabled", true);
-  
+
       console.log(chat_request);
       console.log(reciever_id);
-  
+
       jQuery.ajax({
         url: custon_url + "/social-media/response-data.php",
         type: "POST",
@@ -547,8 +555,8 @@ jQuery(document).ready(function () {
           console.log(response);
           jQuery(".chat_box_message").append(
             '<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50 crrnt_user">' +
-            chat_request +
-            "</p>"
+              chat_request +
+              "</p>"
           );
           jQuery(".chat_box_message").scrollTop(
             $(".chat_box_message")[0].scrollHeight
@@ -587,8 +595,8 @@ jQuery(document).ready(function () {
         console.log(response);
         jQuery(".chat_box_message").append(
           '<p class="small p-2 m-3  text-white rounded-5 bg-primary w-50 crrnt_user">' +
-          chat_request +
-          "</p>"
+            chat_request +
+            "</p>"
         );
         jQuery(".chat_box_message").scrollTop(
           $(".chat_box_message")[0].scrollHeight
@@ -615,9 +623,10 @@ jQuery(document).ready(function () {
     sessionStorage.setItem("previous-state", jQuery(this).html());
   });
 
-  jQuery(document).on("click",".share-button", function(){
+  jQuery(document).on("click", ".share-button", function () {
     var post_id = jQuery(this).attr("data-post-id");
-    var post_link = "sharepost.php?" + "post-id=" + post_id;
-    window.location.href= post_link;
+    var post_link = custon_url + "/social-media/sharepost.php?" + "post-id=" + post_id;
+    navigator.clipboard.writeText(post_link);
+    alert("Copied the text: " + post_link);
   });
 });
