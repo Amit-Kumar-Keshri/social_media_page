@@ -8,7 +8,7 @@ function connect_database() {
   $servername = "localhost";
   $username = "root";
   $password = "";
-  $database = "social_media_db";
+  $database = "social_db";
 
   $conn = mysqli_connect($servername, $username, $password, $database);
   if (!$conn) {
